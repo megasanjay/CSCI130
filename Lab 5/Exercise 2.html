@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<title>Exercise 2</title>
+</head>
+
+<body>
+	<script>
+		let action = prompt('Which code do you want to run? 1 for the regular if statements or 2 for shorthand if statements', '');
+
+		if (action == 1)
+		{
+			let msg;
+			let login = prompt('Please login with your id', '');
+
+			if (login == 'student')
+			{
+				msg = 'Hi';
+			}
+			else if (login == 'faculty')
+			{
+				msg = 'Greetings';
+			}
+			else if (login == '')
+			{
+				msg = 'No login';
+			} else
+			{
+				msg = '';
+			}
+
+			alert(msg);
+		}
+		else if (action == 2)
+		{
+			let login = prompt('Please login with your id', '');
+
+			let msg = (login == 'student') ? 'Hi': (login == 'faculty') ? 'Greetings' : (login == '') ? 'No login' : '';
+
+			alert(msg);
+		}
+		else
+		{
+			alert('Incorrect input: Please refresh the page...');
+		}
+	</script>
+</body>
+</html>

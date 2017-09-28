@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<!-- It is the main command to make sure it is an HTML5 document -->
+
+<html lang="en">
+<!-- you can change lang to "es", "fr" -->
+
+<head>
+<meta charset="UTF-8" />
+<title>Web Programming CSci 130 - HTML5</title>
+<!-- Write your comments here, do not hesitate to comment the code and to add extra information
+it is YOUR code, your teaching material, and it is very helpful to add comments in the code in this course,
+so you can see and check the code with the comments altogether.
+If it starts to be confusing, you can create different webpages, as it will happen in the future.
+The examples are extracted from elements in the book HTML5 and CSS3 7edition -->
+</head>
+
+<body>
+
+<!-- Example with different sizes -->
+<h1>Antoni Gaudí</h1>
+<h2 lang="es">La Casa Milà</h2>
+<h2 lang="es">La Sagrada Família</h2>
+
+<hr> <!-- hr to have a horizontal line as a break, so it s not too confusing when you open the webpage with a browser -->
+
+ <!-- Just an image -->
+
+ <!-- with a local link -->
+ <img src="img/dog.jpg" width="300" height="175" alt="Happy Fresno Dog" />
+
+ <!-- with a direct link to online resources (stealing content) -->
+ <img src="https://s-media-cache-ak0.pinimg.com/originals/3b/ef/07/3bef0777401c60b67823816f672a8a31.jpg" width="300" height="175" />
+
+ <hr>
+
+<!-- Going to the next line with br-->
+<br>
+<h1>Title with H1</h1>
+<h2>Title with H2</h2>
+<h3>Title with H3</h3>
+<h4>Title with H4</h4>
+<h5>Title with H5</h5>
+<h6>Title with H6</h6>
+<!-- You cannot do more than H6, with notepad++ h7 is not highlighted -->
+<h7>Title with H7</h7>
+
+
+<!-- use p for paragraph -->
+<p>With a simple paragraph</p>
+
+ <hr>
+<!-- An example with the section
+you can indent the different blocks so it is easier to read and undertsand ! -->
+<h1>Product User Guide</h1>
+<section>
+	<h1>Setting it Up</h1>
+</section>
+<section>
+	<h1>Basic Features</h1>
+	<section> <!-- nested, so it's a subsection of its parent -->
+		<h1>Video Playback</h1>
+	</section>
+</section>
+<section>
+	<h1>Advanced Features</h1>
+</section>
+
+ <hr>
+ <!-- Use article to put the sections inside so you have a block
+The article element represents a self-contained composition in a
+document, page, application, or site and is, in principle, independently
+distributable or reusable, e.g., in syndication. This could be a forum
+post, a magazine or newspaper article, a blog entry, a user-submitted
+comment, an interactive widget or gadget, or any other independent item of content.
+ -->
+<article>
+	<h1>Product User Guide</h1>
+	<section>
+		<h1>Setting it Up</h1>
+	</section>
+	<section>
+		<h1>Basic Features</h1>
+		<section>
+			<h1>Video Playback</h1>
+		</section>
+	</section>
+	<section>
+		<h1>Advanced Features</h1>
+	</section>
+</article>
+
+ <hr>
+<!-- Problem for the previous version, you have h1 tag at all the levels
+it is therefore not consistent with the idea (lack of constraints for html5?)
+As you can see, there is a link between the level and the indentation, it will help you to be consistent :) -->
+<article>
+	<h1>Product User Guide</h1> <!-- first level -->
+	<section>
+		<h2>Setting it Up</h2>  <!-- second level -->
+	</section>
+	<section>
+		<h2>Basic Features</h2> <!-- second level -->
+		<section>
+			<h3>Video Playback</h3> <!-- third level -->
+		</section>
+	</section>
+	<section>
+		<h2>Advanced Features</h2> <!-- second level -->
+	</section>
+</article>
+
+
+ <hr>
+<!-- In this example, you can see that the h2 is locked outside of the article, and it is not the same as the h2 in the article -->
+<h2>News from around the Web</h2>
+<article>
+<h1>Local Teen Prefers Vinyl over Digital</h1>
+<p>A local teen has replaced all her digital tracks with vinyl.</p>
+<h2>Hooked after First Album</h2>
+...
+</article>
+
+<hr>
+
+
+<body>
+<article>
+<!-- These headings are grouped together -->
+<hgroup>
+	<h1>Giraffe Escapes from Zoo</h1>
+	<h2>Animals Worldwide Rejoice</h2>
+</hgroup>
+<p>... [article content] ...</p>
+
+</article>
+
+<hr>
+
+
+<!-- This block represents a header
+at or near the top of a page may represent the header (sometimes called a masterhead) for the whole page
+-->
+<header>
+<nav>
+<ul>
+<li><a href="#cat">Cats</a></li>
+<li lang="en"><a href="#dog">Dogs</a></li>
+<li><a href="#hamster">Hamsters</a></li>
+</ul>
+</nav>
+</header>
+
+
+
+<hr>
+
+
+<article>
+	<header id="myheader">
+	<h1>Frequently Asked Questions</h1>
+	<nav> <!-- navigation of the important elements -->
+	<ul> <!-- a list of bullet points (unnumbered list=ul) -->
+		<!-- each item in the list is in a li (list item=li) -->
+		<li><a href="#answer1">What is your return policy?</a></li>
+		<li><a href="#answer2">How do I find a location?</a></li>
+	</ul>
+	</nav>
+	</header>
+
+<p>
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+</p>
+
+<!-- the header links point to these -->
+<article id="answer1">
+	<h2>What is your return policy?</h2>
+	<p> ... some answer ... Go back to the header <a href="#myheader"> Go back </a> </p>
+</article>
+
+<p>
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+</p>
+
+<article id="answer2">
+	<h2>How do I find a location?</h2>
+	<p> ... some answer... Go back to the header <a href="#myheader">  Go back </a> </p>
+</article>
+...
+</article> <!-- end parent article -->
+
+<hr>
+
+<!-- to be used as a sidebar, to give extra information about the main articles in the page -->
+<aside role="complementary">
+<h1>Natural landscapes of California</h1>
+<p>National Parks:</p>
+<ul>
+<li lang="en">Channel Islands NP</li>
+<li lang="en">Yosemite NP</li>
+<li lang="en">Sequoia NP</li>
+<li lang="en">Kings Canyon NP</li>
+<li lang="en">Death Valley NP</li>
+<li lang="en">Joshua Tree NP</li>
+</ul>
+</aside>
+
+
+
+
+
+<hr>
+
+<article>
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+blabla blabla	blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla
+<footer> <!-- the article's footer, not the page's !!!
+it contains information about the author, address, copyright information,...
+you cannot have a footer inside a footer
+-->
+<p>This web page gives information about different HTML5 tags</p>
+<address>
+<!-- as you can see the default presentation for the address is italic -->
+You may reach me at <a href="mailto:hcecotti@csufresno.edu"> my email</a>.
+</address>
+</footer>
+</article>
+
+
+
+</body>
+
+
+
+</html>

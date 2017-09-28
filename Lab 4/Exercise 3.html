@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Exercise 3</title>
+
+	<style type="text/css">
+			 body.sky
+			 {
+				 background-color: #87CEFA;
+			 }
+			 div.cloud1
+			 {
+				 width:200px;
+				 height:60px;
+				 border-radius: 200px;
+				 background: #fff;
+				 position: absolute;
+				 -webkit-animation: cloud1 12s infinite; /* Safari 4.0 - 8.0 */
+		     animation: cloud1 12s infinite;
+		 		 animation-delay: 0s; /* wait 2s before the start */
+				 animation-direction: alternate;
+				 animation-timing-function: linear;
+			 }
+
+			 @keyframes cloud1
+			 {
+				 0%   {margin-left: 0%; margin-top: 10px;}
+				 10%  {margin-left: 8%; margin-top: 70px;}
+				 20%  {margin-left: 16%; margin-top: 10px;}
+				 30%  {margin-left: 24%; margin-top: 70px;}
+				 40%  {margin-left: 32%; margin-top: 10px;}
+				 50%  {margin-left: 40%; margin-top: 70px;}
+				 60%  {margin-left: 48%; margin-top: 10px;}
+				 70%  {margin-left: 56%; margin-top: 70px;}
+				 80%  {margin-left: 64%; margin-top: 10px;}
+				 90%  {margin-left: 72%; margin-top: 70px;}
+				 100% {margin-left: 80%; margin-top: 10px;}
+			 }
+
+			 div.cloud2
+			 {
+				 width:180px;
+				 height:70px;
+				 border-radius: 200px;
+				 background: #fff;
+				 position: absolute;
+				 -webkit-animation: cloud2 10s infinite; /* Safari 4.0 - 8.0 */
+		     animation: cloud2 10s infinite;
+				 animation-direction: alternate;
+				 animation-timing-function: linear;
+		 		 animation-delay: 0s; /* wait 2s before the start */
+
+			 }
+
+			 @keyframes cloud2
+			 {
+				 0%   { margin-left: 80%; margin-top: 50px}
+				 10%  { margin-left: 72%; margin-top: 10px}
+				 20%  { margin-left: 64%;  margin-top: 50px}
+				 30%  { margin-left: 56%;  margin-top: 10px}
+				 40%  { margin-left: 48%;  margin-top: 50px}
+				 50%  { margin-left: 40%; margin-top: 10px}
+				 60%  { margin-left: 32%; margin-top: 50px}
+				 70%  { margin-left: 24%; margin-top: 10px}
+				 80%  { margin-left: 16%; margin-top: 50px}
+				 90%  { margin-left: 8%; margin-top: 10px}
+				 100% { margin-left: 0%; margin-top: 50px}
+			 }
+
+			 div.cloud3
+			 {
+				 width:200px;
+				 height:60px;
+				 border-radius: 200px;
+				 background: #fff;
+				 position: absolute;
+				 -webkit-animation: cloud3 11s infinite; /* Safari 4.0 - 8.0 */
+		     animation: cloud3 11s infinite;
+				 animation-direction: alternate;
+				 animation-timing-function: linear;
+		 		 animation-delay: 0s; /* wait 2s before the start */
+
+			 }
+
+			 @keyframes cloud3
+			 {
+				 0%   {margin-left: 0%; margin-top: 20px;}
+				 10%  {margin-left: 8%; margin-top: 70px;}
+				 20%  {margin-left: 16%; margin-top: 20px;}
+				 30%  {margin-left: 24%; margin-top: 70px;}
+				 40%  {margin-left: 32%; margin-top: 20px;}
+				 50%  {margin-left: 40%; margin-top: 70px;}
+				 60%  {margin-left: 48%; margin-top: 20px;}
+				 70%  {margin-left: 56%; margin-top: 70px;}
+				 80%  {margin-left: 64%; margin-top: 20px;}
+				 90%  {margin-left: 72%; margin-top: 70px;}
+				 100% {margin-left: 80%; margin-top: 20px;}
+			 }
+
+
+
+			 .left-arrow
+			 {
+				 border-color: transparent black;
+				 border-style: solid;
+				 border-width: 20px 20px 20px 0px;
+				 height: 0px;
+				 width: 0px;
+			 }
+
+			 .right-arrow
+			 {
+				 border-color: transparent black;
+				 border-style: solid;
+				 border-width: 20px 0px 20px 20px;
+				 height: 0px;
+				 width: 0px;
+			 }
+
+				.down-arrow
+				{
+					border-color: black transparent;
+					border-style: solid;
+					border-width: 20px 20px 0px 20px;
+					height: 0px;
+					width: 0px;
+				}
+
+				.up-arrow
+				{
+					border-color: black transparent;
+					border-style: solid;
+					border-width: 0px 20px 20px 20px;
+					height: 0px;
+					width: 0px;
+				}
+
+				.mountain
+				{
+					border-color: green transparent;
+					border-style: solid;
+					border-width: 0px 100px 100px 100px;
+					height: 0px;
+					width: 0px;
+				}
+
+			<!--
+				$max: 100px;
+
+				.equilizer {
+				  height: $max;
+				  width: $max;
+				  transform: rotate(360deg);
+				}
+
+				.bar {
+				  fill: DeepPink;
+				  width: 18px;
+				  animation: equalize 1.25s steps(25, end) 0s infinite;
+				}
+
+				.bar:nth-child(1) {
+				  animation-duration: 1.9s;
+				}
+
+				.bar:nth-child(2) {
+				  animation-duration: 2s;
+				}
+
+				.bar:nth-child(3) {
+				  animation-duration: 2.3s;
+				}
+
+				.bar:nth-child(4) {
+				  animation-duration: 2.4s;
+				}
+
+				.bar:nth-child(5) {
+				  animation-duration: 2.1s;
+				}
+
+				@keyframes equalize {
+				  0% {
+				    height: 60px;
+				  }
+				  4% {
+				    height: 50px;
+				  }
+				  8% {
+				    height: 40px;
+				  }
+				  12% {
+				    height: 30px;
+				  }
+				  16% {
+				    height: 20px;
+				  }
+				  20% {
+				    height: 30px;
+				  }
+				  24% {
+				    height: 40px;
+				  }
+				  28% {
+				    height: 10px;
+				  }
+				  32% {
+				    height: 40px;
+				  }
+				  36% {
+				    height: 60px;
+				  }
+				  40% {
+				    height: 20px;
+				  }
+				  44% {
+				    height: 40px;
+				  }
+				  48% {
+				    height: 70px;
+				  }
+				  52% {
+				    height: 30px;
+				  }
+				  56% {
+				    height: 10px;
+				  }
+				  60% {
+				    height: 30px;
+				  }
+				  64% {
+				    height: 50px;
+				  }
+				  68% {
+				    height: 60px;
+				  }
+				  72% {
+				    height: 70px;
+				  }
+				  76% {
+				    height: 80px;
+				  }
+				  80% {
+				    height: 70px;
+				  }
+				  84% {
+				    height: 60px;
+				  }
+				  88% {
+				    height: 50px;
+				  }
+				  92% {
+				    height: 60px;
+				  }
+				  96% {
+				    height: 70px;
+				  }
+				  100% {
+				    height: 80px;
+				  }
+				}
+				-->
+	</style>
+</head>
+
+<body class = "sky">
+
+	<div style = "width:100;height: 500 px">
+		<div class="cloud1"><div>
+		<div class = "cloud2"><div>
+		<div class = "cloud3"><div>
+	</div>
+
+	<!--
+	<svg xmlns="http://www.w3.org/2000/svg" class="equilizer" viewBox="0 0 128 128">
+		<g>
+			<title>Audio Equilizer</title>
+			<rect class="bar" transform="translate(0,0)" y="15"></rect>
+			<rect class="bar" transform="translate(25,0)" y="15"></rect>
+			<rect class="bar" transform="translate(50,0)" y="15"></rect>
+			<rect class="bar" transform="translate(75,0)" y="15"></rect>
+			<rect class="bar" transform="translate(100,0)" y="15"></rect>
+		</g>
+	</svg>
+	-->
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+.regbutt
+{
+  padding: 5px;
+  background-color: #333333;
+}
+
+.regopbutt
+{
+  padding: 10px;
+  background-color: #ff9234;
+}
+
+.clearbutt
+{
+  padding: 5px;
+  background-color: #a6a6a6;
+}
+
+html {height:100%; display:table; width:100%;}
+body {height:100%; width: 100%;display:table-cell; text-align:center; vertical-align:middle;}
+
+table {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+  color: #6cacc5;
+  font: 300 18px/1.6 "Source Sans Pro",sans-serif;
+  padding: 5em 0 2em;
+  text-align: center;
+  align-content: center;
+  background-color: #000000;
+}
+
+button {
+  border-radius: 50%;
+  cursor: pointer;
+  float: left;
+  background-color: #333333;
+  font: inherit;
+  margin: 0.25em;
+  width: 4em;
+  height: 4em;
+  transition: all 0.5s;
+  color: white;
+  font-weight:bolder;
+}
+
+button:hover
+{
+  background-color: red;
+  animation: shake 1s;
+  animation-iteration-count: 1;
+  transition-timing-function: linear;
+}
+
+@keyframes shake {
+  from, to
+  {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90%
+  {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80%
+  {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+.shake {
+  animation-name: shake;
+}

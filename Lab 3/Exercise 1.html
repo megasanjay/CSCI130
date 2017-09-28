@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My first page</title>
+
+  <style type="text/css">
+         table.one
+         {
+           border-collapse:collapse;
+         }
+         td.b
+         {
+            border-style:solid;
+            border-width:1px;
+            border-color:#3333333;
+            padding:10px;
+         }
+         td.a
+         {
+           border-style:solid;
+           border-width:1px;
+           border-color:#FF0000;
+           padding:3px;
+         }
+         caption.heading
+         {
+           font-weight: 600;
+           font-size:16px
+         }
+         table.two
+         {
+           /*background-color:#ADD8E6;*/
+           width: 96%;
+           height: 97%;
+           margin-left: 1%;
+           border-collapse:collapse;
+         }
+         tbody.blueborder
+         {
+           border-style:solid;
+           border-width:3px;
+           border-color:#0000FF;
+         }
+         thead.tvheading
+         {
+           align-content: center;
+         }
+         thead.twoheading
+         {
+           align-content: left;
+         }
+         div.bckground
+         {
+           width: 600px;
+           height: 150px;
+           background-color: #ADD8E6
+         }
+    </style>
+</head>
+<body>
+
+<table class = "one">
+    <caption class="heading">Quarterly Financials for 1962-1964 (in Thousands)</caption>
+
+    <thead>
+      <th scope = "col"> Quarter </th>
+      <th scope = "col"> 1962 </th>
+      <th scope = "col"> 1963 </th>
+      <th scope = "col"> 1964 </th>
+    </thead>
+
+  <tbody>
+  <tr>
+    <th scope = "row"> Q1 </th>
+    <td class = "b"> $145 </td>
+    <td class = "b"> $167 </td>
+    <td class = "b"> $161 </td>
+  </tr>
+
+  <tr>
+    <th scope = "row"> Q2 </th>
+    <td class = "b"> $140 </td>
+    <td class = "b"> $159 </td>
+    <td class = "b"> $164 </td>
+  </tr>
+
+  <tr>
+    <th scope = "row"; style="font-style:italic"> TOTAL </th>
+    <td class = "b"; style="font-weight:bold; font-style:italic"> $595 </td>
+    <td class = "b"; style="font-weight:bold; font-style:italic"> $648 </td>
+    <td class = "b"; style="font-weight:bold; font-style:italic"> $664 </td>
+  </tr>
+</tbody>
+</table>
+
+<br><br><br>
+
+<div class="bckground">
+  <table class ="two">
+    <thead class="tvheading">
+        <th colspan="4"; style="font-size:17px; padding:3px">TV schedule </th>
+    </thead>
+
+    <tbody class = "blueborder">
+
+      <th scope = "col"; style="text-align : center"> Time </th>
+      <th scope = "col"; style="text-align : left"> Mon </th>
+      <th scope = "col"; style="text-align : left"> Tue </th>
+      <th scope = "col"; style="text-align : left"> Wed </th>
+
+      <tr>
+        <th scope = "row"> 8 pm </th>
+        <td class = "a"> Staring Contest </td>
+        <td class = "a" colspan="2"> Celebrity Hoedown </td>
+      </tr>
+
+      <tr>
+        <th scope = "row"> 9 pm </th>
+        <td class = "a"> Hardy, Har, Har </td>
+        <td class = "a"> What's for lunch </td>
+        <td class = "a" rowspan="2" ; style="text-align : center"> Movie of the Week </td>
+      </tr>
+
+      <tr>
+        <th scope = "row"> 10 pm </th>
+        <td class = "a"> Healers, Wheelers, Dealers </td>
+        <td class = "a"> It's a Crime </td>
+      </tr>
+  </table>
+</div>
+
+</body>
+</html>

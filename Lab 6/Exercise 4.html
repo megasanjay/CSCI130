@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<title>Exercise 4</title>
+</head>
+
+<body>
+	<script>
+		let input = prompt("Enter a number", '');
+		let j = 0;
+		let x = 1;
+
+
+		function isPrime(value)
+		{
+    	for(var i = 2; i < value; i++)
+			{
+        if(value % i === 0)
+				{
+            return false;
+        }
+    }
+    	return value > 1;
+		}
+
+		while(j < input)
+		{
+			if (isPrime(x) == true)
+			{
+				j++;
+			}
+			x++;
+		}
+
+		alert ("The " + j + "th prime number is " + (x - 1));
+	</script>
+</body>
+</html>

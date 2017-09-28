@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!-- It is the main command to make sure it is an HTML5 document -->
+
+<html lang="en">
+<!-- you can change lang to "es", "fr" -->
+
+<head>
+<meta charset="UTF-8" />
+<title>Page One</title>
+</head>
+
+
+<!-- Web document: ACCESSIBILITY
+by default you will not see the div blocks on the screen, that s where the presentation will have an effect !
+
+
+WAI-ARIA (Web Accessibility Initiative’s Accessible Rich Internet Applications),
+or just ARIA:
+- a specification that declares itself “a bridging technology.”
+- it fills semantic gaps with attributes until languages like HTML provide their own
+equivalent semantics: you cannot describe everything with HTML5, the number of commands is not infinite.
+With the role, you can specify more directly the purpose of a block.
+
+The main "role":
+- banner: a place that contains information related to the site, not information that is
+specific to the page.
+- navigation: a collection of navigational elements.
+- main: the main content of a document.
+- complementary: a supporting section of the document, it is a complement to the main document,
+it can be used as a standalone document.
+- contentinfo: a region in the document that will contain information about the parent document.
+It can be include the copyright information, address of the author of the document... (footer element)
+
+
+-->
+
+
+
+<body>
+	<!-- Start page container -->
+	<div id="container">
+		<header role="banner">
+			...
+			<nav role="navigation">
+
+
+			<ul id="toc" title="Table of Contents">
+				<h1>Section links</h1>
+				<li><a href="#part1" title="Section 1"</a>Section 1</li>
+				<li><a href="#part2" title="Section 2"</a>Section 2</li>
+				<li><a href="#part3" title="Section 3"</a>Section 3</li>
+				<li><a href="#part4" title="Section 4"</a>Section 4</li>
+				<li><a href="#part5" title="Section 5"</a>Section 5</li>
+
+			<!-- When your visitors point at the labeled
+element, the title will appear. -->
+<!--<li><a href="#part1" title="learn about part 1"</a>blablabla related to part 1</li>
+<li><a href="#part2">blablabla related to part 2</a></li>
+<li><a href="#part3">blablabla related to part 3</a></li>-->
+</ul>
+
+
+
+			... [ul with links] ...
+			</nav>
+		</header>
+
+		<hr>
+
+		<article id="part1">
+			<h2>Section 111</h2>
+			<p> Information related to section 111 <a href="#container"> Go back </a> </p>
+		</article>
+
+		<hr>
+
+		<article id="part2">
+			<h2>Section 1</h2>
+			<p> Information related to section 2 <a href="#container"> Go back </a> </p>
+		</article>
+
+		<hr>
+
+		<article id="part3">
+			<h2>Section 1</h2>
+			<p> Information related to section 3 <a href="#container"> Go back </a> </p>
+		</article>
+
+		<hr>
+
+		<article id="part4">
+			<h2>Section 1</h2>
+			<p> Information related to section 4 <a href="#container"> Go back </a> </p>
+		</article>
+
+		<hr>
+
+		<article id="part5">
+			<h2>Section 1</h2>
+			<p> Information related to section 5 <a href="#container"> Go back </a> </p>
+		</article>
+
+		<!-- Column One when CSS applied -->
+		<div id="content" role="main">
+			<article>
+			<h1> Title of article 1 </h1>
+			...article 1
+			</article>
+			<article>
+			<h1> Title of article 2 </h1>
+			...article 2
+			</article>
+			... [more sections as desired] ...
+		</div>
+		<!-- end column one -->
+		<!-- Column Two when CSS applied -->
+		<div id="sidebar">
+			<aside role="complementary">
+			<h2> Title of aside 1 </h2>
+			...aside 1
+			</aside>
+			<aside role="complementary">
+			<h2> Title of aside 2 </h2>
+			...aside 2
+			</aside>
+			... [more sections as desired] ...
+		</div>
+		<!-- end column two -->
+		<footer role="contentinfo">
+		...
+		</footer>
+	</div>
+	<!-- end page container -->
+<!--
+id: identifier
+Within the start tag of the element, type class="name", where name is the
+identifying name of the class A.
+If you want to assign more than one class, separate each one with a space, as in
+class="name anothername". (You may assign more than two class names.)
+
+-->
+
+</body>
+</html>

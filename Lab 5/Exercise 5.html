@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8" />
+<title>Exercise 5</title>
+</head>
+
+<body>
+	<script>
+		let randnumber = Math.floor((Math.random() * 100) + 1);
+		let input, max = 100, min = 0;
+		let currentNumber = (max - min) / 2;
+		let counter  = 0;
+
+		alert("Let's play a game...");
+
+		while (currentNumber != randnumber)
+		{
+			counter++;
+			input = prompt("What number am I thinking of? The current number is: " + currentNumber + ". Type '1' for lower or '2' for higher...");
+
+			if (input == 1)
+			{
+				if (randnumber > currentNumber)
+				{
+					alert("Wrong. Try the other option");
+					continue;
+				}
+				max = currentNumber - 1;
+				currentNumber = Math.round((max - min) / 2) + min;
+				if (currentNumber == randnumber)
+				{
+					break;
+				}
+				continue;
+			}
+			else if (input == 2)
+			{
+				if (randnumber < currentNumber)
+				{
+					alert("Wrong. Try the other option");
+					continue;
+				}
+				min = currentNumber + 1;
+				currentNumber = Math.round((max - min) / 2) + min;
+				if (currentNumber == randnumber)
+				{
+					break;
+				}
+				continue;
+			}
+			else
+			{
+				alert("Invalid input... Can you not read?")
+			}
+		}
+
+		alert("You took " + counter + " tries to guess a simple number. Shame on you.");
+	</script>
+</body>
+</html>
