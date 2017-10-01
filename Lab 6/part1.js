@@ -4,7 +4,7 @@ var num2 = "";
 var initialInput = "";
 var operation = '';
 
-function clickevent(input)
+function clickEvent(input)
 {
   let inputChar = input.toString();
 
@@ -12,21 +12,26 @@ function clickevent(input)
   {
     case 'a':
       inputChar = '+';
+      input = ' plus ';
       operation = '+';
       break;
     case 's':
       inputChar = '-';
+      input = ' minus ';
       operation = '-';
       break;
     case 'd':
+      input = ' divided by ';
       inputChar = '/';
       operation = '/';
       break;
     case 'x':
+      input = ' times ';
       inputChar = 'x';
       operation = '*';
       break;
     case 'e':
+      input = ' equals ';
       inputChar = '=';
       break;
     case 'p':
@@ -35,12 +40,13 @@ function clickevent(input)
     default:
   }
 
-  initialInput = initialInput + inputChar;
-  document.getElementById("initalOutput").value = initialInput;
+  initialInput = initialInput + input;
+  document.getElementById("betterOutput").placeholder = " ";
+  document.getElementById("betterOutput").placeholder = initialInput;
 
   if (inputChar == '+' || inputChar == '/' || inputChar == '-' || inputChar == 'x' || inputChar == '=')
   {
-    operatorfunction(inputChar);
+    operatorFunction(inputChar);
     return;
   }
 
@@ -55,7 +61,7 @@ function clickevent(input)
 
 }
 
-function operatorfunction(input)
+function operatorFunction(input)
 {
   let total = 0;
 
@@ -80,17 +86,19 @@ function operatorfunction(input)
       default:
     }
 
-    document.getElementById("finalOutput").value = total.toString();
+    document.getElementById("betterOutput").value = total.toString();
     num1 = "";
     num2 = "";
   }
 }
 
-function clearbutton()
+function clearButton()
 {
   initialInput = "";
-  document.getElementById("finalOutput").value = "";
-  document.getElementById("initalOutput").value = "";
+  document.getElementById("betterOutput").value = "";
+  document.getElementsById("betterOutput").placeholder = "";
+
+  iteration = 1;
   num1 = "";
   num2 = "";
 }

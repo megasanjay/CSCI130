@@ -15,6 +15,13 @@
 <body>
 	<table>
 		<tbody>
+
+			<tr>
+				<td colspan = "4">
+					<input type="text" id="betterOutput" class = "displayRow" readonly>
+				</td>
+			</tr>
+<!--
 			<tr>
 				<td colspan = "4">
 					<input type="text" id="finalOutput" class = "displayrow" readonly>
@@ -25,34 +32,41 @@
 					<input type="text" id="initalOutput" class = "displayrow" readonly>
 				</td>
 			</tr>
+-->
 			<tr>
 				<td>
-					<button onclick="clearbutton()" class="clearbutt">CE</button>
+					<button onclick="clearButton()" class="clearButt">Clear Screen</button>
 				</td>
+				<td>
+					<button onclick="clearButton()" class="regButt">Single Output</button>
+				</td>
+				<td>
+					<button onclick="clearButton()" class="regButt">Double Output</button>
+				</td>
+				<td><button onclick="clickEvent('d')" class="regOpButt">/</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="clickevent(7)" class="regbutt">7</button></td>
-				<td><button onclick="clickevent(8)" class="regbutt">8</button></td>
-				<td><button onclick="clickevent(9)" class="regbutt">9</button></td>
-				<td><button onclick="clickevent('d')" class="regopbutt">/</button></td>
+				<td><button onclick="clickEvent(7)" class="regButt">7</button></td>
+				<td><button onclick="clickEvent(8)" class="regButt">8</button></td>
+				<td><button onclick="clickEvent(9)" class="regButt">9</button></td>
+				<td><button onclick="clickEvent('x')" class="regOpButt">x</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="clickevent(4)" class="regbutt">4</button></td>
-				<td><button onclick="clickevent(5)" class="regbutt">5</button></td>
-				<td><button onclick="clickevent(6)" class="regbutt">6</button></td>
-				<td><button onclick="clickevent('x')" class="regopbutt">x</button></td>
+				<td><button onclick="clickEvent(4)" class="regButt">4</button></td>
+				<td><button onclick="clickEvent(5)" class="regButt">5</button></td>
+				<td><button onclick="clickEvent(6)" class="regButt">6</button></td>
+				<td><button onclick="clickEvent('s')" class="regOpButt">-</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="clickevent(1)" class="regbutt">1</button></td>
-				<td><button onclick="clickevent(2)" class="regbutt">2</button></td>
-				<td><button onclick="clickevent(3)" class="regbutt">3</button></td>
-				<td><button onclick="clickevent('s')" class="regopbutt">-</button></td>
+				<td><button onclick="clickEvent(1)" class="regButt">1</button></td>
+				<td><button onclick="clickEvent(2)" class="regButt">2</button></td>
+				<td><button onclick="clickEvent(3)" class="regButt">3</button></td>
+				<td><button onclick="clickEvent('a')" class="regOpButt" >+</button></td>
 			</tr>
 			<tr>
-				<td><button onclick="clickevent(0)" class="regbutt">0</button></td>
-				<td><button onclick="clickevent('p')" class="regbutt">.</button></td>
-				<td><button onclick="clickevent('e')" class="regopbutt" >=</button></td>
-				<td><button onclick="clickevent('a')" class="regopbutt" >+</button></td>
+				<td colspan = "2"><button onclick="clickEvent(0)" class="regzButt">0</button></td>
+				<td><button onclick="clickEvent('p')" class="regButt">.</button></td>
+				<td><button onclick="clickEvent('e')" class="regOpButt" >=</button></td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,31 +1,67 @@
-.regbutt
+.regButt
 {
-  padding: 5px;
-  background-color: #333333;
+  background-color: #f1f1f1;
+  color: black;
 }
 
-.regopbutt
+.regOpButt
 {
-  padding: 10px;
-  background-color: #ff9234;
+  background-color: #f37d73;
+  color: white;
 }
 
-.clearbutt
+.clearButt
 {
-  padding: 5px;
   background-color: #a6a6a6;
+  color: black;
 }
 
-html {height:100%; display:table; width:100%;}
-body {height:100%; width: 100%;display:table-cell; text-align:center; vertical-align:middle;}
-
-table {
-    width: 30%;
-    margin-left: auto;
-    margin-right: auto;
+.regzButt
+{
+  background-color: #f1f1f1;
+  color: black;
 }
 
-body {
+html
+{
+  height:100%;
+  display:table;
+  width:100%;
+}
+
+body
+{
+  height:100%;
+  width: 100%;
+  display:table-cell;
+  text-align:center;
+  vertical-align:middle;
+}
+
+table
+{
+  width: 99%;
+  height:99%;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  border: none;
+}
+
+td
+{
+  border-width: 0px;
+  padding:0px;
+  width: 25%;
+}
+
+tr
+{
+  height: 15%
+}
+
+body
+{
   color: #6cacc5;
   font: 300 18px/1.6 "Source Sans Pro",sans-serif;
   padding: 5em 0 2em;
@@ -35,23 +71,20 @@ body {
 }
 
 button {
-  border-radius: 50%;
   cursor: pointer;
   float: left;
-  background-color: #333333;
-  font: inherit;
-  margin: 0.25em;
-  width: 4em;
-  height: 4em;
-  transition: all 0.5s;
-  color: white;
-  font-weight:bolder;
+  font-family: "Abel";
+  font-size: 2vw;
+  height:100%;
+  width: 100%;
+  font-weight:normal;
+  border:none;
 }
 
 button:hover
 {
-  background-color: red;
-  animation: shake 1s;
+  background-color: #a0a0a0;
+  animation: shake 0.5s;
   animation-iteration-count: 1;
   transition-timing-function: linear;
 }
@@ -64,12 +97,12 @@ button:hover
 
   10%, 30%, 50%, 70%, 90%
   {
-    transform: translate3d(-3px, 0, 0);
+    transform: translate3d(-1px, 0px, -100px);
   }
 
   20%, 40%, 60%, 80%
   {
-    transform: translate3d(3px, 0, 0);
+    transform: translate3d(1px, 0px, 100px);
   }
 }
 
