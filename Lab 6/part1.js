@@ -6,6 +6,28 @@ var operation = '';
 
 function clickEvent(input)
 {
+  if ((document.getElementById('operationsScreen').innerHTML.length) > 20)
+  {
+    if ((document.getElementById('operationsScreen').innerHTML.length) > 45)
+    {
+      document.getElementById('operationsScreen').classList.add("smallerText");
+      document.getElementById('operationsScreen').classList.remove("bigText");
+      document.getElementById('operationsScreen').classList.remove("smallText");
+    }
+    else
+    {
+      document.getElementById('operationsScreen').classList.add("smallText");
+      document.getElementById('operationsScreen').classList.remove("bigText");
+      document.getElementById('operationsScreen').classList.remove("smallerText");
+    }
+  }
+  else
+  {
+    document.getElementById('operationsScreen').classList.remove("smallText");
+    document.getElementById('operationsScreen').classList.add("bigText");
+    document.getElementById('operationsScreen').classList.remove("smallerText");
+  }
+
   let inputChar = input.toString();
 
   switch (inputChar)
@@ -35,14 +57,13 @@ function clickEvent(input)
       inputChar = '=';
       break;
     case 'p':
-      inputChar = '.';
+      input = '.';
       break;
     default:
   }
 
   initialInput = initialInput + input;
-  document.getElementById("betterOutput").placeholder = " ";
-  document.getElementById("betterOutput").placeholder = initialInput;
+  document.getElementById("operationsScreen").innerHTML = initialInput;
 
   if (inputChar == '+' || inputChar == '/' || inputChar == '-' || inputChar == 'x' || inputChar == '=')
   {
@@ -50,13 +71,20 @@ function clickEvent(input)
     return;
   }
 
-  if (iteration % 2 == 0)
+  if (iteration > 2)
   {
     num2 = num2 + inputChar.toString();
   }
   else
   {
-    num1 = num1 + inputChar.toString();
+    if (iteration % 2 == 0)
+    {
+      num2 = num2 + inputChar.toString();
+    }
+    else
+    {
+      num1 = num1 + inputChar.toString();
+    }
   }
 
 }
@@ -86,17 +114,26 @@ function operatorFunction(input)
       default:
     }
 
-    document.getElementById("betterOutput").value = total.toString();
-    num1 = "";
-    num2 = "";
+    document.getElementById("answerScreen").innerHTML = total.toString();
+
+    if (iteration < 3)
+    {
+      num1 = "";
+      num2 = "";
+    }
+    else
+    {
+      num1 = total;
+      num2 = "";
+    }
   }
 }
 
 function clearButton()
 {
   initialInput = "";
-  document.getElementById("betterOutput").value = "";
-  document.getElementsById("betterOutput").placeholder = "";
+  document.getElementById("answerScreen").innerHTML = "";
+  document.getElementById("operationsScreen").innerHTML = "";
 
   iteration = 1;
   num1 = "";
