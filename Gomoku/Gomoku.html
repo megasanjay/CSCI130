@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Part 1</title>
+	<script type="text/javascript" src="Gomoku.js"></script>
+	<link rel="stylesheet" type="text/css" href="Gomoku.css">
+
+</head>
+
+<body>
+	<button id="15x" onclick="resizeTable(15)">15 x 15</button>
+	<button id="19x" onclick="resizeTable(19)">19 x 19</button>
+
+	<div class="dropdown">
+	<button onclick="myFunction()" class="dropbtn">Dropdown</button>
+	  <div id="myDropdown" class="dropdown-content">
+	    <div class = "sblue" onclick="changeColor('sb')"> Sky Blue </div>
+	    <div class = "bred" onclick="changeColor('red')"> Red </div>
+	    <div class = "bgreen" onclick="changeColor('green')"> Green </div>
+	  </div>
+	</div>
+
+	<table id = "gTable">
+	</table>
+</body>
+</html>
