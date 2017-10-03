@@ -33,10 +33,9 @@ body
   width:100%;
   position: relative;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  line-height: 100%;
-  font-size: 500%;
   font-weight: lighter;
   text-align: right;
+  font-size: 500%;
   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   background-size: 500% 500%;
   color:white;

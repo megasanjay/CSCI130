@@ -1,28 +1,198 @@
 var table;
+var tableSize;
 var gridcell;
+var gridArray;
+var currentPlayer;
+var turnCount;
 
-function resizeTable(tableSize) 
+function resizeTable(tsize)
 {
-    let row;
-    let cell;
-    
-    table = document.getElementById("gTable");
+  let row;
+  let cell;
+
+  tableSize = tsize;
+
+  turnCount = 1;
+  currentPlayer = 'p1';
+
+  gridArray = new Array(tsize);
+
+  for (let i = 0; i < tsize; i++)
+  {
+    gridArray[i] = new Array(tsize);
+  }
+
+  for (let i = 0; i < tsize; i++)
+  {
+    for (let j = 0; j < tsize; j++)
+    {
+      gridArray[i][j] = 0;
+    }
+  }
+
+  table = document.getElementById("gTable");
+  table.classList.remove("noClick");
 
 	table.innerHTML = " ";
-	
+
 	for(let i = 0; i < tableSize; i++)
 	{
 		row = table.insertRow(i);
 		for (let j = 0; j < tableSize ; j++)
 		{
 			cell = row.insertCell(j);
-			cell.innerHTML = '<div class = "gridCell">' + i.toString() + ',' + j.toString() + '</div>';
+			cell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')"></button>';
 		}
 	}
 }
 
+function clickFunction(i, j)
+{
+  let win;
+
+  if (turnCount % 2 == 0)
+  {
+    currentPlayer = 'p2';
+  }
+  else
+  {
+    currentPlayer = 'p1';
+  }
+
+  if ((gridArray[i][j] == 1) || (gridArray[i][j] == 2))
+  {
+    errorFunction('taken')
+    return;
+  }
+
+
+  if (currentPlayer == 'p1')
+  {
+    gridArray[i][j] = 1;
+  }
+  else
+  {
+    gridArray[i][j] = 2;
+  }
+
+  displayFunction(i,j);
+  turnCount++;
+
+  winWinNoMatterWhat = checkWin();
+  if (winWinNoMatterWhat == 1)
+  {
+    alert("Player 1 won!");
+    return;
+  }
+  else if (winWinNoMatterWhat == 2)
+  {
+    alert("Player 2 won!");
+  }
+}
+
+function checkWin()
+{
+  let currentSlotPiece;
+  let wincounter;
+
+  // horizontal check
+  for (let i = 0; i < tableSize; i++)
+  {
+    wincounter = 1;
+    for (let j = 0; j < tableSize; j++)
+    {
+      if (gridArray[i][j] == 0)
+      {
+        continue;
+      }
+
+      currentSlotPiece = gridArray[i][j];
+
+      if (gridArray[i][j+1] == currentSlotPiece)
+      {
+        wincounter++;
+      }
+      else
+      {
+        wincounter = 1;
+        currentSlotPiece = gridArray[i][j+1];
+      }
+
+      if (wincounter == 5)
+      {
+        disableButtons();
+        return currentSlotPiece;
+      }
+    }
+  }
+
+  // Vertical check
+  for (let i = 0; i < tableSize; i++)
+  {
+    wincounter = 1;
+    for (let j = 0; j < tableSize; j++)
+    {
+      if (gridArray[j][i] == 0)
+      {
+        continue;
+      }
+
+      currentSlotPiece = gridArray[j][i];
+
+      if (gridArray[j+1][i] == currentSlotPiece)
+      {
+        wincounter++;
+      }
+      else
+      {
+        wincounter = 1;
+        currentSlotPiece = gridArray[j+1][i];
+      }
+
+      if (wincounter == 5)
+      {
+        disableButtons();
+        return currentSlotPiece;
+      }
+    }
+  }
+
+  return false;
+}
+
+function errorFunction(errorCode)
+{
+  switch (errorCode)
+  {
+    case 'taken':
+      alert("This cell has already been filled. Choose another unfilled spot");
+      break;
+  }
+}
+
+function disableButtons()
+{
+  document.getElementById('gTable').classList.add("noClick");
+}
+
+function displayFunction(i, j)
+{
+  let currentCell = document.getElementById("gTable").rows[i].cells[j];
+
+  if (currentPlayer == 'p1')
+  {
+    currentCell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')">❌</button>';
+    currentPlayer = 'p2';
+  }
+  else
+  {
+    currentCell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')">⭕️</button>';
+    currentPlayer = 'p1';
+  }
+}
+
 function changeColor(gridColor)
-{   
+{
     switch (gridColor)
     {
         case 'skyblue':
