@@ -4,6 +4,20 @@ var gridcell;
 var gridArray;
 var currentPlayer;
 var turnCount;
+var gameMode;
+
+function gameMode(input)
+{
+  if (input == 1)
+  {
+    gameMode = 1;
+  }
+  else
+  {
+    gameMode = 2;
+  }
+  alert(gameMode);
+}
 
 function resizeTable(tsize)
 {
@@ -11,7 +25,7 @@ function resizeTable(tsize)
   let cell;
 
   tableSize = tsize;
-
+ 
   turnCount = 1;
   currentPlayer = 'p1';
 
@@ -156,11 +170,47 @@ function checkWin()
       }
     }
   }
+    
+  // Right diagonal check
+  for (let drow = 0; drow < tableSize; drow++)
+  {
+    for (let dcolumn = 0; dcolumn < tableSize; dcolumn++)
+    {
+      wincounter = 1;
 
+      let i , j;
+
+      for (i = drow,j = dcolumn; i < tableSize && j < tableSize; i++,j++)
+      {
+        if (gridArray[i][j] == 0)
+        {
+          continue;
+        }
+
+        currentSlotPiece = gridArray[i][j];
+
+        if (gridArray[i+1][j+1] == currentSlotPiece)
+        {
+          wincounter++;
+        }
+        else
+        {
+          wincounter = 1;
+          currentSlotPiece = gridArray[i+1][j+1];
+        }
+
+        if (wincounter == 5)
+        {
+          disableButtons();
+          return currentSlotPiece;
+        }
+      }
+    }
+  }
+    
   // left diagonal check
   for (let drow = tableSize - 1; drow >= 0; drow--)
   {
-    //alert("row:" + drow);
     for (let dcolumn = 0; dcolumn < tableSize; dcolumn++)
     {
       wincounter = 1;
@@ -169,7 +219,6 @@ function checkWin()
 
       for (i = drow,j = dcolumn; i >=0 && j < tableSize; i--,j++)
       {
-        //alert(i + " " +j);
         if (gridArray[i][j] == 0)
         {
           continue;
@@ -195,8 +244,6 @@ function checkWin()
       }
     }
   }
-
-
 
   return false;
 }
@@ -263,6 +310,10 @@ function colorDropDown() {
 
 function sizeDropDown() {
     document.getElementById("sizeDropdown").classList.toggle("show");
+}
+
+function gameModeDropDown() {
+    document.getElementById("gameModeDropdown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
