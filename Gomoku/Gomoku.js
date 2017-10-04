@@ -4,19 +4,18 @@ var gridcell;
 var gridArray;
 var currentPlayer;
 var turnCount;
-var gameMode;
+var playerGameMode;
 
-function gameMode(input)
+function gameModeFunction(input)
 {
   if (input == 1)
   {
-    gameMode = 1;
+    playerGameMode = 1;
   }
   else
   {
-    gameMode = 2;
+    playerGameMode = 2;
   }
-  alert(gameMode);
 }
 
 function resizeTable(tsize)
@@ -25,7 +24,7 @@ function resizeTable(tsize)
   let cell;
 
   tableSize = tsize;
- 
+
   turnCount = 1;
   currentPlayer = 'p1';
 
@@ -62,7 +61,7 @@ function resizeTable(tsize)
 
 function clickFunction(i, j)
 {
-  let win;
+  let winWinNoMatterWhat;
 
   if (turnCount % 2 == 0)
   {
@@ -144,7 +143,7 @@ function checkWin()
   for (let i = 0; i < tableSize; i++)
   {
     wincounter = 1;
-    for (let j = 0; j < tableSize; j++)
+    for (let j = 0; j < tableSize - 4; j++)
     {
       if (gridArray[j][i] == 0)
       {
@@ -170,24 +169,27 @@ function checkWin()
       }
     }
   }
-    
+
   // Right diagonal check
-  for (let drow = 0; drow < tableSize; drow++)
+  for (let row = 0; row < tableSize - 4; row++)
   {
-    for (let dcolumn = 0; dcolumn < tableSize; dcolumn++)
+    for (let column = 0; column < tableSize - 4; column++)
     {
       wincounter = 1;
 
-      let i , j;
+      let i, j;
 
-      for (i = drow,j = dcolumn; i < tableSize && j < tableSize; i++,j++)
+      for (i = row, j = column; i < tableSize - 1 && j < tableSize - 1; i++, j++)
       {
+
         if (gridArray[i][j] == 0)
         {
           continue;
         }
 
         currentSlotPiece = gridArray[i][j];
+
+        console.log(i + " " + j + " " + wincounter);
 
         if (gridArray[i+1][j+1] == currentSlotPiece)
         {
@@ -196,29 +198,28 @@ function checkWin()
         else
         {
           wincounter = 1;
-          currentSlotPiece = gridArray[i+1][j+1];
         }
 
         if (wincounter == 5)
         {
-          disableButtons();
           return currentSlotPiece;
         }
       }
     }
   }
-    
-  // left diagonal check
-  for (let drow = tableSize - 1; drow >= 0; drow--)
+
+  // Left diagonal check
+  for (let row = 0; row < 11; row++)
   {
-    for (let dcolumn = 0; dcolumn < tableSize; dcolumn++)
+    for (let column = tableSize - 1; column > 3; column--)
     {
       wincounter = 1;
 
-      let i , j;
+      let i, j;
 
-      for (i = drow,j = dcolumn; i >=0 && j < tableSize; i--,j++)
+      for (i = row, j = column; i < tableSize - 1 && j > 0; i++, j--)
       {
+
         if (gridArray[i][j] == 0)
         {
           continue;
@@ -226,25 +227,24 @@ function checkWin()
 
         currentSlotPiece = gridArray[i][j];
 
-        if (gridArray[i-1][j+1] == currentSlotPiece)
+        //console.log(i + " " + j + " " + wincounter);
+
+        if (gridArray[i+1][j-1] == currentSlotPiece)
         {
           wincounter++;
         }
         else
         {
           wincounter = 1;
-          currentSlotPiece = gridArray[i-1][j+1];
         }
 
         if (wincounter == 5)
         {
-          disableButtons();
           return currentSlotPiece;
         }
       }
     }
   }
-
   return false;
 }
 
