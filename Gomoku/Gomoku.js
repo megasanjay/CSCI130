@@ -81,12 +81,12 @@ function clickFunction(i, j)
   winWinNoMatterWhat = checkWin();
   if (winWinNoMatterWhat == 1)
   {
-    alert("Player 1 won!");
+    alert("Player 1 wins!");
     return;
   }
   else if (winWinNoMatterWhat == 2)
   {
-    alert("Player 2 won!");
+    alert("Player 2 wins!");
   }
 }
 
@@ -156,6 +156,47 @@ function checkWin()
       }
     }
   }
+
+  // left diagonal check
+  for (let drow = tableSize - 1; drow >= 0; drow--)
+  {
+    //alert("row:" + drow);
+    for (let dcolumn = 0; dcolumn < tableSize; dcolumn++)
+    {
+      wincounter = 1;
+
+      let i , j;
+
+      for (i = drow,j = dcolumn; i >=0 && j < tableSize; i--,j++)
+      {
+        //alert(i + " " +j);
+        if (gridArray[i][j] == 0)
+        {
+          continue;
+        }
+
+        currentSlotPiece = gridArray[i][j];
+
+        if (gridArray[i-1][j+1] == currentSlotPiece)
+        {
+          wincounter++;
+        }
+        else
+        {
+          wincounter = 1;
+          currentSlotPiece = gridArray[i-1][j+1];
+        }
+
+        if (wincounter == 5)
+        {
+          disableButtons();
+          return currentSlotPiece;
+        }
+      }
+    }
+  }
+
+
 
   return false;
 }
