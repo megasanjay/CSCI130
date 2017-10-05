@@ -5,18 +5,43 @@ var gridArray;
 var currentPlayer;
 var turnCount;
 var playerGameMode;
+var winColor;
 
 function gameModeFunction(input)
 {
   if (input == 1)
   {
     playerGameMode = 1;
+    alert("You are now playing against a dumb student's algorithm to beat you at this stupid game. Good luck! :)");
+    resizeTable(15);
+  }
+  else if (input == 3)
+  {
+    if (!tableSize)
+    {
+      resizeTable(15);
+    }
+    else
+    {
+      resizeTable(tableSize);
+    }
   }
   else
   {
     playerGameMode = 2;
+    alert("k. I hope you have someone next to you because you are now playing in the 1v1 mode. If you clicked this by accident, please choose the other game mode or play against yourself ;)");
+    resizeTable(15);
   }
 }
+
+function clickButton(i,j)
+{
+  if (playerGameMode == 2)
+  {
+    clickFunction(i,j);
+  }
+}
+
 
 function resizeTable(tsize)
 {
@@ -27,6 +52,7 @@ function resizeTable(tsize)
 
   turnCount = 1;
   currentPlayer = 'p1';
+  winColor = "red";
 
   gridArray = new Array(tsize);
 
@@ -54,7 +80,7 @@ function resizeTable(tsize)
 		for (let j = 0; j < tableSize ; j++)
 		{
 			cell = row.insertCell(j);
-			cell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')"></button>';
+			cell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')"></button>';
 		}
 	}
 }
@@ -94,24 +120,41 @@ function clickFunction(i, j)
   winWinNoMatterWhat = checkWin();
   if (winWinNoMatterWhat == 1)
   {
-    alert("Player 1 wins!");
+    alert("Player ❌ wins!");
     return;
   }
   else if (winWinNoMatterWhat == 2)
   {
-    alert("Player 2 wins!");
+    alert("Player ⭕️ wins!");
+  }
+}
+
+function displayFunction(i, j)
+{
+  let currentCell = document.getElementById("gTable").rows[i].cells[j];
+
+  if (currentPlayer == 'p1')
+  {
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">❌</button>';
+    currentPlayer = 'p2';
+  }
+  else
+  {
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">⭕️</button>';
+    currentPlayer = 'p1';
   }
 }
 
 function checkWin()
 {
   let currentSlotPiece;
-  let wincounter;
+  let wincounter, x, y;
 
   // horizontal check
   for (let i = 0; i < tableSize; i++)
   {
     wincounter = 1;
+    
     for (let j = 0; j < tableSize; j++)
     {
       if (gridArray[i][j] == 0)
@@ -121,19 +164,42 @@ function checkWin()
 
       currentSlotPiece = gridArray[i][j];
 
-      if (gridArray[i][j+1] == currentSlotPiece)
+      if (gridArray[i][j + 1] == currentSlotPiece)
       {
         wincounter++;
       }
       else
       {
         wincounter = 1;
-        currentSlotPiece = gridArray[i][j+1];
+        currentSlotPiece = gridArray[i][j + 1];
       }
 
       if (wincounter == 5)
       {
+        {
+          x = "cellr" + i + "c" + j;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + i + "c" + (j + 1);
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + i + "c" + (j - 1);
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + i + "c" + (j - 2);
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + i + "c" + (j - 3);
+          y = document.getElementById(x);
+          y.style.background = winColor;
+        }
+        
         disableButtons();
+        
         return currentSlotPiece;
       }
     }
@@ -143,7 +209,8 @@ function checkWin()
   for (let i = 0; i < tableSize; i++)
   {
     wincounter = 1;
-    for (let j = 0; j < tableSize - 4; j++)
+    
+    for (let j = 0; j < tableSize; j++)
     {
       if (gridArray[j][i] == 0)
       {
@@ -152,19 +219,42 @@ function checkWin()
 
       currentSlotPiece = gridArray[j][i];
 
-      if (gridArray[j+1][i] == currentSlotPiece)
+      if (gridArray[j + 1][i] == currentSlotPiece)
       {
         wincounter++;
       }
       else
       {
         wincounter = 1;
-        currentSlotPiece = gridArray[j+1][i];
+        currentSlotPiece = gridArray[j + 1][i];
       }
 
       if (wincounter == 5)
       {
+        {
+          x = "cellr" + j + "c" + i;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + (j + 1) + "c" + i;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + (j - 1) + "c" + i;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + (j - 2) + "c" + i;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+          
+          x = "cellr" + (j - 3) + "c" + i;
+          y = document.getElementById(x);
+          y.style.background = winColor;
+        }
+        
         disableButtons();
+        
         return currentSlotPiece;
       }
     }
@@ -175,9 +265,9 @@ function checkWin()
   {
     for (let column = 0; column < tableSize - 4; column++)
     {
-      wincounter = 1;
-
+      
       let i, j;
+      wincounter = 1;
 
       for (i = row, j = column; i < tableSize - 1 && j < tableSize - 1; i++, j++)
       {
@@ -189,9 +279,7 @@ function checkWin()
 
         currentSlotPiece = gridArray[i][j];
 
-        console.log(i + " " + j + " " + wincounter);
-
-        if (gridArray[i+1][j+1] == currentSlotPiece)
+        if (gridArray[i + 1][j + 1] == currentSlotPiece)
         {
           wincounter++;
         }
@@ -202,6 +290,30 @@ function checkWin()
 
         if (wincounter == 5)
         {
+          {
+            x = "cellr" + i + "c" + j;
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i + 1) + "c" + (j + 1);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 1) + "c" + (j - 1);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 2) + "c" + (j - 2);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 3) + "c" + (j - 3);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+          }
+          
+          disableButtons();
+          
           return currentSlotPiece;
         }
       }
@@ -213,9 +325,8 @@ function checkWin()
   {
     for (let column = tableSize - 1; column > 3; column--)
     {
-      wincounter = 1;
-
       let i, j;
+      wincounter = 1;
 
       for (i = row, j = column; i < tableSize - 1 && j > 0; i++, j--)
       {
@@ -227,9 +338,7 @@ function checkWin()
 
         currentSlotPiece = gridArray[i][j];
 
-        //console.log(i + " " + j + " " + wincounter);
-
-        if (gridArray[i+1][j-1] == currentSlotPiece)
+        if (gridArray[i + 1][j - 1] == currentSlotPiece)
         {
           wincounter++;
         }
@@ -240,11 +349,36 @@ function checkWin()
 
         if (wincounter == 5)
         {
+          {
+            x = "cellr" + i + "c" + j;
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i + 1) + "c" + (j - 1);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 1) + "c" + (j + 1);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 2) + "c" + (j + 2);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+            
+            x = "cellr" + (i - 3) + "c" + (j + 3);
+            y = document.getElementById(x);
+            y.style.background = winColor;
+          }
+          
+          disableButtons();
+          
           return currentSlotPiece;
         }
       }
     }
   }
+  
   return false;
 }
 
@@ -263,68 +397,82 @@ function disableButtons()
   document.getElementById('gTable').classList.add("noClick");
 }
 
-function displayFunction(i, j)
-{
-  let currentCell = document.getElementById("gTable").rows[i].cells[j];
-
-  if (currentPlayer == 'p1')
-  {
-    currentCell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')">❌</button>';
-    currentPlayer = 'p2';
-  }
-  else
-  {
-    currentCell.innerHTML = '<button class = "gridCell" onclick="clickFunction(' + i + ',' + j + ')">⭕️</button>';
-    currentPlayer = 'p1';
-  }
-}
-
 function changeColor(gridColor)
 {
     switch (gridColor)
     {
         case 'skyblue':
-            table.style.backgroundColor = "skyblue";
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="skyblue";
+            }
             break;
         case 'red':
-            table.style.backgroundColor = "red";
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="red";
+            }
             break;
         case 'green':
-            table.style.backgroundColor = "green";
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="green";
+            }
             break;
         case 'noC':
-            table.style.background = "none";
-            break;
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="none";
+            }
+            reak;
         case 'fuchsia':
-            table.style.backgroundColor = "fuchsia";
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="fuchsia";
+            }
             break;
         case 'silver':
-            table.style.backgroundColor = "silver";
+            list = document.getElementsByClassName("gridCell");
+            for (index = 0; index < list.length; ++index) 
+            {
+              list[index].style.background ="silver";
+            }
             break;
     }
 }
 
-function colorDropDown() {
+function colorDropDown() 
+{
     document.getElementById("colorDropdown").classList.toggle("show");
 }
 
-function sizeDropDown() {
+function sizeDropDown() 
+{
     document.getElementById("sizeDropdown").classList.toggle("show");
 }
 
-function gameModeDropDown() {
+function gameModeDropDown() 
+{
     document.getElementById("gameModeDropdown").classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches(".dropdownButt")) {
-
+window.onclick = function(event) 
+{
+  if (!event.target.matches(".dropdownButt")) 
+  {
     var dropdowns = document.getElementsByClassName("clickContent");
     var i;
-    for (i = 0; i < dropdowns.length; i++) {
+    for (i = 0; i < dropdowns.length; i++) 
+    {
       var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
+      if (openDropdown.classList.contains("show")) 
+      {
         openDropdown.classList.remove("show");
       }
     }
