@@ -37,7 +37,7 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   text-align: center;
-  
+
 }
 
 html
@@ -67,6 +67,7 @@ body
 {
     height: 10%;
     width: 100%;
+    display: inline;
 }
 
 .noClick
@@ -109,7 +110,7 @@ tr
   position: relative;
   text-align: center;
   font-size: 0.9em;
-  
+
 }
 
 .show
