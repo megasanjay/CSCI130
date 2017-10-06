@@ -155,7 +155,7 @@ function clickFunction(i, j)
     moves = [];
     twoVTwoResponse(i,j);
     //moves.sort(function(a,b){return b.streak - a.streak;});
-    
+
     removeDuplicates();
     generateMove();
     /*console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -173,177 +173,325 @@ function generateMove()
   for(i in moves)
   {
     x = moves[i];
-    
+
     console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     console.log(x.index + " " + x.streak + " " + x.row + " " + x.column + " " + x.type);
-    
+
     if (x.streak == 1)
     {
       if (x.type == 'a')
       {
-        if (gridArray[x.row + 1][x.column] == 0)
+        if ((x.row + 1) < tableSize)
         {
-          clickFunction(x.row + 1, x.column);
-          return;
+          if (gridArray[x.row + 1][x.column] == 0)
+          {
+            clickFunction(x.row + 1, x.column);
+            return;
+          }
         }
       }
       if (x.type == 'b')
       {
-        if (gridArray[x.row][x.column + 1] == 0)
+        if (x.column + 1 < tableSize)
         {
-          clickFunction(x.row, x.column + 1);
-          return;
+          if (gridArray[x.row][x.column + 1] == 0)
+          {
+            clickFunction(x.row, x.column + 1);
+            return;
+          }
         }
       }
       if (x.type == 'c')
       {
-        if (gridArray[x.row + 1][x.column - 1] == 0)
+        if (((x.row + 1) < tableSize) && ((x.column - 1) >= 0))
         {
-          clickFunction(x.row + 1, x.column - 1);
-          return;
+          if (gridArray[x.row + 1][x.column - 1] == 0)
+          {
+            clickFunction(x.row + 1, x.column - 1);
+            return;
+          }
         }
       }
       if (x.type == 'd')
       {
-        if (gridArray[x.row + 1][x.column + 1] == 0)
+        if (((x.row + 1) < tableSize) && ((x.column + 1) < tableSize))
         {
-          clickFunction(x.row + 1, x.column + 1);
-          return;
+          if (gridArray[x.row + 1][x.column + 1] == 0)
+          {
+            clickFunction(x.row + 1, x.column + 1);
+            return;
+          }
         }
       }
     }
-    
+
     if (x.streak == 2)
     {
       if (x.type == 'a')
       {
-        if (gridArray[x.row + 2][x.column] == 0)
+        if ((x.row + 2) < tableSize)
         {
-          clickFunction(x.row + 2, x.column);
-          return;
+          if (gridArray[x.row + 2][x.column] == 0)
+          {
+            clickFunction(x.row + 2, x.column);
+            return;
+          }
+          else
+          {
+            if ((x.row - 1) >= 0)
+            {
+              if (gridArray[x.row - 1][x.column] == 0)
+              {
+                clickFunction(x.row - 1, x.column);
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - 1][x.column] == 0)
+          if ((x.row - 1) >= 0)
           {
-            clickFunction(x.row - 1, x.column);
-            return;
+            if (gridArray[x.row - 1][x.column] == 0)
+            {
+              clickFunction(x.row - 1, x.column);
+              return;
+            }
           }
         }
       }
       if (x.type == 'b')
       {
-        if (gridArray[x.row][x.column + 2] == 0)
+        if ((x.column + 2) < tableSize)
         {
-          clickFunction(x.row, x.column + 2);
-          return;
+          if (gridArray[x.row][x.column + 2] == 0)
+          {
+            clickFunction(x.row, x.column + 2);
+            return;
+          }
+          else
+          {
+            if ((x.column - 1) >= 0)
+            {
+              if (gridArray[x.row][x.column - 1] == 0)
+              {
+                clickFunction(x.row, x.column - 1);
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row][x.column - 1] == 0)
+          if ((x.column - 1) >= 0)
           {
-            clickFunction(x.row, x.column - 1);
-            return;
+            if (gridArray[x.row][x.column - 1] == 0)
+            {
+              clickFunction(x.row, x.column - 1);
+              return;
+            }
           }
         }
       }
       if (x.type == 'c')
       {
-        if (gridArray[x.row + 2][x.column - 2] == 0)
+        if (((x.row + 2) < tableSize) && ((x.column - 2) >= 0))
         {
-          clickFunction(x.row + 2, x.column - 2);
-          return;
+          if (gridArray[x.row + 2][x.column - 2] == 0)
+          {
+            clickFunction(x.row + 2, x.column - 2);
+            return;
+          }
+          else
+          {
+            if (((x.row - 1) >= 0) && ((x.column + 1) < tableSize))
+            {
+              if (gridArray[x.row - 1][x.column + 1] == 0)
+              {
+                clickFunction(x.row - 1, x.column + 1);
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - 1][x.column + 1] == 0)
+          if (((x.row - 1) >= 0) && ((x.column + 1) < tableSize))
           {
-            clickFunction(x.row - 1, x.column + 1);
-            return;
+            if (gridArray[x.row - 1][x.column + 1] == 0)
+            {
+              clickFunction(x.row - 1, x.column + 1);
+              return;
+            }
           }
         }
       }
       if (x.type == 'd')
       {
-        if (gridArray[x.row + 2][x.column + 1] == 0)
+        if (((x.row + 2) < tableSize) && ((x.column + 1) < tableSize))
         {
-          clickFunction(x.row + 2, x.column + 1);
-          return;
+          if (gridArray[x.row + 2][x.column + 1] == 0)
+          {
+            clickFunction(x.row + 2, x.column + 1);
+            return;
+          }
+          else
+          {
+            if (((x.row - 1) >= 0) && ((x.column - 1) >= 0))
+            {
+              if (gridArray[x.row - 1][x.column - 1] == 0)
+              {
+                clickFunction(x.row - 1, x.column - 1);
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - 1][x.column - 1] == 0)
+          if (((x.row - 1) >= 0) && ((x.column - 1) >= 0))
           {
-            clickFunction(x.row - 1, x.column - 1);
-            return;
+            if (gridArray[x.row - 1][x.column - 1] == 0)
+            {
+              clickFunction(x.row - 1, x.column - 1);
+              return;
+            }
           }
         }
       }
     }
-    
+
     if (x.streak == 3 || x.streak == 4)
     {
       if (x.type == 'a')
       {
-        if (gridArray[x.row + 2][x.column] == 0)
+        if ((x.row + 2) < tableSize)
         {
-          clickFunction(x.row + 2, x.column);
-          return;
+          if (gridArray[x.row + 2][x.column] == 0)
+          {
+            clickFunction(x.row + 2, x.column);
+            return;
+          }
+          else
+          {
+            if ((x.row - (x.streak - 1)) >= 0)
+            {
+              if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
+              {
+                clickFunction(x.row - (x.streak - 1), x.column);
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
+          if ((x.row - (x.streak - 1)) >= 0)
           {
-            clickFunction(x.row - (x.streak - 1), x.column);
-            return;
+            if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
+            {
+              clickFunction(x.row - (x.streak - 1), x.column);
+              return;
+            }
           }
         }
       }
       if (x.type == 'b')
       {
-        if (gridArray[x.row][x.column + 2] == 0)
+        if (x.column + 2 < tableSize)
         {
-          clickFunction(x.row, x.column + 2);
-          return;
+          if (gridArray[x.row][x.column + 2] == 0)
+          {
+            clickFunction(x.row, x.column + 2);
+            return;
+          }
+          else
+          {
+            if ((x.column - (x.streak - 1)) >= 0)
+            {
+              if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
+              {
+                clickFunction(x.row, x.column - (x.streak - 1));
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
+          if ((x.column - (x.streak - 1)) >= 0)
           {
-            clickFunction(x.row, x.column - (x.streak - 1));
-            return;
+            if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
+            {
+              clickFunction(x.row, x.column - (x.streak - 1));
+              return;
+            }
           }
         }
       }
       if (x.type == 'c')
       {
-        if (gridArray[x.row + 2][x.column - 2] == 0)
+        if (((x.row + 2) < tableSize) && ((x.column - 2) >= 0))
         {
-          clickFunction(x.row + 2, x.column - 2);
-          return;
+          if (gridArray[x.row + 2][x.column - 2] == 0)
+          {
+            clickFunction(x.row + 2, x.column - 2);
+            return;
+          }
+          else
+          {
+            if (((x.row - (x.streak - 1)) >= 0) && ((x.column + (x.streak - 1)) < tableSize))
+            {
+              if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
+              {
+                clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
+          if (((x.row - (x.streak - 1)) >= 0) && ((x.column + (x.streak - 1)) < tableSize))
           {
-            clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
-            return;
+            if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
+            {
+              clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
+              return;
+            }
           }
         }
       }
       if (x.type == 'd')
       {
-        if (gridArray[x.row + 2][x.column + 2] == 0)
+        if (((x.row + 2) < tableSize) && ((x.column + 2) < tableSize))
         {
-          clickFunction(x.row + 2, x.column + 2);
-          return;
+          if (gridArray[x.row + 2][x.column + 2] == 0)
+          {
+            clickFunction(x.row + 2, x.column + 2);
+            return;
+          }
+          else
+          {
+            if (((x.row - (x.streak - 1)) >= 0) && ((x.column - (x.streak - 1)) >= 0))
+            {
+              if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
+              {
+                clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
+                return;
+              }
+            }
+          }
         }
         else
         {
-          if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
+          if (((x.row - (x.streak - 1)) >= 0) && ((x.column - (x.streak - 1)) >= 0))
           {
-            clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
-            return;
+            if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
+            {
+              clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
+              return;
+            }
           }
         }
       }
@@ -359,7 +507,7 @@ function removeDuplicates()
     for(j in moves)
     {
       y = moves[j];
-      
+
       if (x.streak == y.streak && x.row == y.row && x.column == y.column && x.type == y.type && x.index != y.index)
       {
         moves.splice(j,1);
@@ -371,12 +519,12 @@ function removeDuplicates()
     function(a,b)
     {
       var sorter = b.streak - a.streak;
-      
-      if (sorter) 
+
+      if (sorter)
       {
         return sorter;
       }
-      
+
       var tieSorter = b.type - a.type;
       return tieSorter;
     }
@@ -387,7 +535,7 @@ function twoVTwoResponse(inputRow, inputColumn)
 {
   maxwincounter = 0;
   index = 1;
-  
+
   // Right diagonal check
   for (let row = 0; row < tableSize - 1; row++)
   {
@@ -415,7 +563,7 @@ function twoVTwoResponse(inputRow, inputColumn)
         {
           wincounter = 1;
         }
-        
+
         move = new Object();
         move.index = index++;
         move.streak = wincounter;
@@ -427,7 +575,7 @@ function twoVTwoResponse(inputRow, inputColumn)
       }
     }
   }
-  
+
   // Left diagonal check
   for (let row = 0; row < tableSize - 1; row++)
   {
@@ -454,7 +602,7 @@ function twoVTwoResponse(inputRow, inputColumn)
         {
           wincounter = 1;
         }
-        
+
         move = new Object();
         move.index = index++;
         move.streak = wincounter;
@@ -466,7 +614,7 @@ function twoVTwoResponse(inputRow, inputColumn)
       }
     }
   }
-  
+
   // horizontal check
   for (let i = 0; i < tableSize; i++)
   {
@@ -490,18 +638,18 @@ function twoVTwoResponse(inputRow, inputColumn)
         wincounter = 1;
         currentSlotPiece = gridArray[i][j + 1];
       }
-      
+
       move = new Object();
       move.index = index++;
       move.streak = wincounter;
       move.row = i;
       move.column = j;
       move.type = 'b';
-      
+
       moves.push(move);
     }
   }
-  
+
   // Vertical check
   for (let i = 0; i < tableSize; i++)
   {
@@ -525,18 +673,18 @@ function twoVTwoResponse(inputRow, inputColumn)
         wincounter = 1;
         currentSlotPiece = gridArray[j + 1][i];
       }
-      
+
       move = new Object();
       move.index = index++;
       move.streak = wincounter;
       move.row = j;
       move.column = i;
       move.type = 'a';
-      
+
       moves.push(move);
     }
   }
-  
+
 }
 
 function displayFunction(i, j)
@@ -632,6 +780,11 @@ function checkWin()
       }
 
       currentSlotPiece = gridArray[j][i];
+
+      if ((j + 1)  > tableSize - 1)
+      {
+        continue;
+      }
 
       if (gridArray[j + 1][i] == currentSlotPiece)
       {
