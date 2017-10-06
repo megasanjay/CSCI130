@@ -13,6 +13,7 @@ var maxwincounter;
 var maxRow
 var maxColumn;
 var winType;
+var moves = [];
 
 function timingFunction()
 {
@@ -52,10 +53,10 @@ function gameModeFunction(input)
 
 function clickButton(i,j)
 {
-  if (playerGameMode == 2)
-  {
+  //if (playerGameMode == 2)
+  //{
     clickFunction(i,j);
-  }
+  //}
 }
 
 function resizeTable(tsize)
@@ -149,15 +150,393 @@ function clickFunction(i, j)
     return;
   }
 
-  if (playerGameMode == 1)
+  if (playerGameMode == 1 && currentPlayer == 'p2')
   {
+    moves = [];
     twoVTwoResponse(i,j);
+    //moves.sort(function(a,b){return b.streak - a.streak;});
+    
+    removeDuplicates();
+    generateMove();
+    /*console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    for(i in moves)
+      {
+        x = moves[i];
+        console.log(x.index + " " + x.streak + " " + x.row + " " + x.column + " " + x.type);
+      }
+    */
   }
 }
 
-function twoVTwoResponse(i, j)
+function generateMove()
 {
+  for(i in moves)
+  {
+    x = moves[i];
+    
+    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    console.log(x.index + " " + x.streak + " " + x.row + " " + x.column + " " + x.type);
+    
+    if (x.streak == 1)
+    {
+      if (x.type == 'a')
+      {
+        if (gridArray[x.row + 1][x.column] == 0)
+        {
+          clickFunction(x.row + 1, x.column);
+          return;
+        }
+      }
+      if (x.type == 'b')
+      {
+        if (gridArray[x.row][x.column + 1] == 0)
+        {
+          clickFunction(x.row, x.column + 1);
+          return;
+        }
+      }
+      if (x.type == 'c')
+      {
+        if (gridArray[x.row + 1][x.column - 1] == 0)
+        {
+          clickFunction(x.row + 1, x.column - 1);
+          return;
+        }
+      }
+      if (x.type == 'd')
+      {
+        if (gridArray[x.row + 1][x.column + 1] == 0)
+        {
+          clickFunction(x.row + 1, x.column + 1);
+          return;
+        }
+      }
+    }
+    
+    if (x.streak == 2)
+    {
+      if (x.type == 'a')
+      {
+        if (gridArray[x.row + 2][x.column] == 0)
+        {
+          clickFunction(x.row + 2, x.column);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - 1][x.column] == 0)
+          {
+            clickFunction(x.row - 1, x.column);
+            return;
+          }
+        }
+      }
+      if (x.type == 'b')
+      {
+        if (gridArray[x.row][x.column + 2] == 0)
+        {
+          clickFunction(x.row, x.column + 2);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row][x.column - 1] == 0)
+          {
+            clickFunction(x.row, x.column - 1);
+            return;
+          }
+        }
+      }
+      if (x.type == 'c')
+      {
+        if (gridArray[x.row + 2][x.column - 2] == 0)
+        {
+          clickFunction(x.row + 2, x.column - 2);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - 1][x.column + 1] == 0)
+          {
+            clickFunction(x.row - 1, x.column + 1);
+            return;
+          }
+        }
+      }
+      if (x.type == 'd')
+      {
+        if (gridArray[x.row + 2][x.column + 1] == 0)
+        {
+          clickFunction(x.row + 2, x.column + 1);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - 1][x.column - 1] == 0)
+          {
+            clickFunction(x.row - 1, x.column - 1);
+            return;
+          }
+        }
+      }
+    }
+    
+    if (x.streak == 3 || x.streak == 4)
+    {
+      if (x.type == 'a')
+      {
+        if (gridArray[x.row + 2][x.column] == 0)
+        {
+          clickFunction(x.row + 2, x.column);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
+          {
+            clickFunction(x.row - (x.streak - 1), x.column);
+            return;
+          }
+        }
+      }
+      if (x.type == 'b')
+      {
+        if (gridArray[x.row][x.column + 2] == 0)
+        {
+          clickFunction(x.row, x.column + 2);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
+          {
+            clickFunction(x.row, x.column - (x.streak - 1));
+            return;
+          }
+        }
+      }
+      if (x.type == 'c')
+      {
+        if (gridArray[x.row + 2][x.column - 2] == 0)
+        {
+          clickFunction(x.row + 2, x.column - 2);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
+          {
+            clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
+            return;
+          }
+        }
+      }
+      if (x.type == 'd')
+      {
+        if (gridArray[x.row + 2][x.column + 2] == 0)
+        {
+          clickFunction(x.row + 2, x.column + 2);
+          return;
+        }
+        else
+        {
+          if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
+          {
+            clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
+            return;
+          }
+        }
+      }
+    }
+  }
+}
 
+function removeDuplicates()
+{
+  for(i in moves)
+  {
+    x = moves[i];
+    for(j in moves)
+    {
+      y = moves[j];
+      
+      if (x.streak == y.streak && x.row == y.row && x.column == y.column && x.type == y.type && x.index != y.index)
+      {
+        moves.splice(j,1);
+      }
+    }
+  }
+  moves.sort
+  (
+    function(a,b)
+    {
+      var sorter = b.streak - a.streak;
+      
+      if (sorter) 
+      {
+        return sorter;
+      }
+      
+      var tieSorter = b.type - a.type;
+      return tieSorter;
+    }
+  );
+}
+
+function twoVTwoResponse(inputRow, inputColumn)
+{
+  maxwincounter = 0;
+  index = 1;
+  
+  // Right diagonal check
+  for (let row = 0; row < tableSize - 1; row++)
+  {
+    for (let column = 0; column < tableSize - 1; column++)
+    {
+
+      let i, j;
+      wincounter = 1;
+
+      for (i = row, j = column; i < tableSize - 1 && j < tableSize - 1; i++, j++)
+      {
+
+        if (gridArray[i][j] == 0)
+        {
+          continue;
+        }
+
+        currentSlotPiece = gridArray[i][j];
+
+        if (gridArray[i + 1][j + 1] == currentSlotPiece)
+        {
+          wincounter++;
+        }
+        else
+        {
+          wincounter = 1;
+        }
+        
+        move = new Object();
+        move.index = index++;
+        move.streak = wincounter;
+        move.row = i;
+        move.column = j;
+        move.type = 'd';
+
+        moves.push(move);
+      }
+    }
+  }
+  
+  // Left diagonal check
+  for (let row = 0; row < tableSize - 1; row++)
+  {
+    for (let column = tableSize - 1; column > 0; column--)
+    {
+      let i, j;
+      wincounter = 1;
+
+      for (i = row, j = column; i < tableSize - 1 && j > 0; i++, j--)
+      {
+
+        if (gridArray[i][j] == 0)
+        {
+          continue;
+        }
+
+        currentSlotPiece = gridArray[i][j];
+
+        if (gridArray[i + 1][j - 1] == currentSlotPiece)
+        {
+          wincounter++;
+        }
+        else
+        {
+          wincounter = 1;
+        }
+        
+        move = new Object();
+        move.index = index++;
+        move.streak = wincounter;
+        move.row = i;
+        move.column = j;
+        move.type = 'c';
+
+        moves.push(move);
+      }
+    }
+  }
+  
+  // horizontal check
+  for (let i = 0; i < tableSize; i++)
+  {
+    wincounter = 1;
+
+    for (let j = 0; j < tableSize - 1; j++)
+    {
+      if (gridArray[i][j] == 0)
+      {
+        continue;
+      }
+
+      currentSlotPiece = gridArray[i][j];
+
+      if (gridArray[i][j + 1] == currentSlotPiece)
+      {
+        wincounter++;
+      }
+      else
+      {
+        wincounter = 1;
+        currentSlotPiece = gridArray[i][j + 1];
+      }
+      
+      move = new Object();
+      move.index = index++;
+      move.streak = wincounter;
+      move.row = i;
+      move.column = j;
+      move.type = 'b';
+      
+      moves.push(move);
+    }
+  }
+  
+  // Vertical check
+  for (let i = 0; i < tableSize; i++)
+  {
+    wincounter = 1;
+
+    for (let j = 0; j < tableSize - 1; j++)
+    {
+      if (gridArray[j][i] == 0)
+      {
+        continue;
+      }
+
+      currentSlotPiece = gridArray[j][i];
+
+      if (gridArray[j + 1][i] == currentSlotPiece)
+      {
+        wincounter++;
+      }
+      else
+      {
+        wincounter = 1;
+        currentSlotPiece = gridArray[j + 1][i];
+      }
+      
+      move = new Object();
+      move.index = index++;
+      move.streak = wincounter;
+      move.row = j;
+      move.column = i;
+      move.type = 'a';
+      
+      moves.push(move);
+    }
+  }
+  
 }
 
 function displayFunction(i, j)
@@ -356,7 +735,7 @@ function checkWin()
   }
 
   // Left diagonal check
-  for (let row = 0; row < 11; row++)
+  for (let row = 0; row < tableSize - 4; row++)
   {
     for (let column = tableSize - 1; column > 3; column--)
     {
