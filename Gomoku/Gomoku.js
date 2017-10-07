@@ -4,10 +4,11 @@ var gridcell;
 var gridArray;
 var backColor;
 var currentPlayer;
-var turnCount;
+var turnCount = 0;
 var playerGameMode;
 var winColor;
 var startTime;
+var suggestFlash;
 var runTimer;
 var maxwincounter;
 var maxRow
@@ -51,11 +52,43 @@ function gameModeFunction(input)
   changeColor(backColor);
 }
 
+function suggestMoveFunction()
+{
+  if (turnCount == 0)
+  {
+    alert("You need to start a game for me to be able to suggest a move stupid! 🙄")
+    return;
+  }
+
+  table = document.getElementById('gTable');
+  moves = [];
+
+  twoVTwoResponse();
+  removeDuplicates();
+  x = generateMove();
+
+  y = "cellr" + x.row + "c" + x.column;
+  document.getElementById(y).classList.add("flashClass");
+
+  //table.rows[x.row].cells[x.column].style.backgroundColor = "red";
+}
+
 function clickButton(i,j)
 {
   //if (playerGameMode == 2)
   //{
-    clickFunction(i,j);
+ x = document.getElementsByClassName("flashClass");
+ if (x.length == 0)
+ {
+   clickFunction(i,j);
+ }
+ else
+ {
+   x[0].classList.remove("flashClass");
+   clickFunction(i,j);
+ }
+
+
   //}
 }
 
@@ -63,8 +96,6 @@ function resizeTable(tsize)
 {
   let row;
   let cell;
-  startTime = Date.now();
-  runTimer = setInterval(timingFunction, 300);
   document.getElementById("turnCounter").innerHTML = 0;
 
   tableSize = tsize;
@@ -108,6 +139,12 @@ function clickFunction(i, j)
 {
   let winWinNoMatterWhat;
 
+  if (turnCount == 1)
+  {
+    startTime = Date.now();
+    runTimer = setInterval(timingFunction, 300);
+  }
+
   if (turnCount % 2 == 0)
   {
     currentPlayer = 'p2';
@@ -139,33 +176,33 @@ function clickFunction(i, j)
   winWinNoMatterWhat = checkWin();
   if (winWinNoMatterWhat == 1)
   {
-    alert("Player ❌ wins!");
     clearInterval(runTimer);
+    alert("Player ❌ wins!");
     return;
   }
   else if (winWinNoMatterWhat == 2)
   {
-    alert("Player ⭕️ wins!");
     clearInterval(runTimer);
+    alert("Player ⭕️ wins!");
     return;
   }
 
   if (playerGameMode == 1 && currentPlayer == 'p2')
   {
     moves = [];
-    twoVTwoResponse(i,j);
+    twoVTwoResponse();
     //moves.sort(function(a,b){return b.streak - a.streak;});
 
     removeDuplicates();
-    generateMove();
-    /*console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    for(i in moves)
-      {
-        x = moves[i];
-        console.log(x.index + " " + x.streak + " " + x.row + " " + x.column + " " + x.type);
-      }
-    */
+    x = generateMove();
+
+    makeAIMove(x.row, x.column);
   }
+}
+
+function makeAIMove(i, j)
+{
+  clickFunction(i,j);
 }
 
 function generateMove()
@@ -185,8 +222,9 @@ function generateMove()
         {
           if (gridArray[x.row + 1][x.column] == 0)
           {
-            clickFunction(x.row + 1, x.column);
-            return;
+            y.row = x.row + 1;
+            y.column = x.column;
+            return y;
           }
         }
       }
@@ -196,8 +234,9 @@ function generateMove()
         {
           if (gridArray[x.row][x.column + 1] == 0)
           {
-            clickFunction(x.row, x.column + 1);
-            return;
+            y.row = x.row;
+            y.column = x.column + 1;
+            return y;
           }
         }
       }
@@ -207,8 +246,9 @@ function generateMove()
         {
           if (gridArray[x.row + 1][x.column - 1] == 0)
           {
-            clickFunction(x.row + 1, x.column - 1);
-            return;
+            y.row = x.row + 1;
+            y.column = x.column - 1;
+            return y;
           }
         }
       }
@@ -218,8 +258,9 @@ function generateMove()
         {
           if (gridArray[x.row + 1][x.column + 1] == 0)
           {
-            clickFunction(x.row + 1, x.column + 1);
-            return;
+            y.row = x.row + 1;
+            y.column = x.column + 1;
+            return y;
           }
         }
       }
@@ -233,8 +274,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column] == 0)
           {
-            clickFunction(x.row + 2, x.column);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column;
+            return y;
           }
           else
           {
@@ -242,8 +284,9 @@ function generateMove()
             {
               if (gridArray[x.row - 1][x.column] == 0)
               {
-                clickFunction(x.row - 1, x.column);
-                return;
+                y.row = x.row - 1;
+                y.column = x.column;
+                return y;
               }
             }
           }
@@ -254,8 +297,9 @@ function generateMove()
           {
             if (gridArray[x.row - 1][x.column] == 0)
             {
-              clickFunction(x.row - 1, x.column);
-              return;
+              y.row = x.row - 1;
+              y.column = x.column;
+              return y;
             }
           }
         }
@@ -266,8 +310,9 @@ function generateMove()
         {
           if (gridArray[x.row][x.column + 2] == 0)
           {
-            clickFunction(x.row, x.column + 2);
-            return;
+            y.row = x.row;
+            y.column = x.column + 2;
+            return y;
           }
           else
           {
@@ -275,8 +320,9 @@ function generateMove()
             {
               if (gridArray[x.row][x.column - 1] == 0)
               {
-                clickFunction(x.row, x.column - 1);
-                return;
+                y.row = x.row;
+                y.column = x.column - 1;
+                return y;
               }
             }
           }
@@ -287,8 +333,9 @@ function generateMove()
           {
             if (gridArray[x.row][x.column - 1] == 0)
             {
-              clickFunction(x.row, x.column - 1);
-              return;
+              y.row = x.row;
+              y.column = x.column - 1;
+              return y;
             }
           }
         }
@@ -299,8 +346,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column - 2] == 0)
           {
-            clickFunction(x.row + 2, x.column - 2);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column - 2;
+            return y;
           }
           else
           {
@@ -308,8 +356,9 @@ function generateMove()
             {
               if (gridArray[x.row - 1][x.column + 1] == 0)
               {
-                clickFunction(x.row - 1, x.column + 1);
-                return;
+                y.row = x.row - 1;
+                y.column = x.column + 1;
+                return y;
               }
             }
           }
@@ -320,8 +369,9 @@ function generateMove()
           {
             if (gridArray[x.row - 1][x.column + 1] == 0)
             {
-              clickFunction(x.row - 1, x.column + 1);
-              return;
+              y.row = x.row - 1;
+              y.column = x.column + 1;
+              return y;
             }
           }
         }
@@ -332,8 +382,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column + 1] == 0)
           {
-            clickFunction(x.row + 2, x.column + 1);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column + 1;
+            return y;
           }
           else
           {
@@ -341,8 +392,9 @@ function generateMove()
             {
               if (gridArray[x.row - 1][x.column - 1] == 0)
               {
-                clickFunction(x.row - 1, x.column - 1);
-                return;
+                y.row = x.row - 1;
+                y.column = x.column - 1;
+                return y;
               }
             }
           }
@@ -353,8 +405,9 @@ function generateMove()
           {
             if (gridArray[x.row - 1][x.column - 1] == 0)
             {
-              clickFunction(x.row - 1, x.column - 1);
-              return;
+              y.row = x.row - 1;
+              y.column = x.column - 1;
+              return y;
             }
           }
         }
@@ -369,8 +422,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column] == 0)
           {
-            clickFunction(x.row + 2, x.column);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column;
+            return y;
           }
           else
           {
@@ -378,8 +432,9 @@ function generateMove()
             {
               if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
               {
-                clickFunction(x.row - (x.streak - 1), x.column);
-                return;
+                y.row = x.row - (x.streak - 1);
+                y.column = x.column;
+                return y;
               }
             }
           }
@@ -390,8 +445,9 @@ function generateMove()
           {
             if (gridArray[x.row - (x.streak - 1)][x.column] == 0)
             {
-              clickFunction(x.row - (x.streak - 1), x.column);
-              return;
+              y.row = x.row - (x.streak - 1);
+              y.column = x.column;
+              return y;
             }
           }
         }
@@ -402,8 +458,9 @@ function generateMove()
         {
           if (gridArray[x.row][x.column + 2] == 0)
           {
-            clickFunction(x.row, x.column + 2);
-            return;
+            y.row = x.row ;
+            y.column = x.column + 2;
+            return y;
           }
           else
           {
@@ -411,8 +468,9 @@ function generateMove()
             {
               if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
               {
-                clickFunction(x.row, x.column - (x.streak - 1));
-                return;
+                y.row = x.row;
+                y.column = x.column - (x.streak - 1);
+                return y;
               }
             }
           }
@@ -423,8 +481,9 @@ function generateMove()
           {
             if (gridArray[x.row][x.column - (x.streak - 1)] == 0)
             {
-              clickFunction(x.row, x.column - (x.streak - 1));
-              return;
+              y.row = x.row;
+              y.column = x.column - (x.streak - 1);
+              return y;
             }
           }
         }
@@ -435,8 +494,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column - 2] == 0)
           {
-            clickFunction(x.row + 2, x.column - 2);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column - 2;
+            return y;
           }
           else
           {
@@ -444,8 +504,9 @@ function generateMove()
             {
               if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
               {
-                clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
-                return;
+                y.row = x.row - (x.streak - 1);
+                y.column = x.column + (x.streak - 1);
+                return y;
               }
             }
           }
@@ -456,8 +517,9 @@ function generateMove()
           {
             if (gridArray[x.row - (x.streak - 1)][x.column + (x.streak - 1)] == 0)
             {
-              clickFunction(x.row - (x.streak - 1), x.column + (x.streak - 1));
-              return;
+              y.row = x.row - (x.streak - 1);
+              y.column = x.column + (x.streak - 1);
+              return y;
             }
           }
         }
@@ -468,8 +530,9 @@ function generateMove()
         {
           if (gridArray[x.row + 2][x.column + 2] == 0)
           {
-            clickFunction(x.row + 2, x.column + 2);
-            return;
+            y.row = x.row + 2;
+            y.column = x.column + 2;
+            return y;
           }
           else
           {
@@ -477,8 +540,9 @@ function generateMove()
             {
               if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
               {
-                clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
-                return;
+                y.row = x.row - (x.streak - 1);
+                y.column = x.column - (x.streak - 1);
+                return y;
               }
             }
           }
@@ -489,8 +553,9 @@ function generateMove()
           {
             if (gridArray[x.row - (x.streak - 1)][x.column - (x.streak - 1)] == 0)
             {
-              clickFunction(x.row - (x.streak - 1), x.column - (x.streak - 1));
-              return;
+              y.row = x.row - (x.streak - 1);
+              y.column = x.column - (x.streak - 1);
+              return y;
             }
           }
         }
@@ -531,7 +596,7 @@ function removeDuplicates()
   );
 }
 
-function twoVTwoResponse(inputRow, inputColumn)
+function twoVTwoResponse()
 {
   maxwincounter = 0;
   index = 1;
@@ -694,12 +759,12 @@ function displayFunction(i, j)
 
   if (currentPlayer == 'p1')
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">❌</button>';
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">🤔</button>';
     currentPlayer = 'p2';
   }
   else
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">⭕️</button>';
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">👶🏽</button>';
     currentPlayer = 'p1';
   }
 
@@ -738,28 +803,7 @@ function checkWin()
 
       if (wincounter == 5)
       {
-        {
-          x = "cellr" + i + "c" + j;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + i + "c" + (j + 1);
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + i + "c" + (j - 1);
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + i + "c" + (j - 2);
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + i + "c" + (j - 3);
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-        }
-
+        highlightWinningCells('h', i , j);
         disableButtons();
 
         return currentSlotPiece;
@@ -798,28 +842,7 @@ function checkWin()
 
       if (wincounter == 5)
       {
-        {
-          x = "cellr" + j + "c" + i;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + (j + 1) + "c" + i;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + (j - 1) + "c" + i;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + (j - 2) + "c" + i;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-
-          x = "cellr" + (j - 3) + "c" + i;
-          y = document.getElementById(x);
-          y.style.opacity = winColor;
-        }
-
+        highlightWinningCells('v', i, j);
         disableButtons();
 
         return currentSlotPiece;
@@ -857,28 +880,7 @@ function checkWin()
 
         if (wincounter == 5)
         {
-          {
-            x = "cellr" + i + "c" + j;
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i + 1) + "c" + (j + 1);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 1) + "c" + (j - 1);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 2) + "c" + (j - 2);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 3) + "c" + (j - 3);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-          }
-
+          highlightWinningCells('rd', i, j);
           disableButtons();
 
           return currentSlotPiece;
@@ -916,28 +918,7 @@ function checkWin()
 
         if (wincounter == 5)
         {
-          {
-            x = "cellr" + i + "c" + j;
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i + 1) + "c" + (j - 1);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 1) + "c" + (j + 1);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 2) + "c" + (j + 2);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-
-            x = "cellr" + (i - 3) + "c" + (j + 3);
-            y = document.getElementById(x);
-            y.style.opacity = winColor;
-          }
-
+          highlightWinningCells('ld', i, j);
           disableButtons();
 
           return currentSlotPiece;
@@ -947,6 +928,101 @@ function checkWin()
   }
 
   return false;
+}
+
+function highlightWinningCells(input, i, j)
+{
+  if (input == 'h')
+  {
+    x = "cellr" + i + "c" + j;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + i + "c" + (j + 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + i + "c" + (j - 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + i + "c" + (j - 2);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + i + "c" + (j - 3);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+  }
+
+  if (input == 'v')
+  {
+    x = "cellr" + j + "c" + i;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (j + 1) + "c" + i;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (j - 1) + "c" + i;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (j - 2) + "c" + i;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (j - 3) + "c" + i;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+  }
+
+  if (input == 'ld')
+  {
+    x = "cellr" + i + "c" + j;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i + 1) + "c" + (j - 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 1) + "c" + (j + 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 2) + "c" + (j + 2);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 3) + "c" + (j + 3);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+  }
+
+  if (input == 'rd')
+  {
+    x = "cellr" + i + "c" + j;
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i + 1) + "c" + (j + 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 1) + "c" + (j - 1);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 2) + "c" + (j - 2);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+
+    x = "cellr" + (i - 3) + "c" + (j - 3);
+    y = document.getElementById(x);
+    y.style.opacity = winColor;
+  }
 }
 
 function errorFunction(errorCode)
@@ -992,14 +1068,14 @@ function changeColor(gridColor)
             }
             backColor = 'green';
             break;
-        case 'noC':
+        case 'white':
             list = document.getElementsByClassName("gridCell");
             for (index = 0; index < list.length; ++index)
             {
-              list[index].style.background ="none";
+              list[index].style.background ="white";
             }
-            backColor = 'noC';
-            reak;
+            backColor = 'white';
+            break;
         case 'fuchsia':
             list = document.getElementsByClassName("gridCell");
             for (index = 0; index < list.length; ++index)

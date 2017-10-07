@@ -50,6 +50,7 @@ body
 {
     width: 100%;
     height: 100%;
+    background: rgb(48, 48, 48);
 }
 
 .gridContainer
@@ -110,7 +111,29 @@ tr
   position: relative;
   text-align: center;
   font-size: 0.9em;
+  background: white;
 
+}
+
+.flashClass
+{
+  animation: suggestAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-direction: alternate-reverse;
+}
+
+@-webkit-keyframes suggestAnimation
+{
+  0%, 100%
+  {
+    background: rgb(241, 87, 120);
+  }
+  50%
+  {
+    background: rgb(87, 197, 241);
+  }
 }
 
 .show
