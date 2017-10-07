@@ -9,9 +9,9 @@ var playerGameMode;
 var winColor;
 var startTime;
 var suggestFlash;
-var runTimer;
 var maxwincounter;
-var maxRow
+var maxRow;
+var runTimer;
 var maxColumn;
 var winType;
 var moves = [];
@@ -41,7 +41,7 @@ function gameModeFunction(input)
     {
       resizeTable(tableSize);
     }
-    changeColor('silver');
+    changeColor('white');
   }
   else
   {
@@ -105,6 +105,9 @@ function resizeTable(tsize)
   winColor = 0.5;
 
   gridArray = new Array(tsize);
+  
+  startTime = Date.now();
+  runTimer = setInterval(timingFunction, 300);
 
   for (let i = 0; i < tsize; i++)
   {
@@ -141,8 +144,7 @@ function clickFunction(i, j)
 
   if (turnCount == 1)
   {
-    startTime = Date.now();
-    runTimer = setInterval(timingFunction, 300);
+    
   }
 
   if (turnCount % 2 == 0)
@@ -759,12 +761,12 @@ function displayFunction(i, j)
 
   if (currentPlayer == 'p1')
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">🤔</button>';
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">X</button>';
     currentPlayer = 'p2';
   }
   else
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">👶🏽</button>';
+    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">O</button>';
     currentPlayer = 'p1';
   }
 
