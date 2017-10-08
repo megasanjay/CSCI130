@@ -113,9 +113,9 @@ tr
   background: white;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: 900;
-  text-align: center;
   font-size: 150%;
-  color:crimson;
+  opacity: 0.8;
+  color: crimson;
 }
 
 .flashClass
