@@ -6,8 +6,8 @@
   border: none;
   position: relative;
   cursor: pointer;
-  height: 5em;
-  width: 8em;
+  height: inherit;
+  width: inherit;
 }
 
 .dropdownButt:hover, .dropdownButt:focus {
@@ -16,10 +16,10 @@
 
 .dropdown {
   position: relative;
-  display: inline-block;
-  width: 8em;
-  height: 5em;
+  width: 10em;
+  height: 4em;
   margin-bottom: 1%;
+  margin-right: 2%;
 }
 
 #x15:hover, #x19:hover, #compv1:hover, #onev1:hover, #gridReset:hover
@@ -54,22 +54,44 @@ body
   background: rgb(48, 48, 48);
 }
 
+
+.menuContainer
+{
+  height: 5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.gameContainer
+{
+  display: flex;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+  align-content: center;
+  margin: auto;
+  
+}
+
+.infoContainer
+{
+  width:auto;
+  height: auto;
+  vertical-align: inherit;
+  margin: auto;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 900;
+  font-size: 125%;
+  color:whitesmoke;
+}
+
 .gridContainer
 {
   position: relative;
   width: 800px;
   height: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  margin-top: auto;
-}
-
-.menuContainer
-{
-    height: 5em;
-    width: 100%;
-    display: inline;
+  margin: auto;
 }
 
 .noClick
@@ -179,27 +201,127 @@ tr
   display:block;
 }
 
+.colorDeepPink:hover
+{
+  background: DeepPink;
+}
+
+.colorLightSalmon:hover
+{
+  background: LightSalmon;
+}
+
+.colorSalmon:hover
+{
+  background: Salmon;
+}
+
+.colorLightCoral:hover
+{
+  background: LightCoral;
+}
+
+.colorCrimson:hover
+{
+  background: Crimson;
+}
+
+.colorOrangeRed:hover
+{
+  background: OrangeRed;
+}
+
+.colorTomato:hover
+{
+  background: Tomato;
+}
+
+.colorYellow:hover
+{
+  background: Yellow;
+}
+
+.colorOrange:hover
+{
+  background: Orange;
+}
+
+.colorPeachPuff:hover
+{
+  background: PeachPuff;
+}
+
+.colorGold:hover
+{
+  background: Gold;
+}
+
+.colorGoldenrod:hover
+{
+  background: Goldenrod;
+}
+
+.colorLime:hover
+{
+  background: Lime;
+}
+
+.colorMediumAquamarine:hover
+{
+  background: MediumAquamarine;
+}
+
+.colorAqua:hover
+{
+  background: Aqua;
+}
+
+.colorAquamarine:hover
+{
+  background: Aquamarine;
+}
+
+.colorMediumTurquoise:hover
+{
+  background: MediumTurquoise;
+}
+
 .colorSkyBlue:hover
 {
-  background: skyblue;
+  background: SkyBlue;
 }
 
-.colorRed:hover
+.colorDeepSkyBlue:hover
 {
-  background: red;
+  background: DeepSkyBlue;
 }
 
-.colorGreen:hover
+.colorViolet:hover
 {
-  background: green;
+  background: Violet;
 }
 
-.colorFuchsia:hover
+.colorMagenta:hover
 {
-  background: fuchsia;
+  background: Magenta;
 }
 
-.colorSilver:hover
+.colorAzure:hover
 {
-  background: silver;
+  background: Azure;
+}
+
+.colorLavenderBlush:hover
+{
+  background: LavenderBlush;
+}
+
+.colorLightGray:hover
+{
+  background: LightGray;
+}
+
+.colorSlateGray:hover
+{
+  background: SlateGray;
 }

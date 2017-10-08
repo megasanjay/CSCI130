@@ -20,9 +20,35 @@ var moves = [];
 
 function timingFunction()
 {
+  let seconds;
   let currentTime = Date.now();
-
-  document.getElementById('runningTimer').innerHTML = (currentTime - startTime) / 1000;
+  let minutes = parseInt(((currentTime - startTime) / 1000) / 60);
+  
+  if(minutes > 0)
+  {
+    seconds = ((currentTime - startTime) / 1000) - (minutes * 60);
+  }
+  else
+  {
+    seconds = (currentTime - startTime) / 1000;
+  }
+  
+  if (minutes != 0)
+  {
+    if (minutes == 1)
+    {
+      document.getElementById('runningTimer').innerHTML = minutes.toString() + " Minute and " + (parseInt(seconds)).toString() + " Seconds";
+    }
+    else
+    {
+      document.getElementById('runningTimer').innerHTML = minutes.toString() + " Minutes and " + (parseInt(seconds)).toString() + " Seconds";
+    }
+    
+  }
+  else
+  {
+    document.getElementById('runningTimer').innerHTML = (parseInt(seconds)).toString() + " Seconds";
+  }
 }
 
 function gameModeFunction(input)
@@ -1068,71 +1094,222 @@ function disableButtons()
 
 function changeGridColor(gridColorInput)
 {
-    if (gridColorInput == player1Color || gridColorInput == player2Color)
+  if (gridColorInput == player1Color || gridColorInput == player2Color)
+  {
+    choice = confirm("One of the pieces on the grid has the same color as the background you are choosing. Do you still want to go through with the current selection?");
+    if (!choice)
     {
-      choice = confirm("One of the pieces on the grid has the same color as the background you are choosing. Do you still want to go through with the current selection?");
-      if (!choice)
-      {
-        return;
-      }
+      return;
     }
+  }
+  
     switch (gridColorInput)
     {
-        case 'skyblue':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.backgroundColor ="skyblue";
-            }
-            gridColor = 'skyblue';
-            break;
-        case 'red':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.background ="red";
-            }
-            gridColor = 'red';
-            break;
-        case 'green':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.background ="green";
-            }
-            gridColor = 'green';
-            break;
-        case 'white':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.background ="white";
-            }
-            gridColor = 'white';
-            break;
-        case 'fuchsia':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.background ="fuchsia";
-            }
-            gridColor = 'fuchsia';
-            break;
-        case 'silver':
-            list = document.getElementsByClassName("gridCell");
-            for (index = 0; index < list.length; ++index)
-            {
-              list[index].style.background ="silver";
-            }
-            gridColor = 'silver';
-            break;
+      case 'DeepPink':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="DeepPink";
+        }
+        gridColor = 'DeepPink';
+        break;
+      case 'LightSalmon':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="LightSalmon";
+        }
+        gridColor = 'LightSalmon';
+        break;
+      case 'Salmon':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Salmon";
+        }
+        gridColor = 'Salmon';
+        break;
+      case 'LightCoral':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="LightCoral";
+        }
+        gridColor = 'LightCoral';
+        break;
+      case 'Crimson':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Crimson";
+        }
+        gridColor = 'Crimson';
+        break;
+      case 'OrangeRed':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="OrangeRed";
+        }
+        gridColor = 'OrangeRed';
+        break;
+      case 'Tomato':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Tomato";
+        }
+        gridColor = 'Tomato';
+        break;
+      case 'Yellow':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Yellow";
+        }
+        gridColor = 'Yellow';
+        break;
+      case 'Orange':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Orange";
+        }
+        gridColor = 'Orange';
+        break;
+      case 'PeachPuff':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="PeachPuff";
+        }
+        gridColor = 'PeachPuff';
+        break;
+      case 'Gold':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Gold";
+        }
+        gridColor = 'Gold';
+        break;
+      case 'Goldenrod':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Goldenrod";
+        }
+        gridColor = 'Goldenrod';
+        break;
+      case 'Lime':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Lime";
+        }
+        gridColor = 'Lime';
+        break;
+      case 'MediumAquamarine':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="MediumAquamarine";
+        }
+        gridColor = 'MediumAquamarine';
+        break;
+      case 'Aqua':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Aqua";
+        }
+        gridColor = 'Aqua';
+        break;
+      case 'Aquamarine':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Aquamarine";
+        }
+        gridColor = 'Aquamarine';
+        break;
+      case 'MediumTurquoise':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="MediumTurquoise";
+        }
+        gridColor = 'MediumTurquoise';
+        break;
+      case 'SkyBlue':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="SkyBlue";
+        }
+        gridColor = 'SkyBlue';
+        break;
+      case 'DeepSkyBlue':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="DeepSkyBlue";
+        }
+        gridColor = 'DeepSkyBlue';
+        break;
+      case 'Violet':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Violet";
+        }
+        gridColor = 'Violet';
+        break;
+      case 'Magenta':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Magenta";
+        }
+        gridColor = 'Magenta';
+        break;
+      case 'Azure':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="Azure";
+        }
+        gridColor = 'Azure';
+        break;
+      case 'LavenderBlush':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="LavenderBlush";
+        }
+        gridColor = 'LavenderBlush';
+        break;
+      case 'LightGray':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="LightGray";
+        }
+        gridColor = 'LightGray';
+        break;
+      case 'SlateGray':
+        list = document.getElementsByClassName("gridCell");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.backgroundColor ="SlateGray";
+        }
+        gridColor = 'SlateGray';
+        break;
     }
 }
 
 function changeP1Color(p1ColorInput)
 {
-  //alert(gridColor);
-  //alert(p1ColorInput);
   if (gridColor == p1ColorInput)
   {
     choice = confirm("Your choice of color for player ❌ is the same as the current background. Do you still want to go through with the current selection?");
@@ -1143,54 +1320,206 @@ function changeP1Color(p1ColorInput)
   }
   switch (p1ColorInput)
   {
-    case 'skyblue':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="skyblue";
-        }
-        player1Color = 'skyblue';
-        break;
-    case 'red':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="red";
-        }
-        player1Color = 'red';
-        break;
-    case 'green':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="green";
-        }
-        player1Color = 'green';
-        break;
-    case 'white':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="white";
-        }
-        player1Color = 'white';
-        break;
-    case 'fuchsia':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="fuchsia";
-        }
-        player1Color = 'fuchsia';
-        break;
-    case 'silver':
-        list = document.getElementsByClassName("player1");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="silver";
-        }
-        player1Color = 'silver';
-        break;
+    case 'DeepPink':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="DeepPink";
+      }
+      player1Color = 'DeepPink';
+      break;
+    case 'LightSalmon':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightSalmon";
+      }
+      player1Color = 'LightSalmon';
+      break;
+    case 'Salmon':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Salmon";
+      }
+      player1Color = 'Salmon';
+      break;
+    case 'LightCoral':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightCoral";
+      }
+      player1Color = 'LightCoral';
+      break;
+    case 'Crimson':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Crimson";
+      }
+      player1Color = 'Crimson';
+      break;
+    case 'OrangeRed':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="OrangeRed";
+      }
+      player1Color = 'OrangeRed';
+      break;
+    case 'Tomato':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Tomato";
+      }
+      player1Color = 'Tomato';
+      break;
+    case 'Yellow':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Yellow";
+      }
+      player1Color = 'Yellow';
+      break;
+    case 'Orange':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Orange";
+      }
+      player1Color = 'Orange';
+      break;
+    case 'PeachPuff':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="PeachPuff";
+      }
+      player1Color = 'PeachPuff';
+      break;
+    case 'Gold':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Gold";
+      }
+      player1Color = 'Gold';
+      break;
+    case 'Goldenrod':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Goldenrod";
+      }
+      player1Color = 'Goldenrod';
+      break;
+    case 'Lime':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Lime";
+      }
+      player1Color = 'Lime';
+      break;
+    case 'MediumAquamarine':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="MediumAquamarine";
+      }
+      player1Color = 'MediumAquamarine';
+      break;
+    case 'Aqua':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Aqua";
+      }
+      player1Color = 'Aqua';
+      break;
+    case 'Aquamarine':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Aquamarine";
+      }
+      player1Color = 'Aquamarine';
+      break;
+    case 'MediumTurquoise':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="MediumTurquoise";
+      }
+      player1Color = 'MediumTurquoise';
+      break;
+    case 'SkyBlue':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="SkyBlue";
+      }
+      player1Color = 'SkyBlue';
+      break;
+    case 'DeepSkyBlue':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="DeepSkyBlue";
+      }
+      player1Color = 'DeepSkyBlue';
+      break;
+    case 'Violet':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Violet";
+      }
+      player1Color = 'Violet';
+      break;
+    case 'Magenta':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Magenta";
+      }
+      player1Color = 'Magenta';
+      break;
+    case 'Azure':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Azure";
+      }
+      player1Color = 'Azure';
+      break;
+    case 'LavenderBlush':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LavenderBlush";
+      }
+      player1Color = 'LavenderBlush';
+      break;
+    case 'LightGray':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightGray";
+      }
+      player1Color = 'LightGray';
+      break;
+    case 'SlateGray':
+      list = document.getElementsByClassName("player1");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="SlateGray";
+      }
+      player1Color = 'SlateGray';
+      break;
   }
 }
 
@@ -1206,60 +1535,217 @@ function changeP2Color(p2ColorInput)
   }
   switch (p2ColorInput)
   {
-    case 'skyblue':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="skyblue";
-        }
-        player2Color = 'skyblue';
-        break;
-    case 'red':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="red";
-        }
-        player2Color = 'red';
-        break;
-    case 'green':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="green";
-        }
-        player2Color = 'green';
-        break;
-    case 'white':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="white";
-        }
-        player2Color = 'white';
-        break;
-    case 'fuchsia':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="fuchsia";
-        }
-        player2Color = 'fuchsia';
-        break;
-    case 'silver':
-        list = document.getElementsByClassName("player2");
-        for (index = 0; index < list.length; ++index)
-        {
-          list[index].style.color ="silver";
-        }
-        player2Color = 'silver';
-        break;
+    case 'DeepPink':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="DeepPink";
+      }
+      player2Color = 'DeepPink';
+      break;
+    case 'LightSalmon':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightSalmon";
+      }
+      player2Color = 'LightSalmon';
+      break;
+    case 'Salmon':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Salmon";
+      }
+      player2Color = 'Salmon';
+      break;
+    case 'LightCoral':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightCoral";
+      }
+      player2Color = 'LightCoral';
+      break;
+    case 'Crimson':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Crimson";
+      }
+      player2Color = 'Crimson';
+      break;
+    case 'OrangeRed':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="OrangeRed";
+      }
+      player2Color = 'OrangeRed';
+      break;
+    case 'Tomato':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Tomato";
+      }
+      player2Color = 'Tomato';
+      break;
+    case 'Yellow':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Yellow";
+      }
+      player2Color = 'Yellow';
+      break;
+    case 'Orange':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Orange";
+      }
+      player2Color = 'Orange';
+      break;
+    case 'PeachPuff':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="PeachPuff";
+      }
+      player2Color = 'PeachPuff';
+      break;
+    case 'Gold':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Gold";
+      }
+      player2Color = 'Gold';
+      break;
+    case 'Goldenrod':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Goldenrod";
+      }
+      player2Color = 'Goldenrod';
+      break;
+    case 'Lime':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Lime";
+      }
+      player2Color = 'Lime';
+      break;
+    case 'MediumAquamarine':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="MediumAquamarine";
+      }
+      player2Color = 'MediumAquamarine';
+      break;
+    case 'Aqua':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Aqua";
+      }
+      player2Color = 'Aqua';
+      break;
+    case 'Aquamarine':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Aquamarine";
+      }
+      player2Color = 'Aquamarine';
+      break;
+    case 'MediumTurquoise':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="MediumTurquoise";
+      }
+      player2Color = 'MediumTurquoise';
+      break;
+    case 'SkyBlue':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="SkyBlue";
+      }
+      player2Color = 'SkyBlue';
+      break;
+    case 'DeepSkyBlue':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="DeepSkyBlue";
+      }
+      player2Color = 'DeepSkyBlue';
+      break;
+    case 'Violet':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Violet";
+      }
+      player2Color = 'Violet';
+      break;
+    case 'Magenta':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Magenta";
+      }
+      player2Color = 'Magenta';
+      break;
+    case 'Azure':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="Azure";
+      }
+      player2Color = 'Azure';
+      break;
+    case 'LavenderBlush':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LavenderBlush";
+      }
+      player2Color = 'LavenderBlush';
+      break;
+    case 'LightGray':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="LightGray";
+      }
+      player2Color = 'LightGray';
+      break;
+    case 'SlateGray':
+      list = document.getElementsByClassName("player2");
+      for (index = 0; index < list.length; ++index)
+      {
+        list[index].style.color ="SlateGray";
+      }
+      player2Color = 'SlateGray';
+      break;
   }
 }
 
 function gridColorDropDown()
 {
     document.getElementById("gridcolorDropdown").classList.toggle("show");
+}
+
+function navigationDropDown()
+{
+    document.getElementById("navigationDropdown").classList.toggle("show");
 }
 
 function playerOneColorDropDown()
@@ -1299,13 +1785,3 @@ window.onclick = function(event)
     }
   }
 }
-
-/*
-1 - p1
-2 - p2
-3 - p1
-4 - p2
-5 - p1
-6 - p2
-7 - p1
-*/

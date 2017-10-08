@@ -10,76 +10,147 @@
 </head>
 
 <body>
-    <div class = "menuContainer">
-        <div class="dropdown">
-            <button class="dropdownButt" onclick="gameModeDropDown()" title="Choose the size of the grid you want to play on" >New Game</button>
-            <div id="gameModeDropdown" class="clickContent">
-              <div id="compv1" onclick="gameModeFunction(1)" >You vs. The Machine</div>
-              <div id="onev1" onclick="gameModeFunction(2)">You vs. Another You</div>
-              <div id="gridReset" onclick="gameModeFunction(3)">Reset The Grid</div>
-          </div>
-        </div>
-
-        <div class="dropdown">
-            <button class="dropdownButt" onclick="sizeDropDown()" title="Choose the size of the grid you wannt to play on" >Sizes</button>
-            <div id="sizeDropdown" class="clickContent">
-                <div id="x15" onclick="resizeTable(15)" >15 x 15</div>
-                <div id="x19" onclick="resizeTable(19)">19 x 19</div>
-          </div>
-        </div>
-
-        <div class="dropdown">
-            <button onclick="gridColorDropDown()" class="dropdownButt">Grid Color</button>
-            <div id="gridcolorDropdown" class="clickContent">
-                <div class = "colornoColor colorDropdown" onclick="changeGridColor('white')"> White </div>
-                <div class = "colorSkyBlue colorDropdown" onclick="changeGridColor('skyblue')"> Sky Blue </div>
-                <div class = "colorRed colorDropdown" onclick="changeGridColor('red')"> Red </div>
-                <div class = "colorGreen colorDropdown" onclick="changeGridColor('green')"> Green </div>
-                <div class = "colorFuchsia colorDropdown" onclick="changeGridColor('fuchsia')"> Fuchsia </div>
-                <div class = "colorSilver colorDropdown" onclick="changeGridColor('silver')"> Silver </div>
-          </div>
-        </div>
-
-				<div class="dropdown">
-            <button onclick="playerOneColorDropDown()" class="dropdownButt">Player 'X' Color</button>
-            <div id="p1colorDropdown" class="clickContent">
-                <div class = "colornoColor colorDropdown" onclick="changeP1Color('white')"> White </div>
-                <div class = "colorSkyBlue colorDropdown" onclick="changeP1Color('skyblue')"> Sky Blue </div>
-                <div class = "colorRed colorDropdown" onclick="changeP1Color('red')"> Red </div>
-                <div class = "colorGreen colorDropdown" onclick="changeP1Color('green')"> Green </div>
-                <div class = "colorFuchsia colorDropdown" onclick="changeP1Color('fuchsia')"> Fuchsia </div>
-                <div class = "colorSilver colorDropdown" onclick="changeP1Color('silver')"> Silver </div>
-          </div>
-        </div>
-
-				<div class="dropdown">
-            <button onclick="playerTwoColorDropDown()" class="dropdownButt">Player '〇' Color</button>
-            <div id="p2colorDropdown" class="clickContent">
-                <div class = "colornoColor colorDropdown" onclick="changeP2Color('white')"> White </div>
-                <div class = "colorSkyBlue colorDropdown" onclick="changeP2Color('skyblue')"> Sky Blue </div>
-                <div class = "colorRed colorDropdown" onclick="changeP2Color('red')"> Red </div>
-                <div class = "colorGreen colorDropdown" onclick="changeP2Color('green')"> Green </div>
-                <div class = "colorFuchsia colorDropdown" onclick="changeP2Color('fuchsia')"> Fuchsia </div>
-                <div class = "colorSilver colorDropdown" onclick="changeP2Color('silver')"> Silver </div>
-          </div>
-        </div>
-
-				<div class="dropdown">
-					<button id ="suggestMove" onclick="suggestMoveFunction()" class="dropdownButt">Suggest a move</button>
-				</div>
+  <div class = "menuContainer">
+    <div class="dropdown">
+      <button class="dropdownButt" onclick="gameModeDropDown()" title="Choose the size of the grid you want to play on" >New Game</button>
+      <div id="gameModeDropdown" class="clickContent">
+        <div id="compv1" onclick="gameModeFunction(1)" >You vs. The Machine</div>
+        <div id="onev1" onclick="gameModeFunction(2)">You vs. Another You</div>
+        <div id="gridReset" onclick="gameModeFunction(3)">Reset The Grid</div>
+      </div>
     </div>
 
-    <br>
+    <div class="dropdown">
+      <button class="dropdownButt" onclick="sizeDropDown()" title="Choose the size of the grid you wannt to play on" >Sizes</button>
+      <div id="sizeDropdown" class="clickContent">
+        <div id="x15" onclick="resizeTable(15)" >15 x 15</div>
+        <div id="x19" onclick="resizeTable(19)">19 x 19</div>
+      </div>
+    </div>
 
+    <div class="dropdown">
+      <button onclick="gridColorDropDown()" class="dropdownButt">Grid Color</button>
+      <div id="gridcolorDropdown" class="clickContent">
+        <div class = "colorDeepPink colorDropdown" onclick="changeGridColor('DeepPink')"> Deep Pink </div>
+        <div class = "colorLightSalmon colorDropdown" onclick="changeGridColor('LightSalmon')"> Light Salmon </div>
+        <div class = "colorSalmon colorDropdown" onclick="changeGridColor('Salmon')"> Salmon </div>
+        <div class = "colorLightCoral colorDropdown" onclick="changeGridColor('LightCoral')"> Light Coral </div>
+        <div class = "colorCrimson colorDropdown" onclick="changeGridColor('Crimson')"> Crimson </div>
+        <div class = "colorOrangeRed colorDropdown" onclick="changeGridColor('OrangeRed')"> Orange Red </div>
+        <div class = "colorTomato colorDropdown" onclick="changeGridColor('Tomato')"> Tomato </div>
+        <div class = "colorOrange colorDropdown" onclick="changeGridColor('Orange')"> Orange </div>
+        <div class = "colorYellow colorDropdown" onclick="changeGridColor('Yellow')"> Yellow </div>
+        <div class = "colorPeachPuff colorDropdown" onclick="changeGridColor('PeachPuff')"> Peach Puff </div>
+        <div class = "colorGold colorDropdown" onclick="changeGridColor('Gold')"> Gold </div>
+        <div class = "colorGoldenrod colorDropdown" onclick="changeGridColor('Goldenrod')"> Goldenrod </div>
+        <div class = "colorLime colorDropdown" onclick="changeGridColor('Lime')"> Lime </div>
+        <div class = "colorMediumAquamarine colorDropdown" onclick="changeGridColor('MediumAquamarine')"> Medium Aquamarine </div>
+        <div class = "colorAqua colorDropdown" onclick="changeGridColor('Aqua')"> Aqua </div>
+        <div class = "colorAquamarine colorDropdown" onclick="changeGridColor('Aquamarine')"> Aquamarine </div>
+        <div class = "colorMediumTurquoise colorDropdown" onclick="changeGridColor('MediumTurquoise')"> Medium Turquoise </div>
+        <div class = "colorSkyBlue colorDropdown" onclick="changeGridColor('SkyBlue')"> Sky Blue </div>
+        <div class = "colorDeepSkyBlue colorDropdown" onclick="changeGridColor('DeepSkyBlue')"> Deep Sky Blue </div>
+        <div class = "colorViolet colorDropdown" onclick="changeGridColor('Violet')"> Violet </div>
+        <div class = "colorMagenta colorDropdown" onclick="changeGridColor('Magenta')"> Magenta </div>
+        <div class = "colorAzure colorDropdown" onclick="changeGridColor('Azure')"> Azure </div>
+        <div class = "colorLavenderBlush colorDropdown" onclick="changeGridColor('LavenderBlush')"> Lavender Blush </div>
+        <div class = "colorLightGray colorDropdown" onclick="changeGridColor('LightGray')"> Light Gray </div>
+        <div class = "colorSlateGray colorDropdown" onclick="changeGridColor('SlateGray')"> Slate Gray </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button onclick="playerOneColorDropDown()" class="dropdownButt">Player 'X' Color</button>
+      <div id="p1colorDropdown" class="clickContent">
+        <div class = "colorDeepPink colorDropdown" onclick="changeP1Color('DeepPink')"> Deep Pink </div>
+        <div class = "colorLightSalmon colorDropdown" onclick="changeP1Color('LightSalmon')"> Light Salmon </div>
+        <div class = "colorSalmon colorDropdown" onclick="changeP1Color('Salmon')"> Salmon </div>
+        <div class = "colorLightCoral colorDropdown" onclick="changeP1Color('LightCoral')"> Light Coral </div>
+        <div class = "colorCrimson colorDropdown" onclick="changeP1Color('Crimson')"> Crimson </div>
+        <div class = "colorOrangeRed colorDropdown" onclick="changeP1Color('OrangeRed')"> Orange Red </div>
+        <div class = "colorTomato colorDropdown" onclick="changeP1Color('Tomato')"> Tomato </div>
+        <div class = "colorOrange colorDropdown" onclick="changeP1Color('Orange')"> Orange </div>
+        <div class = "colorYellow colorDropdown" onclick="changeP1Color('Yellow')"> Yellow </div>
+        <div class = "colorPeachPuff colorDropdown" onclick="changeP1Color('PeachPuff')"> Peach Puff </div>
+        <div class = "colorGold colorDropdown" onclick="changeP1Color('Gold')"> Gold </div>
+        <div class = "colorGoldenrod colorDropdown" onclick="changeP1Color('Goldenrod')"> Goldenrod </div>
+        <div class = "colorLime colorDropdown" onclick="changeP1Color('Lime')"> Lime </div>
+        <div class = "colorMediumAquamarine colorDropdown" onclick="changeP1Color('MediumAquamarine')"> Medium Aquamarine </div>
+        <div class = "colorAqua colorDropdown" onclick="changeP1Color('Aqua')"> Aqua </div>
+        <div class = "colorAquamarine colorDropdown" onclick="changeP1Color('Aquamarine')"> Aquamarine </div>
+        <div class = "colorMediumTurquoise colorDropdown" onclick="changeP1Color('MediumTurquoise')"> Medium Turquoise </div>
+        <div class = "colorSkyBlue colorDropdown" onclick="changeP1Color('SkyBlue')"> Sky Blue </div>
+        <div class = "colorDeepSkyBlue colorDropdown" onclick="changeP1Color('DeepSkyBlue')"> Deep Sky Blue </div>
+        <div class = "colorViolet colorDropdown" onclick="changeP1Color('Violet')"> Violet </div>
+        <div class = "colorMagenta colorDropdown" onclick="changeP1Color('Magenta')"> Magenta </div>
+        <div class = "colorAzure colorDropdown" onclick="changeP1Color('Azure')"> Azure </div>
+        <div class = "colorLavenderBlush colorDropdown" onclick="changeP1Color('LavenderBlush')"> Lavender Blush </div>
+        <div class = "colorLightGray colorDropdown" onclick="changeP1Color('LightGray')"> Light Gray </div>
+        <div class = "colorSlateGray colorDropdown" onclick="changeP1Color('SlateGray')"> Slate Gray </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button onclick="playerTwoColorDropDown()" class="dropdownButt">Player '〇' Color</button>
+      <div id="p2colorDropdown" class="clickContent">
+        <div class = "colorDeepPink colorDropdown" onclick="changeP2Color('DeepPink')"> Deep Pink </div>
+        <div class = "colorLightSalmon colorDropdown" onclick="changeP2Color('LightSalmon')"> Light Salmon </div>
+        <div class = "colorSalmon colorDropdown" onclick="changeP2Color('Salmon')"> Salmon </div>
+        <div class = "colorLightCoral colorDropdown" onclick="changeP2Color('LightCoral')"> Light Coral </div>
+        <div class = "colorCrimson colorDropdown" onclick="changeP2Color('Crimson')"> Crimson </div>
+        <div class = "colorOrangeRed colorDropdown" onclick="changeP2Color('OrangeRed')"> Orange Red </div>
+        <div class = "colorTomato colorDropdown" onclick="changeP2Color('Tomato')"> Tomato </div>
+        <div class = "colorOrange colorDropdown" onclick="changeP2Color('Orange')"> Orange </div>
+        <div class = "colorYellow colorDropdown" onclick="changeP2Color('Yellow')"> Yellow </div>
+        <div class = "colorPeachPuff colorDropdown" onclick="changeP2Color('PeachPuff')"> Peach Puff </div>
+        <div class = "colorGold colorDropdown" onclick="changeP2Color('Gold')"> Gold </div>
+        <div class = "colorGoldenrod colorDropdown" onclick="changeP2Color('Goldenrod')"> Goldenrod </div>
+        <div class = "colorLime colorDropdown" onclick="changeP2Color('Lime')"> Lime </div>
+        <div class = "colorMediumAquamarine colorDropdown" onclick="changeP2Color('MediumAquamarine')"> Medium Aquamarine </div>
+        <div class = "colorAqua colorDropdown" onclick="changeP2Color('Aqua')"> Aqua </div>
+        <div class = "colorAquamarine colorDropdown" onclick="changeP2Color('Aquamarine')"> Aquamarine </div>
+        <div class = "colorMediumTurquoise colorDropdown" onclick="changeP2Color('MediumTurquoise')"> Medium Turquoise </div>
+        <div class = "colorSkyBlue colorDropdown" onclick="changeP2Color('SkyBlue')"> Sky Blue </div>
+        <div class = "colorDeepSkyBlue colorDropdown" onclick="changeP2Color('DeepSkyBlue')"> Deep Sky Blue </div>
+        <div class = "colorViolet colorDropdown" onclick="changeP2Color('Violet')"> Violet </div>
+        <div class = "colorMagenta colorDropdown" onclick="changeP2Color('Magenta')"> Magenta </div>
+        <div class = "colorAzure colorDropdown" onclick="changeP2Color('Azure')"> Azure </div>
+        <div class = "colorLavenderBlush colorDropdown" onclick="changeP2Color('LavenderBlush')"> Lavender Blush </div>
+        <div class = "colorLightGray colorDropdown" onclick="changeP2Color('LightGray')"> Light Gray </div>
+        <div class = "colorSlateGray colorDropdown" onclick="changeP2Color('SlateGray')"> Slate Gray </div>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button id ="suggestMove" onclick="suggestMoveFunction()" class="dropdownButt">Suggest a move</button>
+    </div>
+    
+    <div class="dropdown">
+      <button class="dropdownButt" onclick="navigationDropDown()" title="Choose the size of the grid you want to play on" >More Helpful Links...</button>
+      <div id="navigationDropdown" class="clickContent">
+        <div id="compv1" onclick="gameModeFunction(1)" >HomePage</div>
+        <div id="onev1" onclick="gameModeFunction(2)">How to play</div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  
+  <div class = "gameContainer"> 
+    
+    <div class = "infoContainer">
+      <div> Current game timer: <span id = "runningTimer">0 Seconds</span></div>
+      <div> Number of turns: <span id = "turnCounter">0</span></div>
+      <div> Number of pieces on the board: <span id = "totalPieceCounter">0</span></div>
+      <div> Number of ❌pieces on the board: <span id = "p1PieceCounter">0</span></div>
+      <div> Number of ⭕️pieces on the board: <span id = "p2PieceCounter">0</span></div>
+    </div>
+    
     <div class = "gridContainer">
         <table id = "gTable"></table>
     </div>
+  </div>
 
-    <div id = "runningTimer"></div>
-    <div> Number of turns: <span id = "turnCounter"> </span></div>
-		<div> Number of pieces on the board: <span id = "totalPieceCounter"> </span></div>
-		<div> Number of ❌ pieces on the board: <span id = "p1PieceCounter"> </span></div>
-		<div> Number of ⭕️ pieces on the board: <span id = "p2PieceCounter"> </span></div>
 
 </body>
 </html>
