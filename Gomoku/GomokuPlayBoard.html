@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Play Gomuku!</title>
+	<script type="text/javascript" src="GomokuPlayBoard.js"></script>
+	<link rel="stylesheet" type="text/css" href="GomokuPlayBoard.css">
+</head>
+
+<body>
+    <div class = "menuContainer">
+        <div class="dropdown">
+            <button class="dropdownButt" onclick="gameModeDropDown()" title="Choose the size of the grid you want to play on" >New Game</button>
+            <div id="gameModeDropdown" class="clickContent">
+              <div id="compv1" onclick="gameModeFunction(1)" >You vs. The Machine</div>
+              <div id="onev1" onclick="gameModeFunction(2)">You vs. Another You</div>
+              <div id="gridReset" onclick="gameModeFunction(3)">Reset The Grid</div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropdownButt" onclick="sizeDropDown()" title="Choose the size of the grid you wannt to play on" >Sizes</button>
+            <div id="sizeDropdown" class="clickContent">
+                <div id="x15" onclick="resizeTable(15)" >15 x 15</div>
+                <div id="x19" onclick="resizeTable(19)">19 x 19</div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+            <button onclick="gridColorDropDown()" class="dropdownButt">Grid Color</button>
+            <div id="gridcolorDropdown" class="clickContent">
+                <div class = "colornoColor colorDropdown" onclick="changeGridColor('white')"> White </div>
+                <div class = "colorSkyBlue colorDropdown" onclick="changeGridColor('skyblue')"> Sky Blue </div>
+                <div class = "colorRed colorDropdown" onclick="changeGridColor('red')"> Red </div>
+                <div class = "colorGreen colorDropdown" onclick="changeGridColor('green')"> Green </div>
+                <div class = "colorFuchsia colorDropdown" onclick="changeGridColor('fuchsia')"> Fuchsia </div>
+                <div class = "colorSilver colorDropdown" onclick="changeGridColor('silver')"> Silver </div>
+          </div>
+        </div>
+
+				<div class="dropdown">
+            <button onclick="playerOneColorDropDown()" class="dropdownButt">Player 'X' Color</button>
+            <div id="p1colorDropdown" class="clickContent">
+                <div class = "colornoColor colorDropdown" onclick="changeP1Color('white')"> White </div>
+                <div class = "colorSkyBlue colorDropdown" onclick="changeP1Color('skyblue')"> Sky Blue </div>
+                <div class = "colorRed colorDropdown" onclick="changeP1Color('red')"> Red </div>
+                <div class = "colorGreen colorDropdown" onclick="changeP1Color('green')"> Green </div>
+                <div class = "colorFuchsia colorDropdown" onclick="changeP1Color('fuchsia')"> Fuchsia </div>
+                <div class = "colorSilver colorDropdown" onclick="changeP1Color('silver')"> Silver </div>
+          </div>
+        </div>
+
+				<div class="dropdown">
+            <button onclick="playerTwoColorDropDown()" class="dropdownButt">Player '〇' Color</button>
+            <div id="p2colorDropdown" class="clickContent">
+                <div class = "colornoColor colorDropdown" onclick="changeP2Color('white')"> White </div>
+                <div class = "colorSkyBlue colorDropdown" onclick="changeP2Color('skyblue')"> Sky Blue </div>
+                <div class = "colorRed colorDropdown" onclick="changeP2Color('red')"> Red </div>
+                <div class = "colorGreen colorDropdown" onclick="changeP2Color('green')"> Green </div>
+                <div class = "colorFuchsia colorDropdown" onclick="changeP2Color('fuchsia')"> Fuchsia </div>
+                <div class = "colorSilver colorDropdown" onclick="changeP2Color('silver')"> Silver </div>
+          </div>
+        </div>
+
+				<div class="dropdown">
+					<button id ="suggestMove" onclick="suggestMoveFunction()" class="dropdownButt">Suggest a move</button>
+				</div>
+    </div>
+
+    <br>
+
+    <div class = "gridContainer">
+        <table id = "gTable"></table>
+    </div>
+
+    <div id = "runningTimer"></div>
+    <div> Number of turns: <span id = "turnCounter"> </span></div>
+		<div> Number of pieces on the board: <span id = "totalPieceCounter"> </span></div>
+		<div> Number of ❌ pieces on the board: <span id = "p1PieceCounter"> </span></div>
+		<div> Number of ⭕️ pieces on the board: <span id = "p2PieceCounter"> </span></div>
+
+</body>
+</html>

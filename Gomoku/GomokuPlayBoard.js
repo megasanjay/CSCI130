@@ -2,10 +2,12 @@ var table;
 var tableSize;
 var gridcell;
 var gridArray;
-var backColor;
+var gridColor;
 var currentPlayer;
 var turnCount = 0;
 var playerGameMode;
+var player1Color;
+var player2Color;
 var winColor;
 var startTime;
 var suggestFlash;
@@ -25,31 +27,52 @@ function timingFunction()
 
 function gameModeFunction(input)
 {
-  if (input == 1)
+  if (input == 1) // Computer vs You
   {
     playerGameMode = 1;
     alert("You are now playing against a dumb student's algorithm to beat you at this stupid game. Good luck! :)");
+
     resizeTable(15);
+
+    gridColor = 'white';
+    changeGridColor(gridColor);
+    player1Color = player2Color = 'red';
+    changeP1Color(player1Color);
+    changeP2Color(player2Color)
   }
-  else if (input == 3)
+  else if (input == 3) // Reset
   {
     if (!tableSize)
     {
       resizeTable(15);
+
+      gridColor = 'white';
+      changeGridColor(gridColor);
+      player1Color = player2Color = 'red';
+      changeP1Color(player1Color);
+      changeP2Color(player2Color);
     }
     else
     {
       resizeTable(tableSize);
+      changeGridColor(gridColor);
+      changeP1Color(player1Color);
+      changeP2Color(player2Color);
     }
-    changeColor('white');
   }
-  else
+  else // 2v2
   {
     playerGameMode = 2;
     alert("k. I hope you have someone next to you because you are now playing in the 1v1 mode. If you clicked this by accident, please choose the other game mode or play against yourself ;)");
+
     resizeTable(15);
+
+    gridColor = 'white';
+    changeGridColor(gridColor);
+    player1Color = player2Color = 'red';
+    changeP1Color(player1Color);
+    changeP2Color(player2Color);
   }
-  changeColor(backColor);
 }
 
 function suggestMoveFunction()
@@ -105,7 +128,7 @@ function resizeTable(tsize)
   winColor = 0.5;
 
   gridArray = new Array(tsize);
-  
+
   startTime = Date.now();
   runTimer = setInterval(timingFunction, 300);
 
@@ -142,17 +165,16 @@ function clickFunction(i, j)
 {
   let winWinNoMatterWhat;
 
-  if (turnCount == 1)
-  {
-    
-  }
+  document.getElementById('totalPieceCounter').innerHTML = turnCount;
 
   if (turnCount % 2 == 0)
   {
     currentPlayer = 'p2';
+    document.getElementById('p2PieceCounter').innerHTML = parseInt(turnCount/2);
   }
   else
   {
+    document.getElementById('p1PieceCounter').innerHTML = parseInt(turnCount/2) + 1;
     currentPlayer = 'p1';
   }
 
@@ -761,16 +783,18 @@ function displayFunction(i, j)
 
   if (currentPlayer == 'p1')
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">X</button>';
+    currentCell.innerHTML = '<button class = "gridCell player1" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">X</button>';
     currentPlayer = 'p2';
   }
   else
   {
-    currentCell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">O</button>';
+    currentCell.innerHTML = '<button class = "gridCell player2" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">O</button>';
     currentPlayer = 'p1';
   }
 
-  changeColor(backColor);
+  changeGridColor(gridColor);
+  changeP1Color(player1Color);
+  changeP2Color(player2Color);
 }
 
 function checkWin()
@@ -1042,9 +1066,17 @@ function disableButtons()
   document.getElementById('gTable').classList.add("noClick");
 }
 
-function changeColor(gridColor)
+function changeGridColor(gridColorInput)
 {
-    switch (gridColor)
+    if (gridColorInput == player1Color || gridColorInput == player2Color)
+    {
+      choice = confirm("One of the pieces on the grid has the same color as the background you are choosing. Do you still want to go through with the current selection?");
+      if (!choice)
+      {
+        return;
+      }
+    }
+    switch (gridColorInput)
     {
         case 'skyblue':
             list = document.getElementsByClassName("gridCell");
@@ -1052,7 +1084,7 @@ function changeColor(gridColor)
             {
               list[index].style.backgroundColor ="skyblue";
             }
-            backColor = 'skyblue';
+            gridColor = 'skyblue';
             break;
         case 'red':
             list = document.getElementsByClassName("gridCell");
@@ -1060,7 +1092,7 @@ function changeColor(gridColor)
             {
               list[index].style.background ="red";
             }
-            backColor = 'red';
+            gridColor = 'red';
             break;
         case 'green':
             list = document.getElementsByClassName("gridCell");
@@ -1068,7 +1100,7 @@ function changeColor(gridColor)
             {
               list[index].style.background ="green";
             }
-            backColor = 'green';
+            gridColor = 'green';
             break;
         case 'white':
             list = document.getElementsByClassName("gridCell");
@@ -1076,7 +1108,7 @@ function changeColor(gridColor)
             {
               list[index].style.background ="white";
             }
-            backColor = 'white';
+            gridColor = 'white';
             break;
         case 'fuchsia':
             list = document.getElementsByClassName("gridCell");
@@ -1084,7 +1116,7 @@ function changeColor(gridColor)
             {
               list[index].style.background ="fuchsia";
             }
-            backColor = 'fuchsia';
+            gridColor = 'fuchsia';
             break;
         case 'silver':
             list = document.getElementsByClassName("gridCell");
@@ -1092,14 +1124,152 @@ function changeColor(gridColor)
             {
               list[index].style.background ="silver";
             }
-            backColor = 'silver';
+            gridColor = 'silver';
             break;
     }
 }
 
-function colorDropDown()
+function changeP1Color(p1ColorInput)
 {
-    document.getElementById("colorDropdown").classList.toggle("show");
+  //alert(gridColor);
+  //alert(p1ColorInput);
+  if (gridColor == p1ColorInput)
+  {
+    choice = confirm("Your choice of color for player ❌ is the same as the current background. Do you still want to go through with the current selection?");
+    if (!choice)
+    {
+      return;
+    }
+  }
+  switch (p1ColorInput)
+  {
+    case 'skyblue':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="skyblue";
+        }
+        player1Color = 'skyblue';
+        break;
+    case 'red':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="red";
+        }
+        player1Color = 'red';
+        break;
+    case 'green':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="green";
+        }
+        player1Color = 'green';
+        break;
+    case 'white':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="white";
+        }
+        player1Color = 'white';
+        break;
+    case 'fuchsia':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="fuchsia";
+        }
+        player1Color = 'fuchsia';
+        break;
+    case 'silver':
+        list = document.getElementsByClassName("player1");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="silver";
+        }
+        player1Color = 'silver';
+        break;
+  }
+}
+
+function changeP2Color(p2ColorInput)
+{
+  if (gridColor == p2ColorInput)
+  {
+    choice = confirm("Your choice of color for player ⭕️ is the same as the current background. Do you still want to go through with the current selection?");
+    if (!choice)
+    {
+      return;
+    }
+  }
+  switch (p2ColorInput)
+  {
+    case 'skyblue':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="skyblue";
+        }
+        player2Color = 'skyblue';
+        break;
+    case 'red':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="red";
+        }
+        player2Color = 'red';
+        break;
+    case 'green':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="green";
+        }
+        player2Color = 'green';
+        break;
+    case 'white':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="white";
+        }
+        player2Color = 'white';
+        break;
+    case 'fuchsia':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="fuchsia";
+        }
+        player2Color = 'fuchsia';
+        break;
+    case 'silver':
+        list = document.getElementsByClassName("player2");
+        for (index = 0; index < list.length; ++index)
+        {
+          list[index].style.color ="silver";
+        }
+        player2Color = 'silver';
+        break;
+  }
+}
+
+function gridColorDropDown()
+{
+    document.getElementById("gridcolorDropdown").classList.toggle("show");
+}
+
+function playerOneColorDropDown()
+{
+    document.getElementById("p1colorDropdown").classList.toggle("show");
+}
+
+function playerTwoColorDropDown()
+{
+    document.getElementById("p2colorDropdown").classList.toggle("show");
 }
 
 function sizeDropDown()
@@ -1129,3 +1299,13 @@ window.onclick = function(event)
     }
   }
 }
+
+/*
+1 - p1
+2 - p2
+3 - p1
+4 - p2
+5 - p1
+6 - p2
+7 - p1
+*/

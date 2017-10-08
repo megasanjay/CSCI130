@@ -1,13 +1,13 @@
 .dropdownButt {
   background-color: #4CAF50;
   color: white;
-  padding: 10px;
+  padding: 0px;
   font-size: 16px;
   border: none;
   position: relative;
   cursor: pointer;
-  height: 2%;
-  width: inherit;
+  height: 5em;
+  width: 8em;
 }
 
 .dropdownButt:hover, .dropdownButt:focus {
@@ -17,7 +17,8 @@
 .dropdown {
   position: relative;
   display: inline-block;
-  width: 8vw;
+  width: 8em;
+  height: 5em;
   margin-bottom: 1%;
 }
 
@@ -66,7 +67,7 @@ body
 
 .menuContainer
 {
-    height: 10%;
+    height: 5em;
     width: 100%;
     display: inline;
 }
