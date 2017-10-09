@@ -19,7 +19,8 @@
   width: 10em;
   height: 4em;
   margin-bottom: 1%;
-  margin-right: 2%;
+  margin-right: none;
+  margin-top: none;
 }
 
 #x15:hover, #x19:hover, #compv1:hover, #onev1:hover, #gridReset:hover
@@ -43,38 +44,20 @@
 
 html
 {
-  width: 99%;
-  height: 97%;
-}
-
-body
-{
   width: 100%;
   height: 100%;
-  background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-  background-size: 500% 500%;
 }
 
 body
 {
-  -webkit-animation: rainbow;
-  -webkit-animation-duration:50s;
-  -webkit-animation-iteration-count: infinite;
-}
+  width: 99%;
+  height: 98%;
+  background: #283048;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #859398, #283048);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #859398, #283048); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-@-webkit-keyframes rainbow {
-    0%
-    {
-      background-position:0% 85%;
-    }
-    50%
-    {
-      background-position:98% 19%;
-    }
-    100%
-    {
-      background-position:0% 85%;
-    }
+  background-size: contain;
+
 }
 
 .menuContainer
@@ -83,6 +66,10 @@ body
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  margin-top: none;
+  margin-right: none;
+  margin-left: none;
+  padding-left: 0px;
 }
 
 .gameContainer
@@ -92,7 +79,9 @@ body
   height: auto;
   vertical-align: top;
   align-content: center;
-  margin: auto;
+  margin: none;
+  margin-right: none;
+  
   
 }
 
@@ -106,6 +95,11 @@ body
   font-weight: 900;
   font-size: 125%;
   color:whitesmoke;
+}
+
+.info
+{
+  text-shadow: 2px 2px 15px rgba(0, 0, 0, 1);
 }
 
 .gridContainer
