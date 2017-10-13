@@ -22,7 +22,7 @@ function timingFunction()
   let seconds;
   let currentTime = Date.now();
   let minutes = parseInt(((currentTime - startTime) / 1000) / 60);
-  
+
   if(minutes > 0)
   {
     seconds = ((currentTime - startTime) / 1000) - (minutes * 60);
@@ -31,7 +31,7 @@ function timingFunction()
   {
     seconds = (currentTime - startTime) / 1000;
   }
-  
+
   if (minutes != 0)
   {
     if (minutes == 1)
@@ -42,7 +42,7 @@ function timingFunction()
     {
       document.getElementById('runningTimer').innerHTML = minutes.toString() + " Minutes and " + (parseInt(seconds)).toString() + " Seconds";
     }
-    
+
   }
   else
   {
@@ -1099,7 +1099,7 @@ function changeGridColor(gridColorInput)
       return;
     }
   }
-  
+
     switch (gridColorInput)
     {
       case 'DeepPink':

@@ -14,12 +14,12 @@
     <div class="dropdown">
       <button class="dropdownButt" onclick="navigationDropDown()" title="Choose the size of the grid you want to play on" >Menu</button>
       <div id="navigationDropdown" class="clickContent">
-        <div id="compv1" onclick="location.href='GomokuMainPage.html'">Home Page</div>
-        <div id="onev1" onclick="gameModeFunction(2)">How to play</div>
-        <div id="onev1" onclick="gameModeFunction(2)">Learn more about the creator of this website</div>
+        <div id="homePage" onclick="location.href='GomokuMainPage.html'">Home Page</div>
+        <div id="learnToPlay">How to play</div>
+        <div id="aboutMe">Learn more about the creator of this website</div>
       </div>
     </div>
-    
+
     <div class="dropdown">
       <button class="dropdownButt" onclick="gameModeDropDown()" title="Choose the size of the grid you want to play on" >New Game</button>
       <div id="gameModeDropdown" class="clickContent">
@@ -133,13 +133,13 @@
     <div class="dropdown">
       <button id ="suggestMove" onclick="suggestMoveFunction()" class="dropdownButt">Suggest a move</button>
     </div>
-    
+
   </div>
 
   <br>
-  
-  <div class = "gameContainer"> 
-    
+
+  <div class = "gameContainer">
+
     <div class = "infoContainer">
       <div class = "info"> Current game timer: <span id = "runningTimer">0 Seconds</span></div>
       <div class = "info"> Number of turns: <span id = "turnCounter">0</span></div>
@@ -147,7 +147,7 @@
       <div class = "info"> Number of ❌ pieces on the board: <span id = "p1PieceCounter">0</span></div>
       <div class = "info"> Number of ⭕️ pieces on the board: <span id = "p2PieceCounter">0</span></div>
     </div>
-    
+
     <div class = "gridContainer">
         <table id = "gTable"></table>
     </div>
