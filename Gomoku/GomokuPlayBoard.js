@@ -52,6 +52,10 @@ function timingFunction()
 
 function gameModeFunction(input)
 {
+  document.getElementById('p1PieceCounter').innerHTML = 0;
+  document.getElementById('p2PieceCounter').innerHTML = 0;
+  document.getElementById("totalPieceCounter").innerHTML = 0;
+  
   if (input == 1) // Computer vs You
   {
     playerGameMode = 1;
@@ -801,7 +805,7 @@ function twoVTwoResponse()
 function displayFunction(i, j)
 {
   let currentCell = document.getElementById("gTable").rows[i].cells[j];
-  document.getElementById("turnCounter").innerHTML = turnCount;
+  document.getElementById("totalPieceCounter").innerHTML = turnCount;
 
   if (currentPlayer == 'p1')
   {

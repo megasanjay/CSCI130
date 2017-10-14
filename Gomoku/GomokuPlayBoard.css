@@ -31,7 +31,17 @@
   background-color: tomato;
 }
 
+#x15:focus, #x19:focus, #compv1:focus, #onev1:focus, #gridReset:focus
+{
+  background-color: tomato;
+}
+
 #homePage:hover, #aboutMe:hover, #learnToPlay:hover
+{
+  background-color: tomato;
+}
+
+#homePage:focus, #aboutMe:focus, #learnToPlay:focus
 {
   background-color: tomato;
 }
@@ -172,7 +182,7 @@ tr
 {
   animation: regBoxBorder;
   animation-iteration-count: infinite;
-  animation-duration: 23s;
+  animation-duration: 2s;
   animation-direction: alternate-reverse;
 }
 
@@ -224,127 +234,127 @@ tr
   display:block;
 }
 
-.colorDeepPink:hover
+.colorDeepPink:hover, .colorDeepPink:focus
 {
   background: DeepPink;
 }
 
-.colorLightSalmon:hover
+.colorLightSalmon:hover, .colorLightSalmon:focus
 {
   background: LightSalmon;
 }
 
-.colorSalmon:hover
+.colorSalmon:hover, .colorSalmon:focus
 {
   background: Salmon;
 }
 
-.colorLightCoral:hover
+.colorLightCoral:hover, .colorLightCoral:focus
 {
   background: LightCoral;
 }
 
-.colorCrimson:hover
+.colorCrimson:hover, .colorCrimson:focus
 {
   background: Crimson;
 }
 
-.colorOrangeRed:hover
+.colorOrangeRed:hover, .colorOrangeRed:focus
 {
   background: OrangeRed;
 }
 
-.colorTomato:hover
+.colorTomato:hover, .colorTomato:focus
 {
   background: Tomato;
 }
 
-.colorYellow:hover
+.colorYellow:hover, .colorYellow:focus
 {
   background: Yellow;
 }
 
-.colorOrange:hover
+.colorOrange:hover, .colorOrange:focus
 {
   background: Orange;
 }
 
-.colorPeachPuff:hover
+.colorPeachPuff:hover, .colorPeachPuff:focus
 {
   background: PeachPuff;
 }
 
-.colorGold:hover
+.colorGold:hover, .colorGold:focus
 {
   background: Gold;
 }
 
-.colorGoldenrod:hover
+.colorGoldenrod:hover, .colorGoldenrod:focus
 {
   background: Goldenrod;
 }
 
-.colorLime:hover
+.colorLime:hover, .colorLime:focus
 {
   background: Lime;
 }
 
-.colorMediumAquamarine:hover
+.colorMediumAquamarine:hover, .colorMediumAquamarine:focus
 {
   background: MediumAquamarine;
 }
 
-.colorAqua:hover
+.colorAqua:hover, .colorAqua:focus
 {
   background: Aqua;
 }
 
-.colorAquamarine:hover
+.colorAquamarine:hover, .colorAquamarine:focus
 {
   background: Aquamarine;
 }
 
-.colorMediumTurquoise:hover
+.colorMediumTurquoise:hover, .colorMediumTurquoise:focus
 {
   background: MediumTurquoise;
 }
 
-.colorSkyBlue:hover
+.colorSkyBlue:hover, .colorSkyBlue:focus
 {
   background: SkyBlue;
 }
 
-.colorDeepSkyBlue:hover
+.colorDeepSkyBlue:hover, .colorDeepSkyBlue:focus
 {
   background: DeepSkyBlue;
 }
 
-.colorViolet:hover
+.colorViolet:hover, .colorViolet:focus
 {
   background: Violet;
 }
 
-.colorMagenta:hover
+.colorMagenta:hover, .colorMagenta:focus
 {
   background: Magenta;
 }
 
-.colorAzure:hover
+.colorAzure:hover, .colorAzure:focus
 {
   background: Azure;
 }
 
-.colorLavenderBlush:hover
+.colorLavenderBlush:hover, .colorLavenderBlush:focus
 {
   background: LavenderBlush;
 }
 
-.colorLightGray:hover
+.colorLightGray:hover, .colorLightGray:focus
 {
   background: LightGray;
 }
 
-.colorSlateGray:hover
+.colorSlateGray:hover, .colorSlateGray:focus
 {
   background: SlateGray;
 }
