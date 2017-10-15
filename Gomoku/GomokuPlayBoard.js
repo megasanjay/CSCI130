@@ -121,8 +121,6 @@ function suggestMoveFunction()
 
   y = "cellr" + x.row + "c" + x.column;
   document.getElementById(y).classList.add("flashClass");
-
-  //table.rows[x.row].cells[x.column].style.backgroundColor = "red";
 }
 
 function clickButton(i,j)
