@@ -16,10 +16,10 @@ body
 body
 {
   -webkit-animation: rainbow;
-  -webkit-animation-duration:50s;
+  -webkit-animation-duration: 50s;
   -webkit-animation-iteration-count: infinite;
   -moz-animation: rainbow;
-  -moz-animation-duration:50s;
+  -moz-animation-duration: 50s;
   -moz-animation-iteration-count: infinite;
   cursor: pointer;
 }
@@ -30,7 +30,7 @@ body
   position: absolute;
   text-align: center;
   margin-top: -150px;
-  top:50%;
+  top: 50%;
   width: 95%;
   margin-left: 2%;
 }

@@ -127,7 +127,7 @@ function suggestMoveFunction()
 
 function clickButton(i,j)
 {
-  document.getElementById('suggestMove').classList.remove("noClick");
+  document.getElementById('suggestMove').disabled = false;
   x = document.getElementsByClassName("flashClass");
  if (x.length == 0)
  {
@@ -1090,7 +1090,13 @@ function errorFunction(errorCode)
 function disableButtons()
 {
   document.getElementById('gTable').classList.add("noClick");
-  document.getElementById('suggestMove').classList.add("noClick");
+  document.getElementById('suggestMove').disabled = true;
+  
+  list = document.getElementsByClassName('gridCell');
+  for (index = 0; index < list.length; ++index)
+  {
+    list[index].disabled = true;
+  }
 }
 
 function changeGridColor(gridColorInput)
