@@ -27,7 +27,6 @@
   background-color: #3e8e41;
 }
 
-
 html
 {
   width: 100%;
@@ -70,23 +69,7 @@ h3
 
 span
 {
-  font-weight: 600;
-}
-
-#history
-{
-}
-
-#howToPlay
-{
-  
-}
-
-
-
-#uiGuide
-{
-  
+  font-weight: bold;
 }
 
 #history:hover, #howToPlay:hover, #uiGuide:hover
