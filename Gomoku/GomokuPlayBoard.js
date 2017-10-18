@@ -22,7 +22,7 @@ function timingFunction()
   let seconds;
   let currentTime = Date.now();
   let minutes = parseInt(((currentTime - startTime) / 1000) / 60);
-  
+
   if(minutes > 0)
   {
     seconds = ((currentTime - startTime) / 1000) - (minutes * 60);
@@ -31,7 +31,7 @@ function timingFunction()
   {
     seconds = (currentTime - startTime) / 1000;
   }
-  
+
   if (minutes != 0)
   {
     if (minutes == 1)
@@ -42,7 +42,7 @@ function timingFunction()
     {
       document.getElementById('runningTimer').innerHTML = minutes.toString() + " Minutes and " + (parseInt(seconds)).toString() + " Seconds";
     }
-    
+
   }
   else
   {
@@ -55,7 +55,7 @@ function gameModeFunction(input)
   document.getElementById('p1PieceCounter').innerHTML = 0;
   document.getElementById('p2PieceCounter').innerHTML = 0;
   document.getElementById("totalPieceCounter").innerHTML = 0;
-  
+
   if (input == 1) // Computer vs You
   {
     playerGameMode = 1;
@@ -949,7 +949,6 @@ function checkWin()
 
       for (i = row, j = column; i < tableSize - 1 && j > 0; i++, j--)
       {
-
         if (gridArray[i][j] == 0)
         {
           continue;
@@ -1089,7 +1088,7 @@ function disableButtons()
 {
   document.getElementById('gTable').classList.add("noClick");
   document.getElementById('suggestMove').disabled = true;
-  
+
   list = document.getElementsByClassName('gridCell');
   for (index = 0; index < list.length; ++index)
   {
@@ -1107,7 +1106,7 @@ function changeGridColor(gridColorInput)
       return;
     }
   }
-  
+
     switch (gridColorInput)
     {
       case 'DeepPink':
