@@ -15,7 +15,7 @@
 
 .dropdownButt:hover, .dropdownButt:focus
 {
-  background-color: #3e8e41;
+  background-color: #eb4000;
 }
 
 .dropdown
@@ -30,22 +30,22 @@
 
 #x15:hover, #x19:hover, #compv1:hover, #onev1:hover, #gridReset:hover
 {
-  background-color: tomato;
+  background-color: #ff846e;
 }
 
 #x15:focus, #x19:focus, #compv1:focus, #onev1:focus, #gridReset:focus
 {
-  background-color: tomato;
+  background-color: #ff846e;
 }
 
 #homePage:hover, #aboutMe:hover, #learnToPlay:hover
 {
-  background-color: tomato;
+  background-color: #ff846e;
 }
 
 #homePage:focus, #aboutMe:focus, #learnToPlay:focus
 {
-  background-color: tomato;
+  background-color: #ff846e;
 }
 
 .clickContent
@@ -210,27 +210,27 @@ tr
 {
   0%
   {
-    background: rgba(255, 204, 204, 0.5);
+    background: rgba(255, 204, 204, 0.9);
   }
   20%
   {
-    background: rgba(255, 229, 204, 0.5);
+    background: rgba(255, 229, 204, 0.9);
   }
   60%
   {
-    background: rgba(255, 254, 204, 0.5);
+    background: rgba(255, 254, 204, 0.9);
   }
   60%
   {
-    background: rgba(230, 255, 204, 0.5);
+    background: rgba(230, 255, 204, 0.9);
   }
   80%
   {
-    background: rgba(204, 255, 204, 0.5);
+    background: rgba(204, 255, 204, 0.9);
   }
   100%
   {
-    background: rgba(204, 255, 229, 0.5);
+    background: rgba(204, 255, 229, 0.9);
   }
 }
 

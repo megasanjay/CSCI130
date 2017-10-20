@@ -10,14 +10,10 @@ var player1Color;
 var player2Color;
 var winColor;
 var startTime;
-var suggestFlash;
-var maxwincounter;
 var runTimer;
-var maxColumn;
-var winType;
 var moves = [];
 
-function timingFunction()
+function timingFunction()   // function for the timer
 {
   let seconds;
   let currentTime = Date.now();
@@ -50,7 +46,7 @@ function timingFunction()
   }
 }
 
-function gameModeFunction(input)
+function gameModeFunction(input)  // function for the game mode button
 {
   document.getElementById('p1PieceCounter').innerHTML = 0;
   document.getElementById('p2PieceCounter').innerHTML = 0;
@@ -59,7 +55,7 @@ function gameModeFunction(input)
   if (input == 1) // Computer vs You
   {
     playerGameMode = 1;
-    alert("You are now playing against a dumb student's algorithm to beat you at this stupid game. Good luck! :)");
+    alert("You are now playing against the computer");
 
     resizeTable(15);
 
@@ -92,7 +88,7 @@ function gameModeFunction(input)
   else // 2v2
   {
     playerGameMode = 2;
-    alert("k. I hope you have someone next to you because you are now playing in the 1v1 mode. If you clicked this by accident, please choose the other game mode or play against yourself ;)");
+    alert("You are now in the Player v. Player mode. Please take turns at selecting where you want to set your piece.");
 
     resizeTable(15);
 
@@ -104,11 +100,11 @@ function gameModeFunction(input)
   }
 }
 
-function suggestMoveFunction()
+function suggestMoveFunction() // function to suggest the next best move
 {
   if (turnCount == 0)
   {
-    alert("You need to start a game for me to be able to suggest a move stupid! 🙄")
+    errorFunction('suggestOnEmpty');
     return;
   }
 
@@ -123,7 +119,7 @@ function suggestMoveFunction()
   document.getElementById(y).classList.add("flashClass");
 }
 
-function clickButton(i,j)
+function clickButton(i,j) // Click function for the grid
 {
   document.getElementById('suggestMove').disabled = false;
   x = document.getElementsByClassName("flashClass");
@@ -138,7 +134,7 @@ function clickButton(i,j)
  }
 }
 
-function resizeTable(tsize)
+function resizeTable(tsize) // resize the table
 {
   let row;
   let cell;
@@ -185,11 +181,11 @@ function resizeTable(tsize)
 	}
 }
 
-function clickFunction(i, j)
+function clickFunction(i, j)  // click function for the grid
 {
   let winWinNoMatterWhat;
 
-  document.getElementById('totalPieceCounter').innerHTML = turnCount;
+  document.getElementById('turnCounter').innerHTML = turnCount;
 
   if (turnCount % 2 == 0)
   {
@@ -239,9 +235,8 @@ function clickFunction(i, j)
   {
     moves = [];
     twoVTwoResponse();
-    //moves.sort(function(a,b){return b.streak - a.streak;});
-
     removeDuplicates();
+    
     x = generateMove();
 
     makeAIMove(x.row, x.column);
@@ -253,7 +248,7 @@ function makeAIMove(i, j)
   clickFunction(i,j);
 }
 
-function generateMove()
+function generateMove() // generate the computer's move
 {
   for(i in moves)
   {
@@ -612,7 +607,7 @@ function generateMove()
   }
 }
 
-function removeDuplicates()
+function removeDuplicates() // cleanup function for list of legal moves
 {
   for(i in moves)
   {
@@ -644,9 +639,8 @@ function removeDuplicates()
   );
 }
 
-function twoVTwoResponse()
+function twoVTwoResponse() // helper function for AI
 {
-  maxwincounter = 0;
   index = 1;
 
   // Right diagonal check
@@ -800,7 +794,7 @@ function twoVTwoResponse()
 
 }
 
-function displayFunction(i, j)
+function displayFunction(i, j)  // draw the grid
 {
   let currentCell = document.getElementById("gTable").rows[i].cells[j];
   document.getElementById("totalPieceCounter").innerHTML = turnCount;
@@ -821,11 +815,10 @@ function displayFunction(i, j)
   changeP2Color(player2Color);
 }
 
-function checkWin()
+function checkWin() // function to check to see if a player has won
 {
   let currentSlotPiece;
   let wincounter, x, y;
-  maxwincounter = 0;
 
   // horizontal check
   for (let i = 0; i < tableSize; i++)
@@ -979,7 +972,7 @@ function checkWin()
   return false;
 }
 
-function highlightWinningCells(input, i, j)
+function highlightWinningCells(input, i, j) // Show winning cells
 {
   if (input == 'h')
   {
@@ -1074,17 +1067,20 @@ function highlightWinningCells(input, i, j)
   }
 }
 
-function errorFunction(errorCode)
+function errorFunction(errorCode) // error diplay function
 {
   switch (errorCode)
   {
     case 'taken':
       alert("This cell has already been filled. Choose another unfilled spot");
       break;
+    case 'suggestOnEmpty':
+      alert("You need to play at least one move before I can suggest a move.");
+      break;
   }
 }
 
-function disableButtons()
+function disableButtons() // disable appropriate buttons
 {
   document.getElementById('gTable').classList.add("noClick");
   document.getElementById('suggestMove').disabled = true;
@@ -1096,7 +1092,7 @@ function disableButtons()
   }
 }
 
-function changeGridColor(gridColorInput)
+function changeGridColor(gridColorInput)  // function to change the background color of the grid
 {
   if (gridColorInput == player1Color || gridColorInput == player2Color)
   {
@@ -1312,7 +1308,7 @@ function changeGridColor(gridColorInput)
     }
 }
 
-function changeP1Color(p1ColorInput)
+function changeP1Color(p1ColorInput)  // function to change player one's piece color 
 {
   if (gridColor == p1ColorInput)
   {
@@ -1527,7 +1523,7 @@ function changeP1Color(p1ColorInput)
   }
 }
 
-function changeP2Color(p2ColorInput)
+function changeP2Color(p2ColorInput)  // function to change player two's piece color 
 {
   if (gridColor == p2ColorInput)
   {
