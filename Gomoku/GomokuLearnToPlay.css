@@ -1,3 +1,9 @@
+/*
+  Sanjay Soundarajan
+  109146095
+  Follow the development of this project: https://github.com/megasanjay/CSCI130/tree/master/Gomoku
+*/
+
 .dropdown
 {
   position: relative;
@@ -37,7 +43,7 @@ body
 {
   width: 99%;
   height: 98%;
-  background: rgb(245, 245, 245); 
+  background: rgb(245, 245, 245);
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: lighter;
 }

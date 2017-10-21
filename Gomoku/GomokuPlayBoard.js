@@ -1,3 +1,9 @@
+/*
+  Sanjay Soundarajan
+  109146095
+  Follow the development of this project: https://github.com/megasanjay/CSCI130/tree/master/Gomoku
+*/
+
 var table;
 var tableSize;
 var gridcell;
@@ -231,12 +237,12 @@ function clickFunction(i, j)  // click function for the grid
     return;
   }
 
-  if (playerGameMode == 1 && currentPlayer == 'p2')
+  if (playerGameMode == 1 && currentPlayer == 'p2') // AI response
   {
     moves = [];
     twoVTwoResponse();
     removeDuplicates();
-    
+
     x = generateMove();
 
     makeAIMove(x.row, x.column);
@@ -250,12 +256,14 @@ function makeAIMove(i, j)
 
 function generateMove() // generate the computer's move
 {
+  // 'a' for horizontal moves
+  // 'b' for vertical moves
+  // 'c' for left-diagonal moves
+  // 'd' for right-diagonal moves
+
   for(i in moves)
   {
     x = moves[i];
-
-    console.log("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    console.log(x.index + " " + x.streak + " " + x.row + " " + x.column + " " + x.type);
 
     if (x.streak == 1)
     {
@@ -1308,7 +1316,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
     }
 }
 
-function changeP1Color(p1ColorInput)  // function to change player one's piece color 
+function changeP1Color(p1ColorInput)  // function to change player one's piece color
 {
   if (gridColor == p1ColorInput)
   {
@@ -1523,7 +1531,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
   }
 }
 
-function changeP2Color(p2ColorInput)  // function to change player two's piece color 
+function changeP2Color(p2ColorInput)  // function to change player two's piece color
 {
   if (gridColor == p2ColorInput)
   {

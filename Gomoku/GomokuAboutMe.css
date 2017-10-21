@@ -1,3 +1,9 @@
+/*
+  Sanjay Soundarajan
+  109146095
+  Follow the development of this project: https://github.com/megasanjay/CSCI130/tree/master/Gomoku
+*/
+
 .dropdown
 {
   position: relative;
@@ -19,7 +25,7 @@
   cursor: pointer;
   height: inherit;
   width: inherit;
-  background: tomato;  /* fallback for old browsers */
+  background: tomato;
 }
 
 .dropdownButt:hover, .dropdownButt:focus
@@ -37,7 +43,7 @@ body
 {
   width: 99%;
   height: 98%;
-  background: rgb(245, 245, 245); 
+  background: rgb(245, 245, 245);
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: lighter;
   background: -webkit-linear-gradient(right, #8e9eab, #eef2f3);
@@ -74,6 +80,11 @@ span
   font-weight: bold;
 }
 
+a
+{
+  text-decoration: none;
+}
+
 #contactMe
 {
   list-style-type: none;
@@ -108,7 +119,7 @@ svg:hover
   animation-direction: alternate;
 }
 
-@-webkit-keyframes pulse 
+@-webkit-keyframes pulse
 {
   0% {
     @include transform(scale(.9));
