@@ -150,7 +150,6 @@ function resizeTable(tsize) // resize the table
 
   turnCount = 1;
   currentPlayer = 'p1';
-  winOpacity = 0.5;
   gameState = 'inProgress';
 
   gridArray = new Array(tsize);
@@ -182,7 +181,7 @@ function resizeTable(tsize) // resize the table
 		for (let j = 0; j < tableSize ; j++)
 		{
 			cell = row.insertCell(j);
-			cell.innerHTML = '<button class = "gridCell" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')"></button>';
+			cell.innerHTML = '<button class = "gridCell" id = "cellr' + i + 'c' + j + '" onclick = "clickButton(' + i + ',' + j + ')"></button>';
 		}
 	}
 }
@@ -815,12 +814,12 @@ function displayFunction(i, j)  // draw the grid
 
   if (currentPlayer == 'p1')
   {
-    currentCell.innerHTML = '<button class = "gridCell player1" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">X</button>';
+    currentCell.innerHTML = '<button class = "gridCell player1" id = "cellr' + i + 'c' + j + '" onclick = "clickButton(' + i + ',' + j + ')">X</button>';
     currentPlayer = 'p2';
   }
   else
   {
-    currentCell.innerHTML = '<button class = "gridCell player2" id= "cellr' + i + 'c' + j + '" onclick="clickButton(' + i + ',' + j + ')">O</button>';
+    currentCell.innerHTML = '<button class = "gridCell player2" id = "cellr' + i + 'c' + j + '" onclick = "clickButton(' + i + ',' + j + ')">O</button>';
     currentPlayer = 'p1';
   }
 
@@ -994,26 +993,33 @@ function checkWin() // function to check to see if a player has won
 
 function highlightWinningCells(input, i, j) // Show winning cells
 {
+  winOpacity = 0.6;
+  
   if (input == 'h')
   {
     x = "cellr" + i + "c" + (j - 3);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("horizontalCell1");
     
     x = "cellr" + i + "c" + (j - 2);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("horizontalCell2");
     
     x = "cellr" + i + "c" + (j - 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("horizontalCell3");
 
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("horizontalCell4");
 
     x = "cellr" + i + "c" + (j + 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("horizontalCell5");
   }
 
@@ -1021,22 +1027,27 @@ function highlightWinningCells(input, i, j) // Show winning cells
   {
     x = "cellr" + (j - 3) + "c" + i;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("verticalCell1");
 
     x = "cellr" + (j - 2) + "c" + i;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("verticalCell2");
 
     x = "cellr" + (j - 1) + "c" + i;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("verticalCell3");
     
     x = "cellr" + j + "c" + i;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("verticalCell4");
 
     x = "cellr" + (j + 1) + "c" + i;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("verticalCell5");
   }
 
@@ -1044,22 +1055,27 @@ function highlightWinningCells(input, i, j) // Show winning cells
   {
     x = "cellr" + (i - 3) + "c" + (j + 3);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("leftDiagonalCell1");
     
     x = "cellr" + (i - 2) + "c" + (j + 2);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("leftDiagonalCell2");
     
     x = "cellr" + (i - 1) + "c" + (j + 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("leftDiagonalCell3");
 
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("leftDiagonalCell4");
 
     x = "cellr" + (i + 1) + "c" + (j - 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("leftDiagonalCell5");
 
     
@@ -1069,22 +1085,27 @@ function highlightWinningCells(input, i, j) // Show winning cells
   {
     x = "cellr" + (i - 3) + "c" + (j - 3);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("rightDiagonalCell1");
     
     x = "cellr" + (i - 2) + "c" + (j - 2);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("rightDiagonalCell2");
     
     x = "cellr" + (i - 1) + "c" + (j - 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("rightDiagonalCell3");
     
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("rightDiagonalCell4");
 
     x = "cellr" + (i + 1) + "c" + (j + 1);
     y = document.getElementById(x);
+    y.style.opacity = winOpacity;
     y.classList.add("rightDiagonalCell5");
   }
 }
@@ -1133,7 +1154,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="DeepPink";
+          list[index].style.backgroundColor = "DeepPink";
         }
         gridColor = 'DeepPink';
         break;
@@ -1141,7 +1162,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="LightSalmon";
+          list[index].style.backgroundColor = "LightSalmon";
         }
         gridColor = 'LightSalmon';
         break;
@@ -1149,7 +1170,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Salmon";
+          list[index].style.backgroundColor = "Salmon";
         }
         gridColor = 'Salmon';
         break;
@@ -1157,7 +1178,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="LightCoral";
+          list[index].style.backgroundColor = "LightCoral";
         }
         gridColor = 'LightCoral';
         break;
@@ -1165,7 +1186,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Crimson";
+          list[index].style.backgroundColor = "Crimson";
         }
         gridColor = 'Crimson';
         break;
@@ -1173,7 +1194,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="OrangeRed";
+          list[index].style.backgroundColor = "OrangeRed";
         }
         gridColor = 'OrangeRed';
         break;
@@ -1181,7 +1202,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Tomato";
+          list[index].style.backgroundColor = "Tomato";
         }
         gridColor = 'Tomato';
         break;
@@ -1189,7 +1210,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Yellow";
+          list[index].style.backgroundColor = "Yellow";
         }
         gridColor = 'Yellow';
         break;
@@ -1197,7 +1218,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Orange";
+          list[index].style.backgroundColor = "Orange";
         }
         gridColor = 'Orange';
         break;
@@ -1205,7 +1226,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="PeachPuff";
+          list[index].style.backgroundColor = "PeachPuff";
         }
         gridColor = 'PeachPuff';
         break;
@@ -1213,7 +1234,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Gold";
+          list[index].style.backgroundColor = "Gold";
         }
         gridColor = 'Gold';
         break;
@@ -1221,7 +1242,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Goldenrod";
+          list[index].style.backgroundColor = "Goldenrod";
         }
         gridColor = 'Goldenrod';
         break;
@@ -1229,7 +1250,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Lime";
+          list[index].style.backgroundColor = "Lime";
         }
         gridColor = 'Lime';
         break;
@@ -1237,7 +1258,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="MediumAquamarine";
+          list[index].style.backgroundColor = "MediumAquamarine";
         }
         gridColor = 'MediumAquamarine';
         break;
@@ -1245,7 +1266,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Aqua";
+          list[index].style.backgroundColor = "Aqua";
         }
         gridColor = 'Aqua';
         break;
@@ -1253,7 +1274,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Aquamarine";
+          list[index].style.backgroundColor = "Aquamarine";
         }
         gridColor = 'Aquamarine';
         break;
@@ -1261,7 +1282,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="MediumTurquoise";
+          list[index].style.backgroundColor = "MediumTurquoise";
         }
         gridColor = 'MediumTurquoise';
         break;
@@ -1269,7 +1290,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="SkyBlue";
+          list[index].style.backgroundColor = "SkyBlue";
         }
         gridColor = 'SkyBlue';
         break;
@@ -1277,7 +1298,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="DeepSkyBlue";
+          list[index].style.backgroundColor = "DeepSkyBlue";
         }
         gridColor = 'DeepSkyBlue';
         break;
@@ -1285,7 +1306,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Violet";
+          list[index].style.backgroundColor = "Violet";
         }
         gridColor = 'Violet';
         break;
@@ -1293,7 +1314,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Magenta";
+          list[index].style.backgroundColor = "Magenta";
         }
         gridColor = 'Magenta';
         break;
@@ -1301,7 +1322,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="Azure";
+          list[index].style.backgroundColor = "Azure";
         }
         gridColor = 'Azure';
         break;
@@ -1309,7 +1330,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="LavenderBlush";
+          list[index].style.backgroundColor = "LavenderBlush";
         }
         gridColor = 'LavenderBlush';
         break;
@@ -1317,7 +1338,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="LightGray";
+          list[index].style.backgroundColor = "LightGray";
         }
         gridColor = 'LightGray';
         break;
@@ -1325,7 +1346,7 @@ function changeGridColor(gridColorInput)  // function to change the background c
         list = document.getElementsByClassName("gridCell");
         for (index = 0; index < list.length; ++index)
         {
-          list[index].style.backgroundColor ="SlateGray";
+          list[index].style.backgroundColor = "SlateGray";
         }
         gridColor = 'SlateGray';
         break;
@@ -1348,7 +1369,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="DeepPink";
+        list[index].style.color = "DeepPink";
       }
       player1Color = 'DeepPink';
       break;
@@ -1356,7 +1377,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightSalmon";
+        list[index].style.color = "LightSalmon";
       }
       player1Color = 'LightSalmon';
       break;
@@ -1364,7 +1385,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Salmon";
+        list[index].style.color = "Salmon";
       }
       player1Color = 'Salmon';
       break;
@@ -1372,7 +1393,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightCoral";
+        list[index].style.color = "LightCoral";
       }
       player1Color = 'LightCoral';
       break;
@@ -1380,7 +1401,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Crimson";
+        list[index].style.color = "Crimson";
       }
       player1Color = 'Crimson';
       break;
@@ -1388,7 +1409,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="OrangeRed";
+        list[index].style.color = "OrangeRed";
       }
       player1Color = 'OrangeRed';
       break;
@@ -1396,7 +1417,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Tomato";
+        list[index].style.color = "Tomato";
       }
       player1Color = 'Tomato';
       break;
@@ -1404,7 +1425,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Yellow";
+        list[index].style.color = "Yellow";
       }
       player1Color = 'Yellow';
       break;
@@ -1412,7 +1433,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Orange";
+        list[index].style.color = "Orange";
       }
       player1Color = 'Orange';
       break;
@@ -1420,7 +1441,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="PeachPuff";
+        list[index].style.color = "PeachPuff";
       }
       player1Color = 'PeachPuff';
       break;
@@ -1428,7 +1449,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Gold";
+        list[index].style.color = "Gold";
       }
       player1Color = 'Gold';
       break;
@@ -1436,7 +1457,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Goldenrod";
+        list[index].style.color = "Goldenrod";
       }
       player1Color = 'Goldenrod';
       break;
@@ -1444,7 +1465,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Lime";
+        list[index].style.color = "Lime";
       }
       player1Color = 'Lime';
       break;
@@ -1452,7 +1473,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="MediumAquamarine";
+        list[index].style.color = "MediumAquamarine";
       }
       player1Color = 'MediumAquamarine';
       break;
@@ -1460,7 +1481,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Aqua";
+        list[index].style.color = "Aqua";
       }
       player1Color = 'Aqua';
       break;
@@ -1468,7 +1489,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Aquamarine";
+        list[index].style.color = "Aquamarine";
       }
       player1Color = 'Aquamarine';
       break;
@@ -1476,7 +1497,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="MediumTurquoise";
+        list[index].style.color = "MediumTurquoise";
       }
       player1Color = 'MediumTurquoise';
       break;
@@ -1484,7 +1505,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="SkyBlue";
+        list[index].style.color = "SkyBlue";
       }
       player1Color = 'SkyBlue';
       break;
@@ -1492,7 +1513,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="DeepSkyBlue";
+        list[index].style.color = "DeepSkyBlue";
       }
       player1Color = 'DeepSkyBlue';
       break;
@@ -1500,7 +1521,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Violet";
+        list[index].style.color = "Violet";
       }
       player1Color = 'Violet';
       break;
@@ -1508,7 +1529,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Magenta";
+        list[index].style.color = "Magenta";
       }
       player1Color = 'Magenta';
       break;
@@ -1516,7 +1537,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Azure";
+        list[index].style.color = "Azure";
       }
       player1Color = 'Azure';
       break;
@@ -1524,7 +1545,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LavenderBlush";
+        list[index].style.color = "LavenderBlush";
       }
       player1Color = 'LavenderBlush';
       break;
@@ -1532,7 +1553,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightGray";
+        list[index].style.color = "LightGray";
       }
       player1Color = 'LightGray';
       break;
@@ -1540,7 +1561,7 @@ function changeP1Color(p1ColorInput)  // function to change player one's piece c
       list = document.getElementsByClassName("player1");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="SlateGray";
+        list[index].style.color = "SlateGray";
       }
       player1Color = 'SlateGray';
       break;
@@ -1563,7 +1584,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="DeepPink";
+        list[index].style.color = "DeepPink";
       }
       player2Color = 'DeepPink';
       break;
@@ -1571,7 +1592,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightSalmon";
+        list[index].style.color = "LightSalmon";
       }
       player2Color = 'LightSalmon';
       break;
@@ -1579,7 +1600,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Salmon";
+        list[index].style.color = "Salmon";
       }
       player2Color = 'Salmon';
       break;
@@ -1587,7 +1608,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightCoral";
+        list[index].style.color = "LightCoral";
       }
       player2Color = 'LightCoral';
       break;
@@ -1595,7 +1616,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Crimson";
+        list[index].style.color = "Crimson";
       }
       player2Color = 'Crimson';
       break;
@@ -1603,7 +1624,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="OrangeRed";
+        list[index].style.color = "OrangeRed";
       }
       player2Color = 'OrangeRed';
       break;
@@ -1611,7 +1632,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Tomato";
+        list[index].style.color = "Tomato";
       }
       player2Color = 'Tomato';
       break;
@@ -1619,7 +1640,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Yellow";
+        list[index].style.color = "Yellow";
       }
       player2Color = 'Yellow';
       break;
@@ -1627,7 +1648,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Orange";
+        list[index].style.color = "Orange";
       }
       player2Color = 'Orange';
       break;
@@ -1635,7 +1656,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="PeachPuff";
+        list[index].style.color = "PeachPuff";
       }
       player2Color = 'PeachPuff';
       break;
@@ -1643,7 +1664,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Gold";
+        list[index].style.color = "Gold";
       }
       player2Color = 'Gold';
       break;
@@ -1651,7 +1672,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Goldenrod";
+        list[index].style.color = "Goldenrod";
       }
       player2Color = 'Goldenrod';
       break;
@@ -1659,7 +1680,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Lime";
+        list[index].style.color = "Lime";
       }
       player2Color = 'Lime';
       break;
@@ -1667,7 +1688,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="MediumAquamarine";
+        list[index].style.color = "MediumAquamarine";
       }
       player2Color = 'MediumAquamarine';
       break;
@@ -1675,7 +1696,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Aqua";
+        list[index].style.color = "Aqua";
       }
       player2Color = 'Aqua';
       break;
@@ -1683,7 +1704,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Aquamarine";
+        list[index].style.color = "Aquamarine";
       }
       player2Color = 'Aquamarine';
       break;
@@ -1691,7 +1712,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="MediumTurquoise";
+        list[index].style.color = "MediumTurquoise";
       }
       player2Color = 'MediumTurquoise';
       break;
@@ -1699,7 +1720,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="SkyBlue";
+        list[index].style.color = "SkyBlue";
       }
       player2Color = 'SkyBlue';
       break;
@@ -1707,7 +1728,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="DeepSkyBlue";
+        list[index].style.color = "DeepSkyBlue";
       }
       player2Color = 'DeepSkyBlue';
       break;
@@ -1715,7 +1736,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Violet";
+        list[index].style.color = "Violet";
       }
       player2Color = 'Violet';
       break;
@@ -1723,7 +1744,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Magenta";
+        list[index].style.color = "Magenta";
       }
       player2Color = 'Magenta';
       break;
@@ -1731,7 +1752,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="Azure";
+        list[index].style.color = "Azure";
       }
       player2Color = 'Azure';
       break;
@@ -1739,7 +1760,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LavenderBlush";
+        list[index].style.color = "LavenderBlush";
       }
       player2Color = 'LavenderBlush';
       break;
@@ -1747,7 +1768,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="LightGray";
+        list[index].style.color = "LightGray";
       }
       player2Color = 'LightGray';
       break;
@@ -1755,7 +1776,7 @@ function changeP2Color(p2ColorInput)  // function to change player two's piece c
       list = document.getElementsByClassName("player2");
       for (index = 0; index < list.length; ++index)
       {
-        list[index].style.color ="SlateGray";
+        list[index].style.color = "SlateGray";
       }
       player2Color = 'SlateGray';
       break;
