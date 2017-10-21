@@ -996,94 +996,96 @@ function highlightWinningCells(input, i, j) // Show winning cells
 {
   if (input == 'h')
   {
+    x = "cellr" + i + "c" + (j - 3);
+    y = document.getElementById(x);
+    y.classList.add("horizontalCell1");
+    
+    x = "cellr" + i + "c" + (j - 2);
+    y = document.getElementById(x);
+    y.classList.add("horizontalCell2");
+    
+    x = "cellr" + i + "c" + (j - 1);
+    y = document.getElementById(x);
+    y.classList.add("horizontalCell3");
+
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("horizontalCell4");
 
     x = "cellr" + i + "c" + (j + 1);
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + i + "c" + (j - 1);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + i + "c" + (j - 2);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + i + "c" + (j - 3);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("horizontalCell5");
   }
 
   if (input == 'v')
   {
-    x = "cellr" + j + "c" + i;
+    x = "cellr" + (j - 3) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (j + 1) + "c" + i;
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (j - 1) + "c" + i;
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("verticalCell1");
 
     x = "cellr" + (j - 2) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("verticalCell2");
 
-    x = "cellr" + (j - 3) + "c" + i;
+    x = "cellr" + (j - 1) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("verticalCell3");
+    
+    x = "cellr" + j + "c" + i;
+    y = document.getElementById(x);
+    y.classList.add("verticalCell4");
+
+    x = "cellr" + (j + 1) + "c" + i;
+    y = document.getElementById(x);
+    y.classList.add("verticalCell5");
   }
 
   if (input == 'ld')
   {
+    x = "cellr" + (i - 3) + "c" + (j + 3);
+    y = document.getElementById(x);
+    y.classList.add("leftDiagonalCell1");
+    
+    x = "cellr" + (i - 2) + "c" + (j + 2);
+    y = document.getElementById(x);
+    y.classList.add("leftDiagonalCell2");
+    
+    x = "cellr" + (i - 1) + "c" + (j + 1);
+    y = document.getElementById(x);
+    y.classList.add("leftDiagonalCell3");
+
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("leftDiagonalCell4");
 
     x = "cellr" + (i + 1) + "c" + (j - 1);
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("leftDiagonalCell5");
 
-    x = "cellr" + (i - 1) + "c" + (j + 1);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (i - 2) + "c" + (j + 2);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (i - 3) + "c" + (j + 3);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    
   }
 
   if (input == 'rd')
   {
+    x = "cellr" + (i - 3) + "c" + (j - 3);
+    y = document.getElementById(x);
+    y.classList.add("rightDiagonalCell1");
+    
+    x = "cellr" + (i - 2) + "c" + (j - 2);
+    y = document.getElementById(x);
+    y.classList.add("rightDiagonalCell2");
+    
+    x = "cellr" + (i - 1) + "c" + (j - 1);
+    y = document.getElementById(x);
+    y.classList.add("rightDiagonalCell3");
+    
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("rightDiagonalCell4");
 
     x = "cellr" + (i + 1) + "c" + (j + 1);
     y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (i - 1) + "c" + (j - 1);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (i - 2) + "c" + (j - 2);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
-
-    x = "cellr" + (i - 3) + "c" + (j - 3);
-    y = document.getElementById(x);
-    y.style.opacity = winOpacity;
+    y.classList.add("rightDiagonalCell5");
   }
 }
 
