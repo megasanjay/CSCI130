@@ -14,7 +14,7 @@ var turnCount = 0;
 var playerGameMode;
 var player1Color;
 var player2Color;
-var winColor;
+var winOpacity;
 var startTime;
 var runTimer;
 var moves = [];
@@ -61,7 +61,7 @@ function gameModeFunction(input)  // function for the game mode button
   if (input == 1) // Computer vs You
   {
     playerGameMode = 1;
-    alert("You are now playing against the computer");
+    alert("You are now playing against the computer! You get to play the first move");
 
     resizeTable(15);
 
@@ -150,7 +150,7 @@ function resizeTable(tsize) // resize the table
 
   turnCount = 1;
   currentPlayer = 'p1';
-  winColor = 0.5;
+  winOpacity = 0.5;
   gameState = 'inProgress';
 
   gridArray = new Array(tsize);
@@ -224,16 +224,22 @@ function clickFunction(i, j)  // click function for the grid
   turnCount++;
 
   winWinNoMatterWhat = checkWin();
-  if (winWinNoMatterWhat == 1)
+  if (winWinNoMatterWhat == 1)  // Player 1 wins
   {
     clearInterval(runTimer);
-    alert("Player ❌ wins!");
+    
+    let totalTime = document.getElementById('runningTimer').innerHTML;
+    
+    alert("Player ❌ wins. This game only lasted " + totalTime + "!");
     return;
   }
-  else if (winWinNoMatterWhat == 2)
+  else if (winWinNoMatterWhat == 2) // player 2 wins
   {
     clearInterval(runTimer);
-    alert("Player ⭕️ wins!");
+    
+    let totalTime = document.getElementById('runningTimer').innerHTML;
+    
+    alert("Player ⭕️ wins. This game only lasted " + totalTime + "!");
     return;
   }
 
@@ -821,6 +827,12 @@ function displayFunction(i, j)  // draw the grid
   changeGridColor(gridColor);
   changeP1Color(player1Color);
   changeP2Color(player2Color);
+  
+  if ((turnCount == 225 && tableSize == 15) || (turnCount == 361 && tableSize == 19))
+  {
+    disableButtons();
+    errorFunction('fullGrid');
+  }
 }
 
 function checkWin() // function to check to see if a player has won
@@ -986,92 +998,92 @@ function highlightWinningCells(input, i, j) // Show winning cells
   {
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + i + "c" + (j + 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + i + "c" + (j - 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + i + "c" + (j - 2);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + i + "c" + (j - 3);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
   }
 
   if (input == 'v')
   {
     x = "cellr" + j + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (j + 1) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (j - 1) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (j - 2) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (j - 3) + "c" + i;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
   }
 
   if (input == 'ld')
   {
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i + 1) + "c" + (j - 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 1) + "c" + (j + 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 2) + "c" + (j + 2);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 3) + "c" + (j + 3);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
   }
 
   if (input == 'rd')
   {
     x = "cellr" + i + "c" + j;
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i + 1) + "c" + (j + 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 1) + "c" + (j - 1);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 2) + "c" + (j - 2);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
 
     x = "cellr" + (i - 3) + "c" + (j - 3);
     y = document.getElementById(x);
-    y.style.opacity = winColor;
+    y.style.opacity = winOpacity;
   }
 }
 
@@ -1080,11 +1092,13 @@ function errorFunction(errorCode) // error diplay function
   switch (errorCode)
   {
     case 'taken':
-      alert("This cell has already been filled. Choose another unfilled spot");
+      alert("This cell has already has a player's piece on it. Please select a slot with no placed pieces on it.");
       break;
     case 'suggestOnEmpty':
-      alert("You need to play at least one move before I can suggest a move.");
+      alert("You need to select a game mode under the 'New Game' menu and place at least one piece before a move can be suggested.");
       break;
+    case 'fullGrid':
+      alert("The entire grid has been filled up. This round ends in a tie-game. Please click the 'Reset' button under the 'New Game' menu to play again.")
   }
 }
 
