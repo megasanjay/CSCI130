@@ -10,16 +10,40 @@
 </head>
 
 <body>
-  <div>
+  <div class="mainContainer">
     <form>
       <fieldset>
-        <input class = "textbox" type = "text" placeholder = "Username ">
+        <input id = "usernameTextBox" class = "regularTextbox" type = "text" 
+               placeholder = "Username "
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+                            else{
+                            document.getElementById('usernameTextBox').classList.remove('errorTextbox');
+                            document.getElementById('usernameTextBox').classList.add('regularTextbox');
+                            }">
         <br> <br>
-        <input class = "textbox" type = "password" placeholder = "Password">
-        <br> <br>
-        <button class = "submitButton"><span>Login </span></button>
+        <input id = "passwordTextBox" class = "regularTextbox" type = "password" 
+               placeholder = "Password"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+                            else{
+                            document.getElementById('passwordTextBox').classList.remove('errorTextbox');
+                            document.getElementById('passwordTextBox').classList.add('regularTextbox');
+                            }">
       </fieldset>
     </form>
+    <br>
+    <button id = "submitButt" class = "submitButton" 
+                onclick = "submit()">
+            <span >Log In  </span>
+    </button>
+    <br> <br>
+    <div class = "divider"><span class="word">or</span></div>
+    <br>
+    <button id = "createAccount"  class = "createButton" 
+                onclick = "createAccount()">
+            <span >Create New Account  </span>
+    </button>
   </div>
 </body>
 </html>
