@@ -28,17 +28,18 @@ if (!empty($_POST))
     echo "username already exists";
     return;
   }
-
-  $sql = "SELECT max(userID) AS newID FROM Users";
-
+  
+  $sql = "SELECT * FROM Users WHERE email = '{$email}'";
   $result = $conn->query($sql);
-  $row = $result->fetch_assoc(); // Fetch a result row as an associative array
-  $index =$row["newID"];
 
-  $index = $index + 1;
+  if ($result->num_rows != 0)
+  {
+    echo "email already exists";
+    return;
+  }
 
-  $sql = "INSERT INTO Users (userID, username, password, email, fname, lname, address) VALUES ";
-  $sql = $sql . "('{$index}', '{$username}', '{$passWord}', '{$email}', 'NULL' , 'NULL', 'NULL')";
+  $sql = "INSERT INTO Users (username, password, email, fname, lname, address) VALUES ";
+  $sql = $sql . "('{$username}', '{$passWord}', '{$email}', 'NULL' , 'NULL', 'NULL')";
 
   if ($conn->query($sql) === TRUE)
   {

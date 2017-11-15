@@ -107,10 +107,20 @@ function alertContents_checkUserName()
           document.getElementById("confirmPasswordTextBox").value = "";
           return;
         }
+        
+        if (response == "email already exists")
+        {
+          alert("This email is already in use by another account. Please use a differnt email to sign up for an account.");
+          document.getElementById("emailTextBox").classList.remove("regularTextbox");
+          document.getElementById("emailTextBox").classList.add("errorTextbox");
+          document.getElementById("passwordTextBox").value = "";
+          document.getElementById("confirmPasswordTextBox").value = "";
+          return;
+        }
 
         if (response == "New record created successfully")
         {
-          alert("User account created. Please login into your account to add your details.");
+          alert("User account created. You can log into your account now.");
           return;
         }
 
