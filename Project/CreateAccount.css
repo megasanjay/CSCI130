@@ -1,12 +1,14 @@
 .mainContainer
 {
   left: 0;
-  position: absolute;
+  position: relative;
   text-align: center;
-  margin-top: -12%;
-  top: 50%;
-  width: 95%;
-  margin-left: 2%;
+  margin: auto;
+  margin-top: 10%;
+  //top: 50%;
+  height: 50%;
+  width: 70%;
+  //margin-left: 2%;
   border: none;
 }
 
@@ -68,7 +70,7 @@ fieldset
   border: 2px solid #000000;
   color: #34495e;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   background-color: none;
   padding: 4px 19px;
@@ -90,7 +92,7 @@ fieldset
   background: transparent;
   border: 2px solid #e74c3c;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   background-color: none;
   padding: 4px 19px;
@@ -110,7 +112,7 @@ fieldset
   cursor: pointer;
   border: none;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 2em;
+  font-size: 1em;
   font-weight: lighter;
   border-radius: 8px;
   border-width: 8px 6px 0;

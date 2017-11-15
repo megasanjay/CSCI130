@@ -3,13 +3,13 @@ function submit()
   let username = document.getElementById("usernameTextBox");
   let password = document.getElementById("passwordTextBox");
   let errorFlag = false;
-  
+
   if (username.value == '' || password.value == '')
   {
       errorFlag = true;
       alert("Please fill all the fields in the page before clicking the 'Login' button.")
   }
-  
+
   if (errorFlag == true)
   {
     if (username.value == '')
@@ -22,53 +22,62 @@ function submit()
       password.classList.remove("regularTextbox");
       password.classList.add("errorTextbox");
     }
-    
+
     return;
   }
-  
+
   validateLogin(username, password);
 }
 
 function validateLogin(username, password)
 {
-  GetPassword(username); 
+  GetPassword(username.value);
 }
 
 function GetPassword(username)
 {
-  var requestURL = "ValidateLogin.php";
+  var requestURL = "http://localhost:8888/loginValidation.php";
   httpRequest = new XMLHttpRequest();
-  httpRequest.onreadystatechange = alertContents_getPassword; 	
+  httpRequest.onreadystatechange = alertContents_getPassword;
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  httpRequest.send('username =' + encodeURIComponent(username));
-  goodindex=httpRequest.onreadystatechange;
+  httpRequest.send('username=' + encodeURIComponent(username));
 }
 
-function alertContents_getPassword() 
+function alertContents_getPassword()
 {
-  try 
+  try
   {
-    if (httpRequest.readyState === XMLHttpRequest.DONE) 
+    if (httpRequest.readyState === XMLHttpRequest.DONE)
     {
-      if (httpRequest.status === 200) 
+      if (httpRequest.status === 200)
       {
-    	// alert(httpRequest.responseText);  // Just for debugging purposes
-		var response = JSON.parse(httpRequest.responseText);  
-		mydata = JSON.parse(JSON.stringify(response));
-		
-		if (mydata.hasOwnProperty('password')) 
+    		var response = httpRequest.responseText;
+
+        if (document.getElementById("passwordTextBox").value == response)
         {
-			let receivedPassword = mydata['password'];
-            //do something
-		}
-		else 
+          sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
+          window.open("MainPage.html", "_self", false);
+        }
+
+        if (response == "Username does not exist")
         {
-		alert('This username is not in the Database.');
-		return 0;
-		}
-	  } 
-      else 
+          document.getElementById("usernameTextBox").classList.remove("regularTextbox");
+          document.getElementById("usernameTextBox").classList.add("errorTextbox");
+          document.getElementById("passwordTextBox").classList.remove("regularTextbox");
+          document.getElementById("passwordTextBox").classList.add("errorTextbox");
+          alert("This username does not exist. Please enter the correct details or create a new account.");
+          return;
+        }
+        if (document.getElementById("passwordTextBox").value != response)
+        {
+          document.getElementById("passwordTextBox").classList.remove("regularTextbox");
+          document.getElementById("passwordTextBox").classList.add("errorTextbox");
+          alert("Incorrect Password. Please enter the correct password");
+          return;
+        }
+      }
+      else
       {
         alert('There was a problem with the request.');
       }
@@ -80,4 +89,3 @@ function alertContents_getPassword()
     alert('Caught Exception: ' + e.description);
   }
 }
-

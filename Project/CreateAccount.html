@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+<head>
+	<meta charset = "UTF-8" />
+	<title>Login!</title>
+	<link rel = "stylesheet" type = "text/css" href = "CreateAccount.css">
+    <script type = "text/javascript" src = "createAccount.js"></script>
+</head>
+
+<body>
+  <div class="mainContainer">
+    <form>
+      <fieldset>
+        <input id = "usernameTextBox" class = "regularTextbox" type = "text"
+               placeholder = "Username "
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('createAccount').click();}
+                            else{
+                            document.getElementById('usernameTextBox').classList.remove('errorTextbox');
+                            document.getElementById('usernameTextBox').classList.add('regularTextbox');
+                            }">
+        <br> <br>
+        <input id = "passwordTextBox" class = "regularTextbox" type = "password"
+               placeholder = "Password"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('createAccount').click();}
+                            else{
+                            document.getElementById('passwordTextBox').classList.remove('errorTextbox');
+                            document.getElementById('passwordTextBox').classList.add('regularTextbox');
+                            }">
+				<br> <br>
+				<input id = "confirmPasswordTextBox" class = "regularTextbox" type = "password"
+               placeholder = "Confirm Password"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('createAccount').click();}
+                            else{
+                            document.getElementById('confirmPasswordTextBox').classList.remove('errorTextbox');
+                            document.getElementById('confirmPasswordTextBox').classList.add('regularTextbox');
+                            }">
+				<br> <br>
+				<input id = "emailTextBox" class = "regularTextbox" type = "text"
+               placeholder = "Email"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('createAccount').click();}
+                            else{
+                            document.getElementById('emailTextBox').classList.remove('errorTextbox');
+                            document.getElementById('emailTextBox').classList.add('regularTextbox');
+                            }">
+      </fieldset>
+    </form>
+    <br>
+		<button id = "createAccount"  class = "createButton"
+                onclick = "createAccount()">
+            <span >Create New Account  </span>
+    </button>
+    <br> <br>
+    <div class = "divider"><span class="word">or</span></div>
+    <br>
+		<button id = "submitButt" class = "submitButton"
+                onclick = "location.href = 'Login.html'">
+            <span >Log In  </span>
+    </button>
+  </div>
+</body>
+</html>
