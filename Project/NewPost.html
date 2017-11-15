@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+<head>
+	<meta charset = "UTF-8" />
+	<title>Login!</title>
+	<link rel = "stylesheet" type = "text/css" href = "NewPost.css">
+    <script type = "text/javascript" src = "NewPost.js"></script>
+</head>
+
+<body>
+  <div class="mainContainer">
+    <form>
+      <fieldset>
+        <input id = "titleTextBox" class = "regularTextbox" type = "text"
+               placeholder = "Title"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+														else{
+                            document.getElementById('titleTextBox').classList.remove('errorTextbox');
+                            document.getElementById('titleTextBox').classList.add('regularTextbox');
+                            }">
+        <br> <br>
+				<textarea id = "descriptionTextBox" class = "regularTextarea"
+									name="Text1" cols="40" rows="5"
+									placeholder="Post details"></textarea>
+				<br> <br>
+				<input id = "imageTextBox" class = "regularTextarea" type = "text"
+               placeholder = "Link To Image"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+														else{
+                            document.getElementById('imageTextBox').classList.remove('errorTextarea');
+                            document.getElementById('imageTextBox').classList.add('regularTextarea');
+                            }">
+      </fieldset>
+    </form>
+    <br>
+    <button id = "submitButt" class = "submitButton"
+                onclick = "submit()">
+            <span >Submit Post</span>
+    </button>
+    <br> <br>
+    <div class = "divider"><span class="word">or</span></div>
+    <br>
+    <button id = "cancelButt"  class = "createButton"
+                onclick = "location.href = 'MainPage.html'">
+            <span > &nbsp;&nbsp;Cancel&nbsp;&nbsp;</span>
+    </button>
+  </div>
+</body>
+</html>

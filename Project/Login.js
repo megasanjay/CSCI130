@@ -54,8 +54,6 @@ function alertContents_getPassword()
       {
         var response = httpRequest.responseText;
 
-        alert(response);
-        
         if (document.getElementById("passwordTextBox").value == response)
         {
           sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);

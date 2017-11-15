@@ -9,7 +9,7 @@ function createAccount()
   if (username.value == '' || password.value == '' || confirmPassword.value == '' || email.value == '')
   {
       errorFlag = true;
-      alert("Please fill all the fields in the page before clicking the 'Login' button.")
+      alert("Please fill all the fields in the page before clicking the 'Create Account' button.")
   }
 
   if (errorFlag == true)
@@ -107,10 +107,10 @@ function alertContents_checkUserName()
           document.getElementById("confirmPasswordTextBox").value = "";
           return;
         }
-        
+
         if (response == "email already exists")
         {
-          alert("This email is already in use by another account. Please use a differnt email to sign up for an account.");
+          alert("This email is already in use by another account. Please use a different email to sign up for an account.");
           document.getElementById("emailTextBox").classList.remove("regularTextbox");
           document.getElementById("emailTextBox").classList.add("errorTextbox");
           document.getElementById("passwordTextBox").value = "";
