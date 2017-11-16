@@ -1,3 +1,24 @@
+function showform(val)
+{
+  var radios = document.getElementsByName("radios");
+  var bookform =  document.getElementById("bookform");
+  var videoform =  document.getElementById("videoform");
+  
+  bookform.style.display = 'block';   // show
+  videoform.style.display = 'none';// hide
+  
+  if(val == 'radio1')
+  {
+      bookform.style.display = 'block';
+      videoform.style.display = 'none';
+  }
+  else if(val == 'radio2'){
+       bookform.style.display = 'none';
+       videoform.style.display = 'block';
+  }    
+}
+
+
 function submit()
 {
   let title = document.getElementById("titleTextBox");

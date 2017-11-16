@@ -7,10 +7,10 @@
 	<title>Login!</title>
 	<link rel = "stylesheet" type = "text/css" href = "NewPost.css">
     <script type = "text/javascript" src = "NewPost.js"></script>
+    <link type='text/css' href='http://fonts.googleapis.com/css?family=Lato:400,700' />
 </head>
 
-<body onload="user = sessionStorage.getItem('currentUser'); 
-								alert(user);">
+<body onload="showform('radio1')">
   <div class="mainContainer">
     <form>
       <fieldset>
@@ -23,28 +23,98 @@
                             document.getElementById('titleTextBox').classList.add('regularTextbox');
                             }">
         <br> <br>
-				<textarea id = "descriptionTextBox" class = "regularTextarea"
+        <textarea id = "descriptionTextBox" class = "regularTextarea"
 									name="Text1" cols="40" rows="5"
 									placeholder="Post details"></textarea>
-				<br> <br>
-				<input id = "imageTextBox" class = "regularTextarea" type = "text"
-               placeholder = "Link To Image"
-               onkeydown = "if (event.keyCode == 13){
-                            document.getElementById('submitButt').click();}
-														else{
-                            document.getElementById('imageTextBox').classList.remove('errorTextarea');
-                            document.getElementById('imageTextBox').classList.add('regularTextarea');
-                            }">
-				<br> <br>
-				<input id = "priceTextBox" class = "regularTextarea" type = "text"
+        <br> <br>
+        <input id = "imageTextBox" class = "regularTextarea" type = "text"
+       placeholder = "Link To Image"
+       onkeydown = "if (event.keyCode == 13){
+                    document.getElementById('submitButt').click();}
+                                                else{
+                    document.getElementById('imageTextBox').classList.remove('errorTextarea');
+                    document.getElementById('imageTextBox').classList.add('regularTextarea');
+                    }">
+        <br> <br>
+        <input id = "priceTextBox" class = "regularTextarea" type = "text"
                placeholder = "Price (Required)"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
-														else{
+                            else{
                             document.getElementById('priceTextBox').classList.remove('errorTextarea');
                             document.getElementById('priceTextBox').classList.add('regularTextarea');
                             }">
+        <br> <br>
+        <input type="radio" checked = "checked" value="radio1" id="r12" name="item2" hidden onchange="showform('radio1')">
+        <label class="radio circle" for="r12">
+          <span class="big">
+            <span class="small"></span>
+          </span>Book
+        </label>
+        <input type="radio" value="radio2" id="r22" name="item2" hidden onchange="showform('radio2')">
+        <label class="radio circle" for="r22">
+          <span class="big">
+            <span class="small"></span>
+          </span>Video
+        </label>
       </fieldset>
+    </form>
+    <br>
+    <form id = "bookform">
+      <textarea id = "bookTitleTextArea" class = "regularTextarea"
+									name="Text1" cols="30" rows="2"
+									placeholder="Title of the book (Required)"></textarea>
+      <br> <br>
+      <textarea id = "bookAuthorTextArea" class = "regularTextarea"
+									name="Text1" cols="30" rows="2"
+									placeholder="Author(s) of the book (Required)"></textarea>
+      <br> <br>
+      <input id = "bookpagesTextArea" class = "regularTextarea" type = "text"
+               placeholder = "No. of pages (Required)"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+                            else{
+                            document.getElementById('bookpagesTextArea').classList.remove('errorTextarea');
+                            document.getElementById('bookpagesTextArea').classList.add('regularTextarea');
+                            }">
+      <br> <br>
+    </form>
+    <form id = "videoform">
+      <input id = "titlTextBox" class = "regularTextbox" type = "text"
+             placeholder = "Title (Required)"
+             onkeydown = "if (event.keyCode == 13){
+                          document.getElementById('submitButt').click();}
+                                                      else{
+                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
+                          document.getElementById('titleTextBox').classList.add('regularTextbox');
+                          }">
+      <br> <br>
+      <input id = "titleTexBox" class = "regularTextbox" type = "text"
+             placeholder = "Title (Required)"
+             onkeydown = "if (event.keyCode == 13){
+                          document.getElementById('submitButt').click();}
+                                                      else{
+                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
+                          document.getElementById('titleTextBox').classList.add('regularTextbox');
+                          }">
+      <br> <br>
+      <input id = "ttleTextBox" class = "regularTextbox" type = "text"
+             placeholder = "Title (Required)"
+             onkeydown = "if (event.keyCode == 13){
+                          document.getElementById('submitButt').click();}
+                                                      else{
+                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
+                          document.getElementById('titleTextBox').classList.add('regularTextbox');
+                          }">
+      <br> <br>
+      <input id = "titleTextBx" class = "regularTextbox" type = "text"
+             placeholder = "Title (Required)"
+             onkeydown = "if (event.keyCode == 13){
+                          document.getElementById('submitButt').click();}
+                                                      else{
+                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
+                          document.getElementById('titleTextBox').classList.add('regularTextbox');
+                          }">
     </form>
     <br>
     <button id = "submitButt" class = "submitButton"
