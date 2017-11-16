@@ -99,20 +99,46 @@ fieldset
   background-color: rgba(240, 255, 255, 0.4);
 }
 
-.errorTextbox, .errorTextarea
+.errorTextbox
 {
   color: #e74c3c;
   box-shadow: none;
   background: transparent;
   border: 2px solid #e74c3c;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: em;
+  font-size: 2em;
   text-align: center;
   background-color: none;
   padding: 4px 19px;
   border-radius: 10px;
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
           transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+}
+
+.errorTextbox::placeholder
+{
+  color: #e74c3c;
+}
+
+.errorTextarea
+{
+  color: #e74c3c;
+  box-shadow: none;
+  background: transparent;
+  border: 2px solid #e74c3c;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  text-align: center;
+  background-color: none;
+  padding: 4px 19px;
+  border-radius: 10px;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+}
+
+.errorTextarea::placeholder
+{
+  color: #e74c3c;
 }
 
 .errorTextbox:hover, .errorTextarea:hover

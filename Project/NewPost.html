@@ -9,12 +9,13 @@
     <script type = "text/javascript" src = "NewPost.js"></script>
 </head>
 
-<body>
+<body onload="user = sessionStorage.getItem('currentUser'); 
+								alert(user);">
   <div class="mainContainer">
     <form>
       <fieldset>
         <input id = "titleTextBox" class = "regularTextbox" type = "text"
-               placeholder = "Title"
+               placeholder = "Title (Required)"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
 														else{
@@ -33,6 +34,15 @@
 														else{
                             document.getElementById('imageTextBox').classList.remove('errorTextarea');
                             document.getElementById('imageTextBox').classList.add('regularTextarea');
+                            }">
+				<br> <br>
+				<input id = "priceTextBox" class = "regularTextarea" type = "text"
+               placeholder = "Price (Required)"
+               onkeydown = "if (event.keyCode == 13){
+                            document.getElementById('submitButt').click();}
+														else{
+                            document.getElementById('priceTextBox').classList.remove('errorTextarea');
+                            document.getElementById('priceTextBox').classList.add('regularTextarea');
                             }">
       </fieldset>
     </form>

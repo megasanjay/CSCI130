@@ -1,14 +1,23 @@
+
 <!DOCTYPE html>
 
 <html lang = "en">
 
 <head>
 	<meta charset = "UTF-8" />
-	<title>Login!</title>
+	<title>Login</title>
 	<link rel = "stylesheet" type = "text/css" href = "MainPage.css">
     <script type = "text/javascript" src = "MainPage.js"></script>
 </head>
 <body onload="checkPrivilege()">
-	<button onclick = "logout()">Logout</>
+	<div class="menuBar menuLeft">
+		<a id="newPost" class="menuLink" href = "NewPost.html"
+               target = "_blank" ><div class="menuDiv">New Post</div></a>
+		<a id="users" class="menuLink" href="Users.html"><div class="menuDiv">Users</div></a>
+
+	</div>
+	<div class="menuBar menuRight">
+		<a id="logout" class="menuLink" href="Login.html" onclick="logout()" style="float:right"><div style="float:right">Sign out</div></a>
+	</div>
 </body>
 </html>

@@ -54,12 +54,6 @@ function alertContents_getPassword()
       {
         var response = httpRequest.responseText;
 
-        if (document.getElementById("passwordTextBox").value == response)
-        {
-          sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
-          window.open("MainPage.html", "_self", false);
-        }
-
         if (response == "Username does not exist")
         {
           document.getElementById("usernameTextBox").classList.remove("regularTextbox");
@@ -69,12 +63,30 @@ function alertContents_getPassword()
           alert("This username does not exist. Please enter the correct details or create a new account.");
           return;
         }
-        if (document.getElementById("passwordTextBox").value != response)
+
+        response = JSON.parse(response);
+
+        if (document.getElementById("passwordTextBox").value != response["password"])
         {
           document.getElementById("passwordTextBox").classList.remove("regularTextbox");
           document.getElementById("passwordTextBox").classList.add("errorTextbox");
           alert("Incorrect Password. Please enter the correct password");
           return;
+        }
+
+        if (document.getElementById("passwordTextBox").value == response["password"])
+        {
+          sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
+          if (response ["admin"] == 1)
+          {
+            sessionStorage.setItem("admin", true);
+          }
+          else
+          {
+            sessionStorage.setItem("admin", false);
+          }
+
+          window.open("MainPage.html", "_self", false);
         }
       }
       else

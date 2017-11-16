@@ -3,14 +3,28 @@ function submit()
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
   let imageLink = document.getElementById("imageTextBox");
+  let priceAmount = document.getElementById('priceTextBox');
   let errorFlag = false;
 
-  if (title.value == '')
+  if (title.value == '' | priceAmount.value == '')
   {
-      alert("All posts need a title at the very minimum to be accepted.")
+      alert("Please fill all the required fields before submitting the post")
+      errorFlag = true;
+  }
+
+  if (errorFlag == true)
+  {
+    if (title.value == '')
+    {
       title.classList.remove("regularTextbox");
       title.classList.add("errorTextbox");
-      return;
+    }
+    if (priceAmount.value == '')
+    {
+      priceAmount.classList.remove("regularTextarea");
+      priceAmount.classList.add("errorTextarea");
+    }
+    return;
   }
 
   let string = imageLink.value;
@@ -35,7 +49,21 @@ function submit()
     image = string;
   }
 
-  submitPost(username, title.value, postContent.value, image);
+  price = priceAmount.value
+
+  if(isNaN(price) == false)
+  {
+    price = parseInt(price);
+  }
+  else
+  {
+    alert("The price contains invalid characters");
+    priceAmount.classList.remove("regularTextarea");
+    priceAmount.classList.add("errorTextarea");
+    return;
+  }
+
+  submitPost(username, title.value, postContent.value, image, price);
 }
 
 function validateImageLink(string)
@@ -52,7 +80,7 @@ function validateImageLink(string)
   }
 }
 
-function submitPost(username, title, postContent, imageLink)
+function submitPost(username, title, postContent, imageLink, price)
 {
   var requestURL = "http://localhost:8888/makePost.php";
   httpRequest = new XMLHttpRequest();
@@ -64,6 +92,7 @@ function submitPost(username, title, postContent, imageLink)
   text = text + '&title=' + encodeURIComponent(title);
   text = text + '&image=' + encodeURIComponent(imageLink);
   text = text + '&desc=' + encodeURIComponent(postContent);
+  text = text + '&price=' + encodeURIComponent(price);
 
   httpRequest.send(text);
 }

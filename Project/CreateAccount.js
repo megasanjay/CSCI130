@@ -38,6 +38,14 @@ function createAccount()
     return;
   }
 
+  if (password.value.length > 30)
+  {
+    alert("The password cannot be more than 30 characters");
+    password.classList.remove("regularTextbox");
+    password.classList.add("errorTextbox");
+    return;
+  }
+
   if (password.value != confirmPassword.value)
   {
     alert("The passwords do not match. Please retype both passwords.");
