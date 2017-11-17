@@ -61,60 +61,78 @@
     </form>
     <br>
     <form id = "bookform">
-      <textarea id = "bookTitleTextArea" class = "regularTextarea"
+      <textarea id = "bookTitleTextBox" class = "regularTextarea"
 									name="Text1" cols="30" rows="2"
-									placeholder="Title of the book (Required)"></textarea>
+									placeholder="Title of the book (Required)"
+									onkeydown = "if (event.keyCode == 13){
+	                             document.getElementById('submitButt').click();}
+	                             else{
+	                             document.getElementById('bookTitleTextBox').classList.remove('errorTextarea');
+	                             document.getElementById('bookTitleTextBox').classList.add('regularTextarea');
+	                             }"></textarea>
       <br> <br>
-      <textarea id = "bookAuthorTextArea" class = "regularTextarea"
+      <textarea id = "bookAuthorTextBox" class = "regularTextarea"
 									name="Text1" cols="30" rows="2"
-									placeholder="Author(s) of the book (Required)"></textarea>
+									placeholder="Author(s) of the book (Required)"
+									onkeydown = "if (event.keyCode == 13){
+	                             document.getElementById('submitButt').click();}
+	                             else{
+	                             document.getElementById('bookAuthorTextBox').classList.remove('errorTextarea');
+	                             document.getElementById('bookAuthorTextBox').classList.add('regularTextarea');
+	                             }"></textarea>
       <br> <br>
-      <input id = "bookpagesTextArea" class = "regularTextarea" type = "text"
+      <input id = "bookPagesTextBox" class = "regularTextarea" type = "text"
                placeholder = "No. of pages (Required)"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
                             else{
-                            document.getElementById('bookpagesTextArea').classList.remove('errorTextarea');
-                            document.getElementById('bookpagesTextArea').classList.add('regularTextarea');
+                            document.getElementById('bookPagesTextBox').classList.remove('errorTextarea');
+                            document.getElementById('bookPagesTextBox').classList.add('regularTextarea');
                             }">
       <br> <br>
     </form>
     <form id = "videoform">
-      <input id = "titlTextBox" class = "regularTextbox" type = "text"
-             placeholder = "Title (Required)"
+			<textarea id = "VideoTitleTextBox" class = "regularTextarea"
+									name="Text1" cols="30" rows="2"
+									placeholder="Title of the video (Required)"></textarea>
+			<br> <br>
+      <input id = "videoDurationTextBox" class = "regularTextarea" type = "text"
+             placeholder = "Duration (Required)"
              onkeydown = "if (event.keyCode == 13){
                           document.getElementById('submitButt').click();}
                                                       else{
-                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
-                          document.getElementById('titleTextBox').classList.add('regularTextbox');
+                          document.getElementById('videoDurationTextBox').classList.remove('errorTextarea');
+                          document.getElementById('videoDurationTextBox').classList.add('regularTextarea');
                           }">
       <br> <br>
-      <input id = "titleTexBox" class = "regularTextbox" type = "text"
-             placeholder = "Title (Required)"
-             onkeydown = "if (event.keyCode == 13){
-                          document.getElementById('submitButt').click();}
-                                                      else{
-                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
-                          document.getElementById('titleTextBox').classList.add('regularTextbox');
-                          }">
-      <br> <br>
-      <input id = "ttleTextBox" class = "regularTextbox" type = "text"
-             placeholder = "Title (Required)"
-             onkeydown = "if (event.keyCode == 13){
-                          document.getElementById('submitButt').click();}
-                                                      else{
-                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
-                          document.getElementById('titleTextBox').classList.add('regularTextbox');
-                          }">
-      <br> <br>
-      <input id = "titleTextBx" class = "regularTextbox" type = "text"
-             placeholder = "Title (Required)"
-             onkeydown = "if (event.keyCode == 13){
-                          document.getElementById('submitButt').click();}
-                                                      else{
-                          document.getElementById('titleTextBox').classList.remove('errorTextbox');
-                          document.getElementById('titleTextBox').classList.add('regularTextbox');
-                          }">
+			<label class = "dropdown" style= "font-size: 1.2em;">Genre:</label>
+			<select name="genres" id = "videoGenreDropdown">
+			  <option value="Absurdist">Absurdist</option>
+			  <option value="Action">Action</option>
+			  <option value="Adventure">Adventure</option>
+			  <option value="Comedy">Comedy</option>
+				<option value="Crime">Crime</option>
+			  <option value="Drama">Drama</option>
+			  <option value="Fantasy">Fantasy</option>
+			  <option value="Historical">Historical</option>
+				<option value="Historical Fiction">Historical Fiction</option>
+			  <option value="Horror">Horror</option>
+			  <option value="Magical Realism">Magical Realism</option>
+			  <option value="Mystery">Mystery</option>
+				<option value="Paranoid">Paranoid</option>
+			  <option value="Philosophical">Philosophical</option>
+			  <option value="Political">Political</option>
+			  <option value="Romance">Romance</option>
+				<option value="Saga">Saga</option>
+			  <option value="Satire">Satire</option>
+			  <option value="Science Fiction">Science Fiction</option>
+			  <option value="Slice of Life">Slice of Life</option>
+			  <option value="Speculative">Speculative</option>
+			  <option value="Thriller">Thriller</option>
+			  <option value="Urban">Urban</option>
+			  <option value="Western">Western</option>
+				<option value="other">Other</option>
+			</select>
     </form>
     <br>
     <button id = "submitButt" class = "submitButton"
