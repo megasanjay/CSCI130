@@ -1,5 +1,6 @@
 a{
   text-decoration: none;
+  cursor: pointer;
 }
 html
 {
@@ -35,6 +36,12 @@ body
 .menuLink{
   color:white;
 }
+.menuHide{
+  display:none;
+}
+.menuShow{
+  display: block;
+}
 .menuDiv{
   padding-left: 20px;
   padding-top: 20px;
@@ -52,6 +59,32 @@ body
   width: 95%;
   margin-left: 2%;
   border: none;
+}
+.itemContainer{
+  margin: auto;
+  border-style: solid;
+  width: 70%;
+  height: 70%;
+  display: flex;
+}
+.imgLeft{
+  width: 60%;
+  height: 100%;
+  border-style: solid;
+}
+.itemSide{
+  width: 40%;
+}
+.itemDetail{
+  height: 40%;
+  width: 100%;
+  border-style: solid;
+  background-color: skyblue;
+}
+.commentContainer{
+  background-color: lightgray;
+  border-style: solid;
+  width: 100%;
 }
 *:focus
 {

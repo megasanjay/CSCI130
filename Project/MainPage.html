@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang = "en">
@@ -10,16 +9,33 @@
     <script type = "text/javascript" src = "MainPage.js"></script>
 </head>
 <body onload="checkPrivilege()">
-	<div class="menuBar menuLeft">
-		<a id="newPost" class="menuLink" href = "NewPost.html"
-               target = "_blank" ><div class="menuDiv">New Post</div></a>
-		<a id="users" class="menuLink" href="Users.html"><div class="menuDiv">Users</div></a>
-
-	</div>
-	<div class="menuBar menuRight">
-		<a id="logout" class="menuLink" href="Login.html" onclick="logout()" style="float:right"><div style="float:right">Sign out</div></a>
+	<div class="menuBar">
+		<div class="menuLeft">
+		<a id="newPost" class="menuLink" href="NewPost.html" target="_blank" onclick="newPost()"><div class="menuDiv">New Post</div></a>
+		<a id="editPost" class="menuLink menuHide" onclick="editPost()"><div class="menuDiv">Edit Post</div></a>
+		<a id="deletePost" class="menuLink menuHide" onclick="deletePost()"><div class="menuDiv">Delete Post</div></a>
 	</div>
 
-
+	<div class="menuRight">
+		<a id="settings" class="menuLink" href="Settings.html"><div class="menuDiv">Settings</div></a>
+		<a id="logout" class="menuLink" href="Login.html" onclick="logout()"><div class="menuDiv">Sign out</div></a>
+	</div>
+</div>
+<br>
+<br>
+<br>
+<div class="itemContainer">
+	<div id="imgContainer" class="imgLeft">
+		img
+	</div>
+	<div id="itemSideContainer" class="itemSide">
+		<div id="itemDetailContainer" class="itemDetail">
+			item details
+		</div>
+		<div id="comment" class="commentContainer">
+			comments
+		</div>
+	</div>
+</div>
 </body>
 </html>
