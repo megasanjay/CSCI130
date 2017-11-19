@@ -208,7 +208,7 @@ function submitPost(newObject)
   httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = alertContents_submitPost;
   httpRequest.open('POST', requestURL);
-  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   httpRequest.send(JSON.stringify(newObject))
 }
 
