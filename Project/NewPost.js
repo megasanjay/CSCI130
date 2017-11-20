@@ -1,3 +1,54 @@
+function checkPrivilege(){
+
+  showform('radio1');
+  user = sessionStorage.getItem("currentUser");
+
+    if (user == undefined)
+    {
+      alert("Please log into your account.");
+      window.open("Login.html", "_self", false);
+    }
+    if(sessionStorage.getItem('action') == "EP"){
+      fillInputFields();
+    }
+}
+function fillInputFields(){
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alert_fillInputFields;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  alert(sessionStorage.getItem('lastPostViewed'));
+  httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
+}
+
+function alert_fillInputFields(){
+  try
+  {
+    if (httpRequest.readyState === XMLHttpRequest.DONE)
+    {
+      alert(httpRequest.status);
+      if (httpRequest.status === 200)
+      {
+        var response = httpRequest.responseText;
+        alert(response);
+        return;
+        let item = JSON.parse(response);
+        alert(item['postTitle']);
+        return;
+      }
+      else
+      {
+        alert('There was a problem with the request.');
+      }
+    }
+	return 1;
+  }
+  catch(e) // Always deal with what can happen badly, client-server applications --> there is always something that can go wrong on one end of the connection
+  {
+    alert('Caught Exception: ' + e.description);
+  }
+}
 function showform(val)
 {
   var bookform =  document.getElementById("bookform");
