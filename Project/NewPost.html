@@ -15,7 +15,7 @@
     <form>
       <fieldset>
         <input id = "titleTextBox" class = "regularTextbox" type = "text"
-               placeholder = "Title (Required)"
+               placeholder = "Title (Required)" maxlength="100"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
 														else{
@@ -24,11 +24,11 @@
                             }">
         <br> <br>
         <textarea id = "descriptionTextBox" class = "regularTextarea"
-									name="Text1" cols="40" rows="5"
+									name="Text1" cols="40" rows="5" maxlength="280"
 									placeholder="Post details"></textarea>
         <br> <br>
         <input id = "imageTextBox" class = "regularTextarea" type = "text"
-       placeholder = "Link To Image"
+       placeholder = "Link To Image" maxlength="100"
        onkeydown = "if (event.keyCode == 13){
                     document.getElementById('submitButt').click();}
                                                 else{
@@ -37,7 +37,7 @@
                     }">
         <br> <br>
         <input id = "priceTextBox" class = "regularTextarea" type = "text"
-               placeholder = "Price (Required)"
+               placeholder = "Price (Required)" maxlength="7"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
                             else{
@@ -63,7 +63,7 @@
     <form id = "bookform">
       <textarea id = "bookTitleTextBox" class = "regularTextarea"
 									name="Text1" cols="30" rows="2"
-									placeholder="Title of the book (Required)"
+									placeholder="Title of the book (Required)" maxlength="30"
 									onkeydown = "if (event.keyCode == 13){
 	                             document.getElementById('submitButt').click();}
 	                             else{
@@ -72,7 +72,7 @@
 	                             }"></textarea>
       <br> <br>
       <textarea id = "bookAuthorTextBox" class = "regularTextarea"
-									name="Text1" cols="30" rows="2"
+									name="Text1" cols="30" rows="2" maxlength="50"
 									placeholder="Author(s) of the book (Required)"
 									onkeydown = "if (event.keyCode == 13){
 	                             document.getElementById('submitButt').click();}
@@ -82,7 +82,7 @@
 	                             }"></textarea>
       <br> <br>
       <input id = "bookPagesTextBox" class = "regularTextarea" type = "text"
-               placeholder = "No. of pages (Required)"
+               placeholder = "No. of pages (Required)" maxlength="4"
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('submitButt').click();}
                             else{
@@ -93,11 +93,11 @@
     </form>
     <form id = "videoform">
 			<textarea id = "VideoTitleTextBox" class = "regularTextarea"
-									name="Text1" cols="30" rows="2"
+									name="Text1" cols="30" rows="2" maxlength="30"
 									placeholder="Title of the video (Required)"></textarea>
 			<br> <br>
       <input id = "videoDurationTextBox" class = "regularTextarea" type = "text"
-             placeholder = "Duration (Required)"
+             placeholder = "Duration (Required)" maxlength="5"
              onkeydown = "if (event.keyCode == 13){
                           document.getElementById('submitButt').click();}
                                                       else{
