@@ -19,7 +19,8 @@ function checkPrivilege()
   }
   let lastViewed = sessionStorage.getItem("lastPostViewed");
   if(lastViewed == undefined){
-    sessionStorage.setItem("lastPostViewed", -1);
+
+    sessionStorage.setItem("lastPostViewed", 1);
   }
   populateMainPage();
 
