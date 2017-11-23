@@ -55,15 +55,16 @@ function fillInputFields(item, subClass){
   title.innerHTML = item['postTitle'];
   postContent.innerHTML = item['postDescription'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
-  if(item['postIssaBook']){
+  alert(item['postIssaBook']);
+  if(item['postIssaBook']==1){
     itemInfo1.innerHTML = "Book Title: " + subClass['bookTitle'];
     itemInfo2.innerHTML = "Author: " + subClass['bookAuthor'];
     itemInfo3.innerHTML = "Pages: " + subClass['bookPages'];
   }
   else{
-    itemInfo1.innerHTML = subClass['videoTitle'];
-    itemInfo2.innerHTML = subClass['videoDuration'];
-    itemInfo3.innerHTML = subClass['videoGenre'];
+    itemInfo1.innerHTML = "Video Title: " + subClass['videoTitle'];
+    itemInfo2.innerHTML = "Duration: " + subClass['videoDuration'];
+    itemInfo3.innerHTML = "Genre: " + subClass['videoGenre'];
   }
 
 }

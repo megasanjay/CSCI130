@@ -29,14 +29,15 @@ function fillInputFields(item, subClass){
   let bookAuthor = document.getElementById('bookAuthorTextBox');
   let bookPages = document.getElementById('bookPagesTextBox');
   let videoTitle = document.getElementById('VideoTitleTextBox');
-  let videoDuration = document.getElementById('VideoTitleTextBox');
+  let videoDuration = document.getElementById('videoDurationTextBox');
   let videoGenre = document.getElementById('videoGenreDropdown');
 
   title.value = item['postTitle'];
   postContent.value = item['postDescription'];
   imageLink.value = item['postImage'];
   priceAmount.value = item['postPrice'];
-  if(item['postIssaBook']){
+  //alert(item['postIssaBook'] == );
+  if(item['postIssaBook'] == 1 ){
     bookRadio.checked = true;
     videoRadio.disabled = true;
     bookTitle.value = subClass['bookTitle'];
@@ -44,6 +45,7 @@ function fillInputFields(item, subClass){
     bookPages.value = subClass['bookPages'];
   }
   else{
+    //alert("TEST");
     bookRadio.disabled = true;
     videoRadio.checked = true;
     showform('radio2');
@@ -139,8 +141,8 @@ function validateInputInfo(){
 
   let username = sessionStorage.getItem("currentUser");
   let image = "";
-
-  if (string.indexOf(".jpg") !== -1)
+  alert(string.indexOf(".jpg"));
+  if (string.indexOf(".jpg") == -1)
   {
     image = string + ".jpg";
   }
@@ -239,7 +241,7 @@ function validateVideoInfo(image, price){
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
   let videoTitle = document.getElementById('VideoTitleTextBox');
-  let videoDuration = document.getElementById('VideoTitleTextBox');
+  let videoDuration = document.getElementById('videoDurationTextBox');
   let videoGenre = document.getElementById('videoGenreDropdown');
 
   let errorFlag;
