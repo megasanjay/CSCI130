@@ -63,7 +63,7 @@ body
 .itemContainer{
   margin: auto;
   border-style: solid;
-  width: 70%;
+  width: 85%;
   height: 70%;
   display: flex;
 }
@@ -85,6 +85,17 @@ body
   background-color: lightgray;
   border-style: solid;
   width: 100%;
+}
+.pageDiv{
+  width: 100%;
+  height: 80%;
+  display:flex;
+}
+.postNav{
+  border-style: solid;
+  background-color: yellow;
+  width: 5%;
+  height: 80%;
 }
 *:focus
 {

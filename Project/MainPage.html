@@ -24,18 +24,34 @@
 <br>
 <br>
 <br>
+<div id="pageDiv" class="pageDiv">
+<div id="prevPost" class="postNav" onclick="navigateTo('p')"></div>
 <div class="itemContainer">
 	<div id="imgContainer" class="imgLeft">
-		img
+		<img id="postImage"/>
 	</div>
 	<div id="itemSideContainer" class="itemSide">
 		<div id="itemDetailContainer" class="itemDetail">
-			item details
+			<div id="postTitleBox">TITLE</div>
+			<div id="postPrice">Price</div>
+			<div id="posterInfo">
+				Posted By: <span id="postUsername">msalomon90</span> on <span id="postDate">November 23, 2017</span>
+			</div>
+			<div id="itemInfo">
+				<span id="itemInfo1"></span>
+				<span id="itemInfo2"></span>
+				<span id="itemInfo3"></span>
+			</div>
+			<div id="postDescription" style="border-style: solid">
+				blah blah blah blah blah c ploos ploos
+			</div>
 		</div>
 		<div id="comment" class="commentContainer">
 			comments
 		</div>
 	</div>
+</div>
+<div id="nextPost" class="postNav" onclick="navigateTo('n')">>><div>
 </div>
 </body>
 </html>
