@@ -1,3 +1,20 @@
+
+function showImage()
+{
+  let modal = document.getElementById('myModal');
+  let image = document.getElementById('postImage');
+  let modalImg = document.getElementById("img01");
+
+  modal.style.display = "block";
+  modalImg.src = image.src;
+}
+
+function closeSpan()
+{
+  let modal = document.getElementById('myModal');
+  modal.style.display = "none";
+}
+
 function logout()
 {
   sessionStorage.clear();
@@ -14,76 +31,122 @@ function checkPrivilege()
     alert("Please log into your account.");
     window.open("Login.html", "_self", false);
   }
+
   if(admin == true){
     showAdminSettings();
   }
+
   let lastViewed = sessionStorage.getItem("lastPostViewed");
-  if(lastViewed == undefined){
 
-    sessionStorage.setItem("lastPostViewed", 1);
+  if(lastViewed == undefined)
+  {
+    sessionStorage.setItem("lastPostViewed", -1);
   }
-  populateMainPage();
 
+  populateMainPage();
 }
-function populateMainPage(){
+function populateMainPage()
+{
   var requestURL = "http://localhost:8888/getPost.php";
   httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = alertContents_loadMain;
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
-  if(sessionStorage.getItem('lastPostViewed') == -1){
+  if(sessionStorage.getItem('lastPostViewed') == -1)
+  {
     httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(-1));
   }
-  else{
+  else
+  {
     httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
   }
 }
 
-function fillInputFields(item, subClass){
-  sessionStorage.setItem('lastPostViewed', item['postID']);
+function fillInputFields(item, subClass)
+{
   let title = document.getElementById("postTitleBox");
   let postContent = document.getElementById("postDescription");
   let priceAmount = document.getElementById('postPrice');
   let itemInfo1 = document.getElementById('itemInfo1');
   let itemInfo2 = document.getElementById('itemInfo2');
   let itemInfo3 = document.getElementById('itemInfo3');
-
-
   let img = document.getElementById("postImage");
-  img.src = item['postImage'];
+  let vid = document.getElementById("dsfdsf");
+  let username = document.getElementById("postUsername");
+  let postDate = document.getElementById("postDate");
 
+  sessionStorage.setItem('lastPostViewed', item['postID']);
+  username.innerHTML = item['postUsername'];
+  postDate.innerHTML = item['postDateCreated'];
   title.innerHTML = item['postTitle'];
   postContent.innerHTML = item['postDescription'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
-  alert(item['postIssaBook']);
-  if(item['postIssaBook']==1){
+
+  if(item['postIssaBook']==1)
+  {
+    img.removeAttribute("hidden");
+    img.src = item['postImage'];
+    vid.setAttribute("hidden", true);
     itemInfo1.innerHTML = "Book Title: " + subClass['bookTitle'];
     itemInfo2.innerHTML = "Author: " + subClass['bookAuthor'];
     itemInfo3.innerHTML = "Pages: " + subClass['bookPages'];
   }
-  else{
+  else
+  {
+    vid.removeAttribute("hidden");
+    vid.setAttribute('src', item['postImage']);
+    img.setAttribute("hidden", true);
     itemInfo1.innerHTML = "Video Title: " + subClass['videoTitle'];
-    itemInfo2.innerHTML = "Duration: " + subClass['videoDuration'];
     itemInfo3.innerHTML = "Genre: " + subClass['videoGenre'];
+
+    let duration = subClass['videoDuration'];
+    if (duration <= 59)
+    {
+      itemInfo2.innerHTML = "Duration: 0:0:" + duration;
+    }
+    else if (duration < 3599)
+    {
+      let minutes = Math.floor(duration / 60);
+      let seconds = duration - minutes * 60;
+      itemInfo2.innerHTML = "Duration: 0:" + minutes + ":"+ seconds;
+    }
+    else
+    {
+      let hours = Math.floor(duration / 3600);
+      duration = duration - hours * 3600;
+      let minutes = Math.floor(duration / 60);
+      let seconds = duration - minutes * 60;
+      itemInfo2.innerHTML = "Duration: " + hours + ":" + minutes + ":" + seconds;
+    }
+
   }
 
+  if (item['postUsername'] == sessionStorage.getItem("currentUser"))
+  {
+    showUserButtons();
+  }
+  else
+  {
+    hideUserButtons();
+  }
 }
 
-function alertContents_loadMain(){
+function alertContents_loadMain()
+{
   try
   {
     if (httpRequest.readyState === XMLHttpRequest.DONE)
     {
-      alert(httpRequest.status);
       if (httpRequest.status === 200)
       {
         var response = httpRequest.responseText;
-        if(response == "End of list"){
-          alert("End of List");
+
+        if(response == "End of list")
+        {
+          alert("There are no more posts to view at this time.");
           return;
         }
-
 
         let item = JSON.parse(response);
         let subClass = JSON.parse(item['subClass']);
@@ -97,41 +160,71 @@ function alertContents_loadMain(){
     }
 	return 1;
   }
-  catch(e) // Always deal with what can happen badly, client-server applications --> there is always something that can go wrong on one end of the connection
+  catch(e)
   {
     alert('Caught Exception: ' + e.description);
   }
-
-
 }
 
-function showAdminSettings(){
-
+function showAdminSettings()
+{
   let deleteBtn = document.getElementById('deletePost');
   deleteBtn.classList.remove('menuHide');
   deleteBtn.classList.add('menuShow');
 }
-function newPost(){
-  sessionStorage.setItem("action", "NP");
+
+function showUserButtons()
+{
+  let deleteBtn = document.getElementById('deletePost');
+  let editBtn = document.getElementById('editPost');
+  deleteBtn.classList.remove('menuHide');
+  deleteBtn.classList.add('menuShow');
+  editBtn.classList.remove('menuHide');
+  editBtn.classList.add('menuShow');
 }
-function editPost(){
+
+function hideUserButtons()
+{
+  let deleteBtn = document.getElementById('deletePost');
+  let editBtn = document.getElementById('editPost');
+  editBtn.classList.remove('menuShow');
+  editBtn.classList.add('menuHide');
+  deleteBtn.classList.remove('menuShow');
+  deleteBtn.classList.add('menuHide');
+
+  if (sessionStorage.getItem("admin") == true)
+  {
+    showAdminSettings();
+  }
+}
+
+function newPost()
+{
+  sessionStorage.setItem("action", "NP");
+  window.open("NewPost.html", "_self", false);
+}
+
+function editPost()
+{
   sessionStorage.setItem("action", "EP");
   sessionStorage.setItem("postID", sessionStorage.getItem("lastPostViewed"));
 
   window.open("NewPost.html", "_self", false);
-  alert("Butts");
 }
-function navigateTo(action){
-  if(action == 'p'){
+
+function navigateTo(action)
+{
+  if(action == 'p')
+  {
     var requestURL = "http://localhost:8888/getPost.php";
     httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = alertContents_loadMain;
     httpRequest.open('POST', requestURL);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     httpRequest.send('action=' + encodeURIComponent('prev') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
-
   }
-  else{
+  else
+  {
     var requestURL = "http://localhost:8888/getPost.php";
     httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = alertContents_loadMain;

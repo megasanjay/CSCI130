@@ -77,13 +77,14 @@ function alertContents_getPassword()
         if (document.getElementById("passwordTextBox").value == response["password"])
         {
           sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
-          if (response ["admin"] == 1)
+
+          if (response["admin"] == 1)
           {
-            sessionStorage.setItem("admin", true);
+            sessionStorage.setItem("admin", 1);
           }
           else
           {
-            sessionStorage.setItem("admin", false);
+            sessionStorage.setItem("admin", 0);
           }
 
           window.open("MainPage.html", "_self", false);

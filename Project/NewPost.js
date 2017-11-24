@@ -1,24 +1,26 @@
-function checkPrivilege(){
-
+function checkPrivilege()
+{
   showform('radio1');
   user = sessionStorage.getItem("currentUser");
 
-    if (user == undefined)
-    {
-      alert("Please log into your account.");
-      window.open("Login.html", "_self", false);
-    }
-    if(sessionStorage.getItem('action') == "EP"){
-      var requestURL = "http://localhost:8888/getPost.php";
-      httpRequest = new XMLHttpRequest();
-      httpRequest.onreadystatechange = alert_fillInputFields;
-      httpRequest.open('POST', requestURL);
-      httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-      alert(sessionStorage.getItem('lastPostViewed'));
-      httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
-    }
+  if (user == undefined)
+  {
+    alert("Please log into your account.");
+    window.open("Login.html", "_self", false);
+  }
+
+  if(sessionStorage.getItem('action') == "EP")
+  {
+    var requestURL = "http://localhost:8888/getPost.php";
+    httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = alert_fillInputFields;
+    httpRequest.open('POST', requestURL);
+    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+    httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
+  }
 }
-function fillInputFields(item, subClass){
+function fillInputFields(item, subClass)
+{
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
   let imageLink = document.getElementById("imageTextBox");
@@ -29,39 +31,66 @@ function fillInputFields(item, subClass){
   let bookAuthor = document.getElementById('bookAuthorTextBox');
   let bookPages = document.getElementById('bookPagesTextBox');
   let videoTitle = document.getElementById('VideoTitleTextBox');
-  let videoDuration = document.getElementById('videoDurationTextBox');
+  let videoHours = document.getElementById('videoHoursDropdown');
+  let videoMinutes = document.getElementById('videoMinutesDropdown');
+  let videoSeconds = document.getElementById('videoSecondsDropdown');
   let videoGenre = document.getElementById('videoGenreDropdown');
 
   title.value = item['postTitle'];
   postContent.value = item['postDescription'];
   imageLink.value = item['postImage'];
   priceAmount.value = item['postPrice'];
-  //alert(item['postIssaBook'] == );
-  if(item['postIssaBook'] == 1 ){
+
+  if(item['postIssaBook'] == 1 )
+  {
     bookRadio.checked = true;
     videoRadio.disabled = true;
     bookTitle.value = subClass['bookTitle'];
     bookAuthor.value = subClass['bookAuthor'];
     bookPages.value = subClass['bookPages'];
   }
-  else{
-    //alert("TEST");
+  else
+  {
     bookRadio.disabled = true;
     videoRadio.checked = true;
     showform('radio2');
     videoTitle.value = subClass['videoTitle'];
-    videoDuration.value = subClass['videoDuration'];
     videoGenre.value = subClass['videoGenre'];
-  }
 
+    let duration = subClass['videoDuration'];
+    if (duration<=59)
+    {
+      videoHours.selectedIndex = 0;
+      videoMinutes.selectedIndex = 0;
+      videoSeconds.selectedIndex = duration;
+    }
+    else if (duration < 3599)
+    {
+      let minutes = Math.floor(duration / 60);
+      let seconds = duration - minutes * 60;
+      videoHours.selectedIndex = 0;
+      videoMinutes.selectedIndex = minutes;
+      videoSeconds.selectedIndex = seconds;
+    }
+    else
+    {
+      let hours = Math.floor(duration / 3600);
+      duration = duration - hours * 3600;
+      let minutes = Math.floor(duration / 60);
+      let seconds = duration - minutes * 60;
+      videoHours.selectedIndex = hours;
+      videoMinutes.selectedIndex = minutes;
+      videoSeconds.selectedIndex = seconds;
+    }
+  }
 }
 
-function alert_fillInputFields(){
+function alert_fillInputFields()
+{
   try
   {
     if (httpRequest.readyState === XMLHttpRequest.DONE)
     {
-      alert(httpRequest.status);
       if (httpRequest.status === 200)
       {
         var response = httpRequest.responseText;
@@ -74,13 +103,15 @@ function alert_fillInputFields(){
         alert('There was a problem with the request.');
       }
     }
-	return 1;
+
+    return 1;
   }
   catch(e) // Always deal with what can happen badly, client-server applications --> there is always something that can go wrong on one end of the connection
   {
     alert('Caught Exception: ' + e.description);
   }
 }
+
 function showform(val)
 {
   var bookform =  document.getElementById("bookform");
@@ -98,6 +129,7 @@ function showform(val)
        videoform.style.display = 'block';
   }
 }
+
 function validateInputInfo(){
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
@@ -121,35 +153,17 @@ function validateInputInfo(){
       title.classList.remove("regularTextbox");
       title.classList.add("errorTextbox");
     }
+
     if (priceAmount.value == '')
     {
       priceAmount.classList.remove("regularTextarea");
       priceAmount.classList.add("errorTextarea");
     }
-    return false;
-  }
 
-  let string = imageLink.value;
-
-  if (validateImageLink(string))
-  {
-    alert("Invalid image link.")
-    imageLink.classList.remove("regularTextarea");
-    imageLink.classList.add("errorTextarea");
     return false;
   }
 
   let username = sessionStorage.getItem("currentUser");
-  let image = "";
-  alert(string.indexOf(".jpg"));
-  if (string.indexOf(".jpg") == -1)
-  {
-    image = string + ".jpg";
-  }
-  else
-  {
-    image = string;
-  }
 
   price = priceAmount.value
 
@@ -164,14 +178,77 @@ function validateInputInfo(){
     priceAmount.classList.add("errorTextarea");
     return false;
   }
-  if(bookRadio.checked){
+
+  if(bookRadio.checked)
+  {
+    let string = imageLink.value;
+    let image = "";
+
+    if (validateImageLink(string) == false)
+    {
+      alert("Invalid image link.")
+      imageLink.classList.remove("regularTextarea");
+      imageLink.classList.add("errorTextarea");
+      return false;
+    }
+
+    if (string.indexOf(".jpg") == -1)
+    {
+      if (string != "")
+      {
+        image = string + ".jpg";
+      }
+    }
+    else
+    {
+      image = string;
+    }
+
     return validateBookInfo(image, price);
   }
-  else{
-    return validateVideoInfo(image, price);
+  else
+  {
+    let string = imageLink.value;
+    let link = "";
+
+    if (validateVideoLink(string))
+    {
+      alert("You are only allowed to link to Youtube videos at this time.")
+      imageLink.classList.remove("regularTextarea");
+      imageLink.classList.add("errorTextarea");
+      return false;
+    }
+
+    let x = string.indexOf(".be/");
+    let y = string.indexOf("watch?v=");
+    let z = string.indexOf("https://www.youtube.com/embed/");
+
+    if (x != -1)
+    {
+      link = string.substring(x + 4, x + 4 + 11);
+      link = "https://www.youtube.com/embed/" + link;
+      return validateVideoInfo(link, price);
+    }
+    else if(y != -1)
+    {
+      link = string.substring( y + 8, y + 8 + 11);
+      link = "https://www.youtube.com/embed/" + link;
+      return validateVideoInfo(link, price);
+    }
+    else if (z != -1)
+    {
+      return validateVideoInfo(string, price);
+    }
+    else
+    {
+      alert("Invalid link");
+      return false;
+    }
   }
 }
-function validateBookInfo(image, price){
+
+function validateBookInfo(image, price)
+{
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
   let bookTitle = document.getElementById('bookTitleTextBox');
@@ -180,7 +257,6 @@ function validateBookInfo(image, price){
 
   errorFlag = false;
 
-
   if (bookTitle.value == '' || bookAuthor.value == '' || bookPages.value == '')
   {
     errorFlag = true;
@@ -188,7 +264,6 @@ function validateBookInfo(image, price){
 
   if (errorFlag == true)
   {
-
     alert("Please fill all the required fields before submitting the post");
     if (bookTitle.value == '')
     {
@@ -241,12 +316,14 @@ function validateVideoInfo(image, price){
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
   let videoTitle = document.getElementById('VideoTitleTextBox');
-  let videoDuration = document.getElementById('videoDurationTextBox');
   let videoGenre = document.getElementById('videoGenreDropdown');
+  let videoHours = document.getElementById('videoHoursDropdown');
+  let videoMinutes = document.getElementById('videoMinutesDropdown');
+  let videoSeconds = document.getElementById('videoSecondsDropdown');
 
   let errorFlag;
 
-  if (videoTitle.value == '' || videoDuration.value == '')
+  if (videoTitle.value == '')
   {
     errorFlag = true;
   }
@@ -254,20 +331,23 @@ function validateVideoInfo(image, price){
   if (errorFlag == true)
   {
     alert("Please fill all the required fields before submitting the post");
+
     if (videoTitle.value == '')
     {
       videoTitle.classList.remove("regularTextarea");
       videoTitle.classList.remove("errorTextarea");
     }
-    if (videoDuration.value == '')
-    {
-      videoDuration.classList.remove("regularTextbox");
-      videoDuration.classList.add("errorTextbox");
-    }
+
     return false;
   }
 
-  //check duration here
+  if (videoHours.value == 0 && videoMinutes.value == 0 && videoMinutes.value == 0)
+  {
+    alert("A valid video duration must be selected.");
+    return false;
+  }
+
+  let duration = (parseInt(videoHours.value) * 60 * 60) + (parseInt(videoMinutes.value) * 60) + (parseInt(videoSeconds.value));
 
   var videoObject = new Object();
   videoObject.username = sessionStorage.getItem("currentUser");
@@ -276,30 +356,47 @@ function validateVideoInfo(image, price){
   videoObject.image = image;
   videoObject.price = price;
   videoObject.videoTitle = videoTitle.value;
-  videoObject.videoDuration = videoDuration.value;
+  videoObject.videoDuration = duration;
   videoObject.videoGenre = videoGenre.value;
   videoObject.isbook = 0;
+
   submitPost(videoObject);
+
   return true;
 }
 function submit()
 {
   validateInputInfo();
-
 }
 
 function validateImageLink(string)
 {
   substring = ".com/a/";
-  if (string.indexOf(substring) !== -1)
+  if (string.indexOf(substring) != -1)
   {
     return false;
   }
   substring = "/gallery";
-  if (string.indexOf(substring) !== -1)
+  if (string.indexOf(substring) != -1)
   {
     return false;
   }
+  return true
+}
+
+function validateVideoLink(string)
+{
+  substring = "youtube";
+  if(string.indexOf(substring) != -1)
+  {
+    return false;
+  }
+  substring = "youtu.be";
+  if(string.indexOf(substring) != -1)
+  {
+    return false;
+  }
+  return true;
 }
 
 function submitPost(newObject)
@@ -328,20 +425,17 @@ function alertContents_submitPost()
       {
         var response = httpRequest.responseText;
 
-        alert(response);
-        //alert(JSON.parse(response));
-        return;
-
         if (response == "New record created successfully")
         {
-          window.opener.location.reload(true);
+          sessionStorage.setItem('lastPostViewed', -1);
           alert("Your post has been submited. ^-^ Click 'Okay' to go back to browsing.");
-          window.close();
+          window.open("MainPage.html", "_self", false);
           return;
         }
-        else
+        else if (response == "record updated")
         {
-          alert(response);
+          alert("Your edits have been submited. Click 'Okay' to go back to browsing where you left off.");
+          window.open("MainPage.html", "_self", false);
           return;
         }
       }
