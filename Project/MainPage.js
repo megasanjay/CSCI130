@@ -61,8 +61,99 @@ function populateMainPage()
   {
     httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
   }
+
 }
 
+function loadComments(){
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadComments;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+  httpRequest.send('action=' + encodeURIComponent('comments') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
+}
+
+function alertContents_loadComments(){
+  try
+  {
+    if (httpRequest.readyState === XMLHttpRequest.DONE)
+    {
+      if (httpRequest.status === 200)
+      {
+        var response = httpRequest.responseText;
+
+        if(response == "Comment deleted"){
+          alert("GOOD NEWS! Comment Deleted :D");
+          location.reload();
+          return;
+        }
+
+        comments = JSON.parse(response);
+        showComments(comments);
+      }
+      else
+      {
+        alert('There was a problem with the request.');
+      }
+    }
+	return 1;
+  }
+  catch(e)
+  {
+    alert('Caught Exception: ' + e.description);
+  }
+}
+function showComments(comments){
+  let table = document.getElementById("commentTable");
+
+  table.innerHTML = "";
+  document.getElementById("newComment").value = "";
+
+  for(let i = 0; i < comments.length; i++)
+  {
+    let row = table.insertRow(i);
+    let cell = row.insertCell(0);
+
+    let commentInfo = document.createElement("div");
+    let commentTextField = document.createElement("div");
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Delete Comment";
+    deleteBtn.classList.add("menuHide");
+    //commentInfo.id = "cID" + comments[i].commentID ;
+
+    commentInfo.classList.add("commentHeader");
+    commentTextField.classList.add("commentText");
+    deleteBtn.classList.add("deleteButton");
+    deleteBtn.addEventListener('click', function(){deleteComment(comments[i].commentID);});
+
+    commentInfo.innerHTML = "Posted By: <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
+    commentTextField.innerHTML = comments[i].commentText;
+    cell.appendChild(commentInfo);
+    cell.appendChild(commentTextField)
+    cell.appendChild(deleteBtn);
+
+    if(comments[i].postUsername == sessionStorage.getItem("currentUser")){
+      deleteBtn.classList.remove("menuHide");
+      deleteBtn.classList.add("menuShow");
+    }
+    else if(sessionStorage.getItem("admin") == true){
+      deleteBtn.classList.remove("menuHide");
+      deleteBtn.classList.add("menuShow");
+    }
+  }
+  //location.reload();
+  return;
+}
+function deleteComment(commentID){
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadComments;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+  httpRequest.send('action=' + encodeURIComponent('deleteComment') + '&postID=' + encodeURIComponent(commentID));
+}
 function fillInputFields(item, subClass)
 {
   let title = document.getElementById("postTitleBox");
@@ -79,7 +170,7 @@ function fillInputFields(item, subClass)
   sessionStorage.setItem('lastPostViewed', item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
-  title.innerHTML = item['postTitle'];
+  title.innerHTML = item['po stTitle'];
   postContent.innerHTML = item['postDescription'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
 
@@ -130,6 +221,8 @@ function fillInputFields(item, subClass)
   {
     hideUserButtons();
   }
+
+  loadComments();
 }
 
 function alertContents_loadMain()
@@ -145,6 +238,13 @@ function alertContents_loadMain()
         if(response == "End of list")
         {
           alert("There are no more posts to view at this time.");
+          return;
+        }
+
+        if(response == "Good News! Comment Posted")
+        {
+          alert("Comment Posted!");
+          location.reload();
           return;
         }
 
@@ -232,4 +332,18 @@ function navigateTo(action)
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     httpRequest.send('action=' + encodeURIComponent('next') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
   }
+}
+function addComment(){
+  let text = document.getElementById("newComment");
+  alert(text.value);
+  if(text.value == ''){
+    alert("Please enter a comment");
+    return;
+  }
+  var requestURL = "http://localhost:8888/postComment.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadMain;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpRequest.send('postID='+ encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + "&postUsername=" + encodeURIComponent(sessionStorage.getItem('currentUser'))+ "&text=" + encodeURIComponent(text.value));
 }

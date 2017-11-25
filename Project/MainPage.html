@@ -40,7 +40,7 @@
 					Settings
 				</div>
 			</a>
-			<a id="logout" class="menuLink" href="Login.html" onclick="logout()">
+			<a id="logout" class="menuLink" onclick="logout()">
 				<div class="menuDiv">
 					Sign out
 				</div>
@@ -82,15 +82,13 @@
 				</div>
 
 				<div id="comment" class="commentContainer" >
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
-					<div class = "comment">blah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blahblah blah</div>
+					<table id="commentTable">
+					</table>
+					<div>
+						<textarea id="newComment" cols="40" rows="4	" maxlength="140"></textarea>
+						<br>
+						<button id="commentBtn" onclick="addComment()">Submit Comment</button>
+					</div>
 				</div>
 			</div>
 		</div>
