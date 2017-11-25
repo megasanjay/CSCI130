@@ -4,15 +4,15 @@
 
 <head>
 	<meta charset = "UTF-8" />
-	<title>Login</title>
+	<title>HomePage!</title>
 	<link rel = "stylesheet" type = "text/css" href = "MainPage.css">
     <script type = "text/javascript" src = "MainPage.js"></script>
 </head>
 
 <body onload="checkPrivilege()"
-			onkeydown = "if (event.keyCode == 37){
+			onkeydown = "if (event.keyCode == 38){
 									 document.getElementById('prevPost').click();}
-									 if (event.keyCode == 39){
+									 if (event.keyCode == 40){
 						 			 document.getElementById('nextPost').click();}"
 									 >
 	<div class="menuBar">
@@ -85,13 +85,11 @@
 					<table id="commentTable">
 					</table>
 					<div>
-						<textarea id="newComment" cols="40" rows="4	" maxlength="140" placeholder="Enter your comment here"
-						onclick = "if (event.keyCode == 37){
-												 event.preventDefault();}
-												 if (event.keyCode == 39){
-									 			 event.preventDefault();}"></textarea>
+						<textarea id="newComment" cols="40" rows="4	" maxlength="140" placeholder="Enter your comment here"></textarea>
 						<br>
-						<button id="commentBtn" onclick="addComment()">Submit Comment</button>
+						<button id="commentBtn" onclick="addComment()">
+							<span>Submit Comment</span>
+						</button>
 					</div>
 				</div>
 			</div>
