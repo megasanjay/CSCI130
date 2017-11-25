@@ -45,6 +45,7 @@ function checkPrivilege()
 
   populateMainPage();
 }
+
 function populateMainPage()
 {
   var requestURL = "http://localhost:8888/getPost.php";
@@ -104,6 +105,7 @@ function alertContents_loadComments(){
     alert('Caught Exception: ' + e.description);
   }
 }
+
 function showComments(comments){
   let table = document.getElementById("commentTable");
 
@@ -118,17 +120,22 @@ function showComments(comments){
     let commentInfo = document.createElement("div");
     let commentTextField = document.createElement("div");
     let deleteBtn = document.createElement("button");
-    deleteBtn.innerHTML = "Delete Comment";
-    deleteBtn.classList.add("menuHide");
-    //commentInfo.id = "cID" + comments[i].commentID ;
+
 
     commentInfo.classList.add("commentHeader");
-    commentTextField.classList.add("commentText");
-    deleteBtn.classList.add("deleteButton");
-    deleteBtn.addEventListener('click', function(){deleteComment(comments[i].commentID);});
+    commentInfo.innerHTML = "Posted by <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
 
-    commentInfo.innerHTML = "Posted By: <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
+    commentTextField.classList.add("commentText");
     commentTextField.innerHTML = comments[i].commentText;
+
+    deleteBtn.innerHTML = "Delete Comment";
+    deleteBtn.classList.add("menuHide");
+    deleteBtn.classList.add("deleteButton");
+    deleteBtn.addEventListener('click', function()
+      {
+        deleteComment(comments[i].commentID);
+      });
+
     cell.appendChild(commentInfo);
     cell.appendChild(commentTextField)
     cell.appendChild(deleteBtn);
@@ -142,9 +149,10 @@ function showComments(comments){
       deleteBtn.classList.add("menuShow");
     }
   }
-  //location.reload();
+
   return;
 }
+
 function deleteComment(commentID){
   var requestURL = "http://localhost:8888/getPost.php";
   httpRequest = new XMLHttpRequest();
@@ -154,6 +162,7 @@ function deleteComment(commentID){
 
   httpRequest.send('action=' + encodeURIComponent('deleteComment') + '&postID=' + encodeURIComponent(commentID));
 }
+
 function fillInputFields(item, subClass)
 {
   let title = document.getElementById("postTitleBox");
@@ -170,7 +179,7 @@ function fillInputFields(item, subClass)
   sessionStorage.setItem('lastPostViewed', item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
-  title.innerHTML = item['po stTitle'];
+  title.innerHTML = item['postTitle'];
   postContent.innerHTML = item['postDescription'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
 

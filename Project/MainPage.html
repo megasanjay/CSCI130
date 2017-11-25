@@ -85,7 +85,11 @@
 					<table id="commentTable">
 					</table>
 					<div>
-						<textarea id="newComment" cols="40" rows="4	" maxlength="140"></textarea>
+						<textarea id="newComment" cols="40" rows="4	" maxlength="140" placeholder="Enter your comment here"
+						onclick = "if (event.keyCode == 37){
+												 event.preventDefault();}
+												 if (event.keyCode == 39){
+									 			 event.preventDefault();}"></textarea>
 						<br>
 						<button id="commentBtn" onclick="addComment()">Submit Comment</button>
 					</div>
