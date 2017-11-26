@@ -83,6 +83,13 @@ a
   display: flex;
 }
 
+#travolta
+{
+  width:550px;
+  height: 309px;
+  margin: auto;
+}
+
 .imgLeft
 {
   width: 60%;
@@ -235,7 +242,9 @@ td
 
 #newComment
 {
-  width: 96%;
+  width: 95%;
+  max-width: 95%;
+  min-width: 95%;
   height: 4em;
   border-radius: 8px;
   border-color: grey;

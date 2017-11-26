@@ -250,9 +250,25 @@ function alertContents_loadMain()
           return;
         }
 
+        if (response == "no records"){
+          let itemBox = document.getElementById('no');
+          itemBox.innerHTML = "<img id='travolta' src='https://thumbs.gfycat.com/UntidyPlumpDore-small.gif'/>";
+          sessionStorage.setItem('lastPostViewed', -1);
+          return;
+        }
+
+        if(response == "Record deletedn"){
+          navigateTo('n');
+          return;
+        }
+
+        if(response == "Record deletedp"){
+          navigateTo('p');
+          return;
+        }
+
         if(response == "Good News! Comment Posted")
         {
-          alert("Comment Posted!");
           location.reload();
           return;
         }
@@ -344,7 +360,6 @@ function navigateTo(action)
 }
 function addComment(){
   let text = document.getElementById("newComment");
-  alert(text.value);
   if(text.value == ''){
     alert("Please enter a comment");
     return;
@@ -355,4 +370,12 @@ function addComment(){
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   httpRequest.send('postID='+ encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + "&postUsername=" + encodeURIComponent(sessionStorage.getItem('currentUser'))+ "&text=" + encodeURIComponent(text.value));
+}
+function deletePost(){
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadMain;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpRequest.send('action=' + encodeURIComponent('delete') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
 }
