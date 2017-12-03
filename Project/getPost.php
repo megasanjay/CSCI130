@@ -14,22 +14,32 @@ if (!empty($_POST))
 
   if ($action == 'view')
   {
-    viewPost($postID);
+    $sort = $_POST['sort'];
+    if($sort == 'date')
+    {
+      viewPostDate($postID);
+    }
+    if($sort == 'price'){
+      viewPostPrice($postID);
+    }
     return;
   }
-  if ($action == 'next')
+  if ($action == 'next' || $action == 'prev')
   {
-    nextPost($postID);
+    $sort = $_POST['sort'];
+    if($sort == 'date')
+    {
+      dateNavigation($postID, $action);
+    }
+    if($sort == 'price')
+    {
+      priceNavigation($postID, $action);
+    }
     return;
   }
   if ($action == 'delete')
   {
     deletePost($postID);
-    return;
-  }
-  if ($action == 'prev')
-  {
-    prevPost($postID);
     return;
   }
   if ($action == 'comments')
@@ -44,6 +54,137 @@ if (!empty($_POST))
   if($action == 'getUserInfo')
   {
     getUserInfo($postID);
+    return;
+  }
+  if($action == 'search')
+  {
+    searchResults($_POST['query']);
+  }
+}
+
+function searchResults($searchText)
+{
+  // Create connection
+  $conn = new mysqli($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
+
+  // Check connection
+  if ($conn->connect_error)
+  {
+      die("Connection failed: " . $conn->connect_error ."<br>");
+  }
+
+  $sql = "SELECT * FROM Books WHERE bookTitle = '{$searchText}' LIMIT 1";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows == 0)
+  {
+    $sql = "SELECT * FROM Videos WHERE videoTitle = '{$searchText}' LIMIT 1";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows == 0)
+    {
+      echo "no records";
+      return;
+    }
+    else
+    {
+      $row = $result->fetch_assoc();
+      echo getCurrentObject($conn, $row["postID"]);
+      return;
+    }
+  }
+  else
+  {
+    $row = $result->fetch_assoc();
+    echo getCurrentObject($conn, $row["postID"]);
+    return;
+  }
+  $conn->close;
+  return;
+}
+
+function priceNavigation($postID, $action)
+{
+  // Create connection
+  $conn = mysqli_connect($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
+
+  // Check connection
+  if ($conn->connect_error)
+  {
+      die("Connection failed: " . $conn->connect_error ."<br>");
+  }
+
+  if ($action == 'next')
+  {
+    $sql = "SELECT * FROM Posts WHERE postPrice <= (SELECT A.postPrice FROM Posts A WHERE A.postID = '{$postID}') ORDER BY postPrice DESC, postID DESC";
+  }
+  else
+  {
+    $sql = "SELECT * FROM Posts WHERE postPrice >= (SELECT A.postPrice FROM Posts A WHERE A.postID = '{$postID}') ORDER BY postPrice ASC, postID ASC";
+  }
+
+  $result = mysqli_query($conn,$sql);
+
+  while($row = mysqli_fetch_assoc($result)){
+    if ($row["postID"] == $postID)
+    {
+      $row = mysqli_fetch_assoc($result);
+      if($row["postID"] == null)
+      {
+        echo "End of list";
+        return;
+      }
+      echo getCurrentObject($conn, $row["postID"]);
+      return;
+    }
+  }
+
+  echo "End of list";
+  mysqli_close($conn);
+  return;
+}
+
+function viewPostPrice($postID)
+{
+  // Create connection
+  $conn = new mysqli($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
+
+  // Check connection
+  if ($conn->connect_error)
+  {
+      die("Connection failed: " . $conn->connect_error ."<br>");
+  }
+
+  $sql = "SELECT COUNT(postID) AS numPost FROM POSTS";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+
+  if($row["numPost"] == 0)
+  {
+    echo "no records";
+    return;
+  }
+
+  if ($postID == -1)
+  {
+    $sql = "SELECT postID FROM Posts ORDER BY postPrice DESC, postID DESC LIMIT 1";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    $postID = $row["postID"];
+
+    echo getCurrentObject($conn, $postID);
+
+    $conn->close();
+
+    return;
+  }
+  else // Case where we went to load back where the user was
+  {
+    echo getCurrentObject($conn, $postID);
+
+    $conn->close();
+
     return;
   }
 }
@@ -122,7 +263,7 @@ function getComments($postID){
   mysqli_close($conn);
 }
 
-function viewPost($postID)
+function viewPostDate($postID)
 {
   // Create connection
   $conn = new mysqli($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
@@ -167,7 +308,7 @@ function viewPost($postID)
   }
 }
 
-function nextPost($postID)
+function dateNavigation($postID, $action)
 {
   // Create connection
   $conn = new mysqli($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
@@ -188,45 +329,15 @@ function nextPost($postID)
     return;
   }
 
-  $sql = "SELECT MAX(postID) AS pID FROM Posts p WHERE p.postID < {$postID}";
-
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
-
-  if ($row["pID"] != null)
+  if($action == 'next')
   {
-    echo getCurrentObject($conn, $row["pID"]);
-    return;
+    $sql = "SELECT MAX(postID) AS pID FROM Posts p WHERE p.postID < {$postID}";
   }
   else
   {
-    echo "End of list";
-    return;
-  }
-}
-
-function prevPost($postID)
-{
-  // Create connection
-  $conn = new mysqli($GLOBALS['servername'], $GLOBALS['serverusername'], $GLOBALS['serverpassword'], $GLOBALS['dbname']);
-
-  // Check connection
-  if ($conn->connect_error)
-  {
-      die("Connection failed: " . $conn->connect_error ."<br>");
+    $sql = "SELECT MIN(postID) AS pID FROM Posts p WHERE p.postID > {$postID}";
   }
 
-  $sql = "SELECT COUNT(postID) AS numPost FROM POSTS";
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
-
-  if($row["numPost"] == 0)
-  {
-    echo "no records";
-    return;
-  }
-
-  $sql = "SELECT MIN(postID) AS pID FROM Posts p WHERE p.postID > {$postID}";
 
   $result = $conn->query($sql);
   $row = $result->fetch_assoc();
@@ -348,127 +459,5 @@ function getCurrentObject($conn, $postID)
 
   return $item->toJSON();
 }
-
-
-
-
-/*
-
-if ($object["isbook"] == true)
-{
-  $username = $object["username"];
-  $postTitle = $object["postTitle"];
-  $content = $object["content"];
-  $image = $object["image"];
-  $price = $object["price"];
-  $bookTitle = $object["bookTitle"];
-  $bookAuthor = $object["bookAuthor"];
-  $bookPages = $object["bookPages"];
-  $isbook = 1;
-
-  // Create connection
-  $conn = new mysqli($servername, $serverusername, $serverpassword, $dbname);
-  // Check connection
-  if ($conn->connect_error)
-  {
-      die("Connection failed: " . $conn->connect_error ."<br>");
-  }
-
-  $sql = "SELECT MAX(postID) AS pID FROM Posts";
-
-  else
-  {
-    $postID = 0;
-  }
-
-  $sql = "INSERT INTO Posts (postID, postUsername, postTitle, postDescription, postImage, postDateCreated, postPrice, postDateModified, postIssaBook) VALUES ";
-  $sql = $sql . "('{$postID}', '{$username}', '{$postTitle}', '{$content}' , '{$image}', CURDATE(), '{$price}', CURDATE(), '{$isbook}')";
-
-  if ($conn->query($sql) === TRUE)
-  {
-    $sql = "INSERT INTO Books (postID, bookTitle, bookAuthor, bookPages) VALUES ";
-    $sql = $sql . "('{$postID}', '{$bookTitle}', '{$bookAuthor}', '{$bookPages}')";
-
-    if ($conn->query($sql) === TRUE)
-    {
-      echo "New record created successfully";
-    }
-    else
-    {
-      echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-  }
-  else
-  {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-
-  $conn->close();
-
-  return;
-}
-else
-{
-  $username = $object["username"];
-  $postTitle = $object["postTitle"];
-  $content = $object["content"];
-  $image = $object["image"];
-  $price = $object["price"];
-  $videoTitle = $object["videoTitle"];
-  $videoDuration = $object["videoDuration"];
-  $videoGenre = $object["videoGenre"];
-  $isbook = 1;
-
-  // Create connection
-  $conn = new mysqli($servername, $serverusername, $serverpassword, $dbname);
-
-  // Check connection
-  if ($conn->connect_error)
-  {
-      die("Connection failed: " . $conn->connect_error ."<br>");
-  }
-
-  $sql = "SELECT MAX(postID) AS pID FROM Posts";
-  $result = $conn->query($sql);
-
-  if ($result->num_rows != 0)
-  {
-    $row = $result->fetch_assoc();
-    $postID = $row["pID"];
-    $postID = $postID + 1;
-  }
-  else
-  {
-    $postID = 0;
-  }
-
-  $sql = "INSERT INTO Posts (postID, postUsername, postTitle, postDescription, postImage, postDateCreated, postPrice, postDateModified, postIssaBook) VALUES ";
-  $sql = $sql . "('{$postID}', '{$username}', '{$postTitle}', '{$content}' , '{$image}', CURDATE(), '{$price}', CURDATE(), '{$isbook}')";
-
-  if ($conn->query($sql) === TRUE)
-  {
-    $sql = "INSERT INTO Videos (postID, videoTitle, videoDuration, videoGenre) VALUES ";
-    $sql = $sql . "('{$postID}', '{$videoTitle}', '{$videoDuration}', '{$videoGenre}')";
-
-    if ($conn->query($sql) === TRUE)
-    {
-      echo "New record created successfully";
-    }
-    else
-    {
-      echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-  }
-  else
-  {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-
-  $conn->close();
-
-  return;
-}
-
-*/
 
 ?>

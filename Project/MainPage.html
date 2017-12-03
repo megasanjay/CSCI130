@@ -35,6 +35,27 @@
 		</div>
 
 		<div class="menuRight">
+			<a id="homeButt" class="menuLink" onclick="sessionStorage.setItem('lastPostViewed',-1);location.reload();">
+	 			<div class="menuDiv">
+					Home
+				</div>
+			</a>
+			<input id="searchTextBox" type="text"/>
+			<a id="searchButt" class="menuLink" onclick="searchPost()">
+	 			<div class="menuDiv">
+					Search
+				</div>
+			</a>
+			<a id="sortPrice" class="menuLink" onclick="sortBy('date')">
+	 			<div class="menuDiv">
+					Sort By Date
+				</div>
+			</a>
+			<a id="sortPrice" class="menuLink" onclick="sortBy('price')">
+	 			<div class="menuDiv">
+					Sort By Price
+				</div>
+			</a>
 			<a id="settings" class="menuLink" href="Settings.html">
 				<div class="menuDiv">
 					Settings
@@ -49,7 +70,7 @@
 	</div>
 
 	<div id="pageDiv" class="pageDiv">
-		<div id = "prevPost" class = "prevButton" onclick = "navigateTo('p')">
+		<div id = "prevPost" class = "prevButton" onclick = "navigateTo('prev')">
 			<span></span>
 		</div>
 
@@ -95,7 +116,7 @@
 			</div>
 		</div>
 
-		<div id = "nextPost" class = "nextButton" onclick = "navigateTo('n')">
+		<div id = "nextPost" class = "nextButton" onclick = "navigateTo('next')">
 			<span></span>
 		</div>
 	</div>

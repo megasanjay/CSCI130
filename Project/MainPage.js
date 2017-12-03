@@ -37,10 +37,14 @@ function checkPrivilege()
   }
 
   let lastViewed = sessionStorage.getItem("lastPostViewed");
+  let sortBy = sessionStorage.getItem("sortBy");
 
   if(lastViewed == undefined)
   {
     sessionStorage.setItem("lastPostViewed", -1);
+  }
+  if(sortBy == undefined){
+    sessionStorage.setItem("sortBy", "date");
   }
 
   populateMainPage();
@@ -53,16 +57,13 @@ function populateMainPage()
   httpRequest.onreadystatechange = alertContents_loadMain;
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+  httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
+}
 
-  if(sessionStorage.getItem('lastPostViewed') == -1)
-  {
-    httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(-1));
-  }
-  else
-  {
-    httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
-  }
-
+function sortBy(option){
+  sessionStorage.setItem("sortBy", option);
+  sessionStorage.setItem("lastPostViewed", -1);
+  location.reload();
 }
 
 function loadComments(){
@@ -104,6 +105,25 @@ function alertContents_loadComments(){
   {
     alert('Caught Exception: ' + e.description);
   }
+}
+
+function searchPost(){
+  let input = document.getElementById('searchTextBox');
+
+  if(input.value == ""){
+    alert("You haven't entered anything silly!");
+    return;
+  }
+
+  sessionStorage.setItem("issaSearch", 1);
+
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadMain;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+  httpRequest.send('action=' + encodeURIComponent('search') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&query=' + encodeURIComponent(input.value));
 }
 
 function showComments(comments){
@@ -177,6 +197,7 @@ function fillInputFields(item, subClass)
   let postDate = document.getElementById("postDate");
 
   sessionStorage.setItem('lastPostViewed', item['postID']);
+  //alert(item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
   title.innerHTML = item['postTitle'];
@@ -244,6 +265,17 @@ function alertContents_loadMain()
       {
         var response = httpRequest.responseText;
 
+        if(sessionStorage.getItem("issaSearch") == 1)
+        {
+          sessionStorage.setItem("issaSearch", 0);
+          document.getElementById("nextPost").style.display = "none";
+          document.getElementById("prevPost").style.display = "none";
+        }
+        else {
+          document.getElementById("nextPost").style.display = "block";
+          document.getElementById("prevPost").style.display = "block";
+        }
+
         if(response == "End of list")
         {
           alert("There are no more posts to view at this time.");
@@ -258,12 +290,12 @@ function alertContents_loadMain()
         }
 
         if(response == "Record deletedn"){
-          navigateTo('n');
+          navigateTo('next');
           return;
         }
 
         if(response == "Record deletedp"){
-          navigateTo('p');
+          navigateTo('prev');
           return;
         }
 
@@ -339,24 +371,13 @@ function editPost()
 
 function navigateTo(action)
 {
-  if(action == 'p')
-  {
-    var requestURL = "http://localhost:8888/getPost.php";
-    httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = alertContents_loadMain;
-    httpRequest.open('POST', requestURL);
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    httpRequest.send('action=' + encodeURIComponent('prev') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
-  }
-  else
-  {
-    var requestURL = "http://localhost:8888/getPost.php";
-    httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = alertContents_loadMain;
-    httpRequest.open('POST', requestURL);
-    httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    httpRequest.send('action=' + encodeURIComponent('next') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
-  }
+  var requestURL = "http://localhost:8888/getPost.php";
+  httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = alertContents_loadMain;
+  httpRequest.open('POST', requestURL);
+  httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+  httpRequest.send('action=' + encodeURIComponent(action) + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
 }
 function addComment(){
   let text = document.getElementById("newComment");
