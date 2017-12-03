@@ -42,7 +42,14 @@ function update($object)
     return;
   }
 
-  $sql = "UPDATE Users SET password='" . $object["password"] . "', email='" . $object["email"] . "', fname='" . $object["firstName"] . "', lname='" . $object["lastName"] . "', address='" . $object["address"] . "' WHERE username='" . $object["username"] . "'";
+  if ($object["password"] != "")
+  {
+    $sql = "UPDATE Users SET password='" . $object["password"] . "', email='" . $object["email"] . "', fname='" . $object["firstName"] . "', lname='" . $object["lastName"] . "', address='" . $object["address"] . "' WHERE username='" . $object["username"] . "'";
+  }
+  else {
+    $sql = "UPDATE Users SET  email='" . $object["email"] . "', fname='" . $object["firstName"] . "', lname='" . $object["lastName"] . "', address='" . $object["address"] . "' WHERE username='" . $object["username"] . "'";
+  }
+
 
   if ($conn->query($sql) === TRUE)
   {

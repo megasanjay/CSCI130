@@ -199,8 +199,24 @@ function fillInputFields(userInfo)
   let address = document.getElementById("addressTextBox");
 
   firstName.value = userInfo.firstName;
+  if (userInfo.firstName == "NULL")
+  {
+    firstName.value = "";
+  }
   lastName.value = userInfo.lastName;
+  if (userInfo.lastName == "NULL")
+  {
+    lastName.value = "";
+  }
   email.value = userInfo.emailAddress;
+  if (userInfo.emailAddress == "NULL")
+  {
+    email.value = "";
+  }
   address.value = userInfo.address;
+  if (userInfo.address == "NULL")
+  {
+    address.value = "";
+  }
   return;
 }

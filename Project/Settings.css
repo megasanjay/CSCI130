@@ -1,14 +1,26 @@
+html
+{
+  width: 100%;
+  height: 100%;
+}
+
+body
+{
+  width: 99%;
+  height: 98%;
+  background: rgb(245, 245, 245);
+  background: -webkit-linear-gradient(right, #8e9eab, #eef2f3);
+  background-size: contain;
+}
+
 .mainContainer
 {
-  left: 0;
   position: relative;
   text-align: center;
   margin: auto;
-  margin-top: 10%;
-  //top: 50%;
-  height: 50%;
+  height: auto;
   width: 70%;
-  //margin-left: 2%;
+  background-color: grey;
   border: none;
 }
 
@@ -67,6 +79,7 @@ fieldset
 .regularTextbox
 {
   background: transparent;
+  width: 60%;
   border: 2px solid #000000;
   color: #34495e;
   font-family: "Lato", Helvetica, Arial, sans-serif;
@@ -84,9 +97,10 @@ fieldset
 {
   background: transparent;
   border: 2px solid #000000;
+  width: 60%;
   color: #34495e;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 1.2em;
+  font-size: 1.4em;
   text-align: center;
   background-color: none;
   padding: 4px 19px;
@@ -166,6 +180,25 @@ fieldset
   color: #ffffff;
   background-color: #1ABC9C;
   white-space:normal;
+  margin-bottom:2em;
+}
+
+.heading
+{
+  //font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Tahoma, sans-serif;
+  font-size: 4em;
+  width: 99%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+  padding: none;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  //box-shadow: 9px 7px 42px -3px rgba(0,0,0,0.75);
 }
 
 .createButton
@@ -228,21 +261,6 @@ fieldset
 .submitButton:hover span:after, .createButton:hover span:after {
   opacity: 1;
   right: 0;
-}
-
-html
-{
-  width: 100%;
-  height: 100%;
-}
-
-body
-{
-  width: 99%;
-  height: 98%;
-  background: rgb(245, 245, 245);
-  background: -webkit-linear-gradient(right, #8e9eab, #eef2f3);
-  background-size: contain;
 }
 
 span

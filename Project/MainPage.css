@@ -132,14 +132,35 @@ a
   font-weight:normal;
   padding-top: 10px;
   padding-bottom: 2px;
+  margin-bottom: 2px;
+  border-bottom-width: 1px;
+  border-bottom-color:grey;
+  border-bottom-style: solid;
 }
 
-#postPrice, #posterInfo, #itemInfo, #postDescription
+#posterInfo, #itemInfo, #postDescription
 {
-  text-align: center;
+  //text-align: center;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 1em;
   font-weight:lighter;
+  border-bottom-width: 1px;
+  border-bottom-color:grey;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  border-top-width: 1px;
+  border-top-color:grey;
+  border-top-style: solid;
+}
+
+#postPrice
+{
+  //text-align: center;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight:lighter;
+  border-bottom-width: 1px;
+  border-bottom-color:grey;
   padding-top: 1px;
   padding-bottom: 2px;
 }
@@ -165,7 +186,7 @@ a
   //border-style: solid;
   //border-width:1px 1px 1px 1px;
   //border-color: grey;
-  //box-shadow: 9px 7px 42px -3px rgba(0,0,0,0.75);
+  //box-shadow: 9px 7px 42px -3px rgba(0,0,0,0.75)
   margin-bottom: 2em;
   padding-left: 3px;
   padding-right: 3px;
@@ -242,18 +263,32 @@ td
 
 #newComment
 {
-  width: 96%;
-  max-width: 96%;
-  min-width: 96%;
+  width: 94%;
+  max-width: 94%;
+  min-width: 94%;
   height: 4em;
-  border-radius: 8px;
-  border-color: grey;
+  border: 2px solid #000000;
+  color: #34495e;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-weight:lighter;
   font-size: 1em;
+  font-weight: lighter;
   text-align: center;
-  background-color: rgba(255,255,255,0.5);
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: none;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 3px;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
 }
+
+#newComment:focus, #newComment:hover
+{
+  background-color: rgba(240, 255, 255, 0.4);
+}
+
 
 #commentBtn
 {

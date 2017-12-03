@@ -10,11 +10,14 @@
 </head>
 
 <body onload="checkPrivilege()">
+
+
   <div class="mainContainer">
     <form>
       <fieldset>
+				<div class = "heading">Account Details</div>
         <input id = "usernameTextBox" class = "regularTextbox" type = "text"
-               placeholder = "Username " maxlength="30" readonly
+               placeholder = "Username " maxlength="30" disabled
                onkeydown = "if (event.keyCode == 13){
                             document.getElementById('saveSettings').click();}
                             ">
@@ -47,7 +50,7 @@
                             }">
 				<br> <br>
         <textarea id = "addressTextBox" class = "regularTextarea"
-									name="Text1" cols="40" rows="5" maxlength="50"
+									name="Text1" cols="30" rows="3" maxlength="150"
 									placeholder="Address"></textarea>
 				<br> <br>
 				<input id = "passwordTextBox" class = "regularTextbox" type = "password"
