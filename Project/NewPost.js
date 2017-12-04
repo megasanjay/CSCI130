@@ -16,7 +16,7 @@ function checkPrivilege()
     httpRequest.onreadystatechange = alert_fillInputFields;
     httpRequest.open('POST', requestURL);
     httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')));
+    httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
   }
 }
 function fillInputFields(item, subClass)
@@ -35,7 +35,6 @@ function fillInputFields(item, subClass)
   let videoMinutes = document.getElementById('videoMinutesDropdown');
   let videoSeconds = document.getElementById('videoSecondsDropdown');
   let videoGenre = document.getElementById('videoGenreDropdown');
-
   title.value = item['postTitle'];
   postContent.value = item['postDescription'];
   imageLink.value = item['postImage'];
@@ -341,7 +340,7 @@ function validateVideoInfo(image, price){
     return false;
   }
 
-  if (videoHours.value == 0 && videoMinutes.value == 0 && videoMinutes.value == 0)
+  if (videoHours.value == 0 && videoMinutes.value == 0 && videoSeconds.value == 0)
   {
     alert("A valid video duration must be selected.");
     return false;

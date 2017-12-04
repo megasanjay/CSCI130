@@ -45,6 +45,20 @@ function checkPrivilege()
   }
   if(sortBy == undefined){
     sessionStorage.setItem("sortBy", "date");
+    document.getElementById('sortDate').classList.remove("menuHide");
+    document.getElementById('sortDate').classList.add("menuShow");
+  }
+  else
+  {
+    if(sortBy == "price")
+    {
+      document.getElementById('sortDate').classList.remove("menuHide");
+      document.getElementById('sortDate').classList.add("menuShow");
+    }
+    else {
+      document.getElementById('sortPrice').classList.remove("menuHide");
+      document.getElementById('sortPrice').classList.add("menuShow");
+    }
   }
 
   populateMainPage();
@@ -224,13 +238,13 @@ function fillInputFields(item, subClass)
     let duration = subClass['videoDuration'];
     if (duration <= 59)
     {
-      itemInfo2.innerHTML = "Duration: 0:0:" + duration;
+      itemInfo2.innerHTML = "Duration: 00:00:" + ((duration < 10) ? '0' + duration.toString() : duration.toString());
     }
     else if (duration < 3599)
     {
       let minutes = Math.floor(duration / 60);
       let seconds = duration - minutes * 60;
-      itemInfo2.innerHTML = "Duration: 0:" + minutes + ":"+ seconds;
+      itemInfo2.innerHTML = "Duration: 00:" + ((minutes < 10) ? '0' + minutes.toString() : minutes.toString()) + ":"+ ((seconds < 10) ? '0' + seconds.toString() : seconds.toString());
     }
     else
     {
@@ -238,9 +252,8 @@ function fillInputFields(item, subClass)
       duration = duration - hours * 3600;
       let minutes = Math.floor(duration / 60);
       let seconds = duration - minutes * 60;
-      itemInfo2.innerHTML = "Duration: " + hours + ":" + minutes + ":" + seconds;
+      itemInfo2.innerHTML = "Duration: " + ((hours < 10) ? '0' + hours.toString() : hours.toString()) + ":" + ((minutes < 10) ? '0' + minutes.toString() : minutes.toString()) + ":" + ((seconds < 10) ? '0' + seconds.toString() : seconds.toString());
     }
-
   }
 
   if (item['postUsername'] == sessionStorage.getItem("currentUser"))
@@ -285,7 +298,7 @@ function alertContents_loadMain()
         if (response == "no records"){
           let itemBox = document.getElementById('no');
           itemBox.innerHTML = "<img id='travolta' src='https://thumbs.gfycat.com/UntidyPlumpDore-small.gif'/>";
-          sessionStorage.setItem('lastPostViewed', -1);
+          //sessionStorage.setItem('lastPostViewed', -1);
           return;
         }
 
