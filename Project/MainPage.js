@@ -1,4 +1,3 @@
-
 function showImage()
 {
   let modal = document.getElementById('myModal');
