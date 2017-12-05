@@ -35,8 +35,10 @@ function fillInputFields(item, subClass)
   let videoMinutes = document.getElementById('videoMinutesDropdown');
   let videoSeconds = document.getElementById('videoSecondsDropdown');
   let videoGenre = document.getElementById('videoGenreDropdown');
-  title.value = item['postTitle'];
-  postContent.value = item['postDescription'];
+
+  title.value = item['postTitle'].split("\'").join("'");
+  temp = item['postDescription'].split("\'").join("'");
+  postContent.value = temp.split("\n").join("<br/>");
   imageLink.value = item['postImage'];
   priceAmount.value = item['postPrice'];
 
@@ -44,8 +46,8 @@ function fillInputFields(item, subClass)
   {
     bookRadio.checked = true;
     videoRadio.disabled = true;
-    bookTitle.value = subClass['bookTitle'];
-    bookAuthor.value = subClass['bookAuthor'];
+    bookTitle.value = subClass['bookTitle'].split("\'").join("'");
+    bookAuthor.value = subClass['bookAuthor'].split("\'").join("'");
     bookPages.value = subClass['bookPages'];
   }
   else
@@ -53,7 +55,7 @@ function fillInputFields(item, subClass)
     bookRadio.disabled = true;
     videoRadio.checked = true;
     showform('radio2');
-    videoTitle.value = subClass['videoTitle'];
+    videoTitle.value = subClass['videoTitle'].split("\'").join("'");
     videoGenre.value = subClass['videoGenre'];
 
     let duration = subClass['videoDuration'];
@@ -371,6 +373,10 @@ function submit()
 
 function validateImageLink(string)
 {
+
+  if(string.indexOf("'") != -1){
+    return false;
+  }
   substring = ".com/a/";
   if (string.indexOf(substring) != -1)
   {
@@ -386,6 +392,9 @@ function validateImageLink(string)
 
 function validateVideoLink(string)
 {
+  if(string.indexOf("'") != -1){
+    return false;
+  }
   substring = "youtube";
   if(string.indexOf(substring) != -1)
   {

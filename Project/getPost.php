@@ -73,13 +73,31 @@ function searchResults($searchText)
       die("Connection failed: " . $conn->connect_error ."<br>");
   }
 
-  $sql = "SELECT * FROM Books WHERE bookTitle = '{$searchText}' LIMIT 1";
-  $result = $conn->query($sql);
+  $searchText = $conn->real_escape_string($searchText);
+
+  $stmt = $conn->prepare("SELECT * FROM Books WHERE bookTitle = ? OR bookAuthor = ? LIMIT 1");
+  if ($stmt==FALSE)
+  {
+  	echo "There is a problem with prepare <br>";
+  	echo $conn->error; // Need to connect/reconnect before the prepare call otherwise it doesnt work
+  }
+  $stmt->bind_param("ss", $searchText, $searchText);
+
+  $stmt->execute();
+  $result = $stmt->get_result();
 
   if ($result->num_rows == 0)
   {
-    $sql = "SELECT * FROM Videos WHERE videoTitle = '{$searchText}' LIMIT 1";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM Videos WHERE videoTitle = ? LIMIT 1");
+    if ($stmt==FALSE)
+    {
+    	echo "There is a problem with prepare <br>";
+    	echo $conn->error; // Need to connect/reconnect before the prepare call otherwise it doesnt work
+    }
+    $stmt->bind_param("s", $searchText);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows == 0)
     {

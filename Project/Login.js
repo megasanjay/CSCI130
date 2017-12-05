@@ -62,7 +62,7 @@ function alertContents_getPassword()
         response = JSON.parse(response);
         responsePassword = response["password"];
         responsePassword = responsePassword.split("\'").join("'");
-
+        alert(responsePassword);
         if (document.getElementById("passwordTextBox").value != responsePassword)
         {
           document.getElementById("passwordTextBox").classList.remove("regularTextbox");

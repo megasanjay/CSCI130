@@ -60,6 +60,10 @@ function validateString(str){
     {
       return true;
     }
+    if (str.value.indexOf("'") != -1)
+    {
+      return false;
+    }
     var re = /^[A-Za-z]+$/;
     if(re.test(str.value))
        return true;
@@ -67,9 +71,12 @@ function validateString(str){
        return false;
 }
 
-
 function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (email.indexOf("'") != -1)
+  {
+    return false;
+  }
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
@@ -213,7 +220,9 @@ function fillInputFields(userInfo)
   {
     email.value = "";
   }
-  address.value = userInfo.address;
+  let temp = userInfo.address.split("\\'").join("'");
+  temp = temp.split("\\n").join("\\\n");
+  address.value = temp.split("\\").join("");
   if (userInfo.address == "NULL")
   {
     address.value = "";
