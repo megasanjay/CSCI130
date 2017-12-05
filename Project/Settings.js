@@ -52,6 +52,14 @@ function saveSettings()
     return;
   }
 
+  if (address.value.indexOf("<") != -1)
+  {
+    alert("This field contains invalid characters");
+    address.classList.remove("regularTextarea");
+    address.classList.add("errorTextarea");
+    return false;
+  }
+
   submitEdit(password, email, firstName, lastName, address);
 }
 
@@ -61,6 +69,10 @@ function validateString(str){
       return true;
     }
     if (str.value.indexOf("'") != -1)
+    {
+      return false;
+    }
+    if (str.value.indexOf("<") != -1)
     {
       return false;
     }

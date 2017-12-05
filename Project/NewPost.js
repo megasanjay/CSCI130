@@ -284,6 +284,22 @@ function validateBookInfo(image, price)
     return false;
   }
 
+  if (bookTitle.value.indexOf("<") != -1)
+  {
+    alert("Oh no! Invalid characters!");
+    bookTitle.classList.remove("regularTextarea");
+    bookTitle.classList.remove("errorTextarea");
+    return false;
+  }
+
+  if (bookAuthor.value.indexOf("<") != -1)
+  {
+    alert("Oh no! Invalid characters!");
+    bookAuthor.classList.remove("regularTextarea");
+    bookAuthor.classList.remove("errorTextarea");
+    return false;
+  }
+
   let pages = bookPages.value;
 
   if(isNaN(pages) == false)
@@ -298,10 +314,13 @@ function validateBookInfo(image, price)
     return false;
   }
 
+
   var bookObject = new Object();
   bookObject.username = sessionStorage.getItem("currentUser");
-  bookObject.postTitle = title.value;
-  bookObject.content = postContent.value;
+  let temp = title.value.split("<").join("&lt");
+  bookObject.postTitle = temp;
+  temp = postContent.value.split("<").join("&lt");
+  bookObject.content = temp;
   bookObject.image = image;
   bookObject.price = price;
   bookObject.bookTitle = bookTitle.value;
@@ -342,6 +361,14 @@ function validateVideoInfo(image, price){
     return false;
   }
 
+  if (videoTitle.value.indexOf("<") != -1)
+  {
+    alert("Oh no! Invalid characters!");
+    videoTitle.classList.remove("regularTextarea");
+    videoTitle.classList.remove("errorTextarea");
+    return false;
+  }
+
   if (videoHours.value == 0 && videoMinutes.value == 0 && videoSeconds.value == 0)
   {
     alert("A valid video duration must be selected.");
@@ -352,8 +379,10 @@ function validateVideoInfo(image, price){
 
   var videoObject = new Object();
   videoObject.username = sessionStorage.getItem("currentUser");
-  videoObject.postTitle = title.value;
-  videoObject.content = postContent.value;
+  let temp = title.value.split("<").join("&lt");
+  videoObject.postTitle = temp;
+  temp = postContent.value.split("<").join("&lt");
+  videoObject.content = temp;
   videoObject.image = image;
   videoObject.price = price;
   videoObject.videoTitle = videoTitle.value;

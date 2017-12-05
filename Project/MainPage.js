@@ -159,7 +159,9 @@ function showComments(comments){
     commentInfo.innerHTML = "Posted by <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
 
     commentTextResponse = comments[i].commentText;
-    commentTextResponse = commentTextResponse.split("\'").join("'");
+    commentTextResponse = commentTextResponse.split("\\'").join("'");
+    commentTextResponse = commentTextResponse.split("\\n").join("<br>");
+    //commentTextResponse = commentTextResponse.split("<").join("&lt");
     commentTextField.classList.add("commentText");
     commentTextField.innerHTML = commentTextResponse;
 
@@ -215,17 +217,18 @@ function fillInputFields(item, subClass)
   //alert(item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
-  title.innerHTML = item['postTitle'];
-  postContent.innerHTML = item['postDescription'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
+  title.innerHTML = item['postTitle'].split("\\'").join("'");
+  let temp = item['postDescription'].split("\\'").join("'" );
+  postContent.innerHTML =  temp.split("\\n").join("<br/>" );
 
   if(item['postIssaBook']==1)
   {
     img.removeAttribute("hidden");
     img.src = item['postImage'];
     vid.setAttribute("hidden", true);
-    itemInfo1.innerHTML = "Book Title: " + subClass['bookTitle'];
-    itemInfo2.innerHTML = "Author: " + subClass['bookAuthor'];
+    itemInfo1.innerHTML = "Book Title: " + subClass['bookTitle'].split("\\'").join("'");
+    itemInfo2.innerHTML = "Author: " + subClass['bookAuthor'].split("\\'").join("'");
     itemInfo3.innerHTML = "Pages: " + subClass['bookPages'];
   }
   else
@@ -233,7 +236,7 @@ function fillInputFields(item, subClass)
     vid.removeAttribute("hidden");
     vid.setAttribute('src', item['postImage']);
     img.setAttribute("hidden", true);
-    itemInfo1.innerHTML = "Video Title: " + subClass['videoTitle'];
+    itemInfo1.innerHTML = "Video Title: " + subClass['videoTitle'].split("\\'").join("'");;
     itemInfo3.innerHTML = "Genre: " + subClass['videoGenre'];
 
     let duration = subClass['videoDuration'];
@@ -393,18 +396,20 @@ function navigateTo(action)
 
   httpRequest.send('action=' + encodeURIComponent(action) + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
 }
+
 function addComment(){
   let text = document.getElementById("newComment");
   if(text.value == ''){
     alert("Please enter a comment");
     return;
   }
+  let temp = text.value.split("<").join("&lt");
   var requestURL = "http://localhost:8888/postComment.php";
   httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = alertContents_loadMain;
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-  httpRequest.send('postID='+ encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + "&postUsername=" + encodeURIComponent(sessionStorage.getItem('currentUser'))+ "&text=" + encodeURIComponent(text.value));
+  httpRequest.send('postID='+ encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + "&postUsername=" + encodeURIComponent(sessionStorage.getItem('currentUser'))+ "&text=" + encodeURIComponent(temp));
 }
 function deletePost(){
   var requestURL = "http://localhost:8888/getPost.php";
