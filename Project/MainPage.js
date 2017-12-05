@@ -159,8 +159,10 @@ function showComments(comments){
     commentInfo.classList.add("commentHeader");
     commentInfo.innerHTML = "Posted by <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
 
+    commentTextResponse = comments[i].commentText;
+    commentTextResponse = commentTextResponse.split("\'").join("'");
     commentTextField.classList.add("commentText");
-    commentTextField.innerHTML = comments[i].commentText;
+    commentTextField.innerHTML = commentTextResponse;
 
     deleteBtn.innerHTML = "Delete Comment";
     deleteBtn.classList.add("menuHide");

@@ -26,11 +26,6 @@ function submit()
     return;
   }
 
-  validateLogin(username, password);
-}
-
-function validateLogin(username, password)
-{
   GetPassword(username.value);
 }
 
@@ -65,8 +60,10 @@ function alertContents_getPassword()
         }
 
         response = JSON.parse(response);
+        responsePassword = response["password"];
+        responsePassword = responsePassword.split("\'").join("'");
 
-        if (document.getElementById("passwordTextBox").value != response["password"])
+        if (document.getElementById("passwordTextBox").value != responsePassword)
         {
           document.getElementById("passwordTextBox").classList.remove("regularTextbox");
           document.getElementById("passwordTextBox").classList.add("errorTextbox");
@@ -74,7 +71,7 @@ function alertContents_getPassword()
           return;
         }
 
-        if (document.getElementById("passwordTextBox").value == response["password"])
+        if (document.getElementById("passwordTextBox").value == responsePassword)
         {
           sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
 
@@ -95,7 +92,7 @@ function alertContents_getPassword()
         alert('There was a problem with the request.');
       }
     }
-	return 1;
+    return 1;
   }
   catch(e) // Always deal with what can happen badly, client-server applications --> there is always something that can go wrong on one end of the connection
   {

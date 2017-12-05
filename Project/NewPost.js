@@ -363,6 +363,7 @@ function validateVideoInfo(image, price){
 
   return true;
 }
+
 function submit()
 {
   validateInputInfo();
