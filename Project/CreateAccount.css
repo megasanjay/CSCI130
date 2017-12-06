@@ -1,3 +1,18 @@
+html
+{
+  width: 100%;
+  height: 100%;
+}
+
+body
+{
+  width: 99%;
+  height: 98%;
+  background: rgb(245, 245, 245);
+  background: -webkit-linear-gradient(right, #8e9eab, #eef2f3);
+  background-size: contain;
+}
+
 .mainContainer
 {
   left: 0;
@@ -5,58 +20,14 @@
   text-align: center;
   margin: auto;
   margin-top: 10%;
-  //top: 50%;
   height: 50%;
   width: 70%;
-  //margin-left: 2%;
   border: none;
 }
 
 form
 {
   border-bottom: 20px;
-}
-
-.divider
-{
-  display:block;
-  position: relative;
-  margin:auto;
-  overflow:hidden;
-  text-align:center;
-  white-space:nowrap;
-  width:25%;
-}
-.divider>span
-{
-  display:inline-block;
-  position:relative
-}
-.divider>span:before, .divider>span:after
-{
-  background:#000000;
-  content:"";
-  height:1px;
-  position:absolute;
-  top:50%;
-  width:9999px;
-}
-
-.divider>span:before
-{
-  margin-right:15px;
-  right:100%
-}
-
-.divider>span:after
-{
-  left:100%;
-  margin-left:15px
-}
-
-.word
-{
-  color:#4b4f56
 }
 
 fieldset
@@ -73,6 +44,7 @@ fieldset
   font-size: 2em;
   text-align: center;
   background-color: none;
+  width: 50%;
   padding: 4px 19px;
   border-radius: 10px;
   box-shadow: none;
@@ -94,6 +66,7 @@ fieldset
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 2em;
   text-align: center;
+  width: 50%;
   background-color: none;
   padding: 4px 19px;
   border-radius: 10px;
@@ -109,6 +82,49 @@ fieldset
 .errorTextbox::placeholder
 {
   color: #e74c3c;
+}
+
+.divider
+{
+  display: block;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  width: 25%;
+}
+
+.divider > span
+{
+  display: inline-block;
+  position: relative
+}
+.divider > span:before, .divider > span:after
+{
+  background: #000000;
+  content: "";
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+}
+
+.divider>span:before
+{
+  margin-right:15px;
+  right:100%
+}
+
+.divider>span:after
+{
+  left:100%;
+  margin-left:15px
+}
+
+.word
+{
+  color:#4b4f56
 }
 
 .submitButton
@@ -128,7 +144,7 @@ fieldset
           transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
   color: #ffffff;
   background-color: #1ABC9C;
-  white-space:normal;
+  white-space: normal;
 }
 
 .createButton
@@ -148,7 +164,7 @@ fieldset
           transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
   color: #ffffff;
   background-color: #3498DB;
-  white-space:normal;
+  white-space: normal;
 }
 
 .submitButton:hover, .submitButton:focus
@@ -191,21 +207,6 @@ fieldset
 .submitButton:hover span:after, .createButton:hover span:after {
   opacity: 1;
   right: 0;
-}
-
-html
-{
-  width: 100%;
-  height: 100%;
-}
-
-body
-{
-  width: 99%;
-  height: 98%;
-  background: rgb(245, 245, 245);
-  background: -webkit-linear-gradient(right, #8e9eab, #eef2f3);
-  background-size: contain;
 }
 
 span

@@ -14,14 +14,10 @@ body
   margin-bottom: 10%;
 }
 
-
 .mainContainer
 {
-  //left: 0;
   position: relative;
   text-align: center;
-  //margin-top: -12%;
-  //top: 20%;
   width: 95%;
   margin-left: 2%;
   border: none;
@@ -30,48 +26,6 @@ body
 form
 {
   border-bottom: 20px;
-}
-
-.divider
-{
-  display:block;
-  position: relative;
-  margin:auto;
-  overflow:hidden;
-  text-align:center;
-  white-space:nowrap;
-  width:25%;
-}
-.divider>span
-{
-  display:inline-block;
-  position:relative
-}
-.divider>span:before, .divider>span:after
-{
-  background:#000000;
-  content:"";
-  height:1px;
-  position:absolute;
-  top:50%;
-  width:9999px;
-}
-
-.divider>span:before
-{
-  margin-right:15px;
-  right:100%
-}
-
-.divider>span:after
-{
-  left:100%;
-  margin-left:15px
-}
-
-.word
-{
-  color:#4b4f56
 }
 
 fieldset
@@ -89,6 +43,7 @@ fieldset
   text-align: center;
   background-color: none;
   padding: 4px 19px;
+  width: 50%;
   border-radius: 10px;
   box-shadow: none;
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
@@ -105,6 +60,7 @@ fieldset
   text-align: center;
   background-color: none;
   padding: 4px 19px;
+  width: 50%;
   border-radius: 10px;
   box-shadow: none;
   -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
@@ -163,97 +119,14 @@ fieldset
   background-color: rgba(240, 255, 255, 0.4);
 }
 
-.submitButton
-{
-  position: relative;
-  cursor: pointer;
-  border: none;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 1em;
-  font-weight: lighter;
-  border-radius: 8px;
-  border-width: 8px 6px 0;
-  border-bottom-width: 0;
-  padding: 10px 100px;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-  color: #ffffff;
-  background-color: #1ABC9C;
-  white-space:normal;
-}
-
-.createButton
-{
-  position: relative;
-  cursor: pointer;
-  border: none;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 1em;
-  font-weight: lighter;
-  border-radius: 8px;
-  border-width: 8px 6px 0;
-  border-bottom-width: 0;
-  padding: 10px 100px;
-  -webkit-font-smoothing: subpixel-antialiased;
-  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
-  color: #ffffff;
-  background-color: #3498DB;
-  white-space:normal;
-}
-
-.submitButton:hover, .submitButton:focus
-{
-  color: #ffffff;
-  background-color: #16A085;
-  border-color: #48c9b0
-}
-
-.createButton:hover, .createButton:focus
-{
-  color: #ffffff;
-  background-color: #2980B9;
-  border-color: #48c9b0
-}
-
-.submitButton span, .createButton span
-{
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.submitButton span:after, .createButton span:after
-{
-  content: '  \00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.submitButton:hover span, .createButton:hover span
-{
-  padding-right: 25px;
-}
-
-.submitButton:hover span:after, .createButton:hover span:after
-{
-  opacity: 1;
-  right: 0;
-}
-
 label
 {
-  color:#000000;
-  display:inline-block;
-  margin-right:20px;
+  color: #000000;
+  display: inline-block;
+  margin-right: 20px;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 1.2em;
-  font-weight:lighter;
+  font-weight: lighter;
 }
 
 .durationdropdown
@@ -262,7 +135,7 @@ label
   margin-left: 10px;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   font-size: 1em;
-  font-weight:normal;
+  font-weight: normal;
 }
 
 .genredropdown
@@ -307,20 +180,147 @@ input[type="radio"]:checked + label span.small
 
 .circle .big
 {
-  height:10px;
+  height: 10px;
   width: 10px;
-  padding : 3px;
-  border:3px solid deepskyblue;
+  padding: 3px;
+  border: 3px solid deepskyblue;
 }
 
 input[type="radio"]:checked + label.circle span.small
 {
-  background-color :skyblue;
+  background-color: skyblue;
 }
 
 select
 {
   font-size: 1.2em;
+}
+
+.divider
+{
+  display: block;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+  width: 25%;
+}
+
+.divider > span
+{
+  display: inline-block;
+  position: relative
+}
+
+.divider > span:before, .divider > span:after
+{
+  background: #000000;
+  content: "";
+  height: 1px;
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+}
+
+.divider > span:before
+{
+  margin-right: 15px;
+  right: 100%
+}
+
+.divider > span:after
+{
+  left: 100%;
+  margin-left: 15px
+}
+
+.word
+{
+  color: #4b4f56
+}
+
+.submitButton
+{
+  position: relative;
+  cursor: pointer;
+  border: none;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: lighter;
+  border-radius: 8px;
+  border-width: 8px 6px 0;
+  border-bottom-width: 0;
+  padding: 10px 100px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+  color: #ffffff;
+  background-color: #1ABC9C;
+  white-space: normal;
+}
+
+.createButton
+{
+  position: relative;
+  cursor: pointer;
+  border: none;
+  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: lighter;
+  border-radius: 8px;
+  border-width: 8px 6px 0;
+  border-bottom-width: 0;
+  padding: 10px 100px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+          transition: border 0.25s linear, color 0.25s linear, background-color 0.25s linear;
+  color: #ffffff;
+  background-color: #3498DB;
+  white-space: normal;
+}
+
+.submitButton:hover, .submitButton:focus
+{
+  color: #ffffff;
+  background-color: #16A085;
+  border-color: #48c9b0
+}
+
+.createButton:hover, .createButton:focus
+{
+  color: #ffffff;
+  background-color: #2980B9;
+  border-color: #48c9b0
+}
+
+.submitButton span, .createButton span
+{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.submitButton span:after, .createButton span:after
+{
+  content: '  \00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.submitButton:hover span, .createButton:hover span
+{
+  padding-right: 25px;
+}
+
+.submitButton:hover span:after, .createButton:hover span:after
+{
+  opacity: 1;
+  right: 0;
 }
 
 *:focus
