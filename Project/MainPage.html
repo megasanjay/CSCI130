@@ -9,6 +9,7 @@
     <script type = "text/javascript" src = "MainPage.js"></script>
 </head>
 
+<!-- Main page will check if user is logged in before they can access the page -->
 <body onload="checkPrivilege()"
 			onkeydown = "if (event.keyCode == 38){
 									 document.getElementById('prevPost').click();}
@@ -17,6 +18,7 @@
 									 >
 	<div class = "menuBar">
 		<div class = "menuLeftSide">
+			<!-- Sets session storage last viewed to -1 so it starts at the most recent post -->
 			<div id="homeButt" class = "menuItem" onclick="sessionStorage.setItem('lastPostViewed',-1);location.reload();">
 				Home
 			</div>
@@ -50,12 +52,12 @@
 			</div>
 		</div>
 	</div>
-
+	<!-- Button to navigate to previous post -->
 	<div id="pageDiv" class="pageDiv">
 		<div id = "prevPost" class = "prevButton" onclick = "navigateTo('prev')">
 			<span></span>
 		</div>
-
+		<!-- Holds the post image -->
 		<div id="no" class="itemContainer">
 			<div id="imgContainer" class="imgLeft">
 				<img id="postImage" onclick="showImage()"/>
@@ -65,7 +67,7 @@
 				  <img class="modal-content" id="img01"/>
 				</div>
 			</div>
-
+			<!-- Holds Item info -->
 			<div id="itemSideContainer" class="itemSide">
 				<div id="itemDetailContainer" class="itemDetail">
 					<div id="postTitleBox">
@@ -83,7 +85,7 @@
 					<div id="postDescription">
 					</div>
 				</div>
-
+				<!-- Holds post comments -->
 				<div id="comment" class="commentContainer" >
 					<table id="commentTable">
 					</table>
@@ -97,7 +99,7 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- Button to navigate to the next post -->
 		<div id = "nextPost" class = "nextButton" onclick = "navigateTo('next')">
 			<span></span>
 		</div>

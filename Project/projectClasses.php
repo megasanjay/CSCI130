@@ -10,48 +10,43 @@ class User
   private $emailAddress;
   private $address;
 
+  // get functions for user
   public function getuserID()
   {
     return $this->userID;
-    //newLine();
   }
 
   public function getuserName()
   {
     return $this->userName;
-    //newLine();
   }
 
   public function getpassword()
   {
     return $this->password;
-    //newLine();
   }
 
   public function getFirstName()
   {
     return $this->firstName;
-    //newLine();
   }
 
   public function getLastName()
   {
     return $this->lastName;
-    //newLine();
   }
 
   public function getEmailAddress()
   {
     return $this->emailAddress;
-    //newLine();
   }
 
   public function getAddress()
   {
     return $this->address;
-    //newLine();
   }
 
+  // set functions for user
   public function setFirstName($name)
   {
     $this->firstName = $name;
@@ -87,7 +82,7 @@ class User
     $this->password = $pw;
   }
 
-  public function displayAll()
+  public function displayAll()     // print function
   {
     echo "User Class";
     newLine();
@@ -117,6 +112,7 @@ class Book
   private $bookAuthor;
   private $bookPages;
 
+  // get functions  for book
   public function getBookTitle()
   {
     return $this->bookTitle;
@@ -142,6 +138,7 @@ class Book
     return $this->bookPages;
   }
 
+  // set functions for book
   public function setBookPages($value)
   {
     $this->bookPages = $value;
@@ -166,6 +163,7 @@ class Video
   private $videoDuration;
   private $videoGenre;
 
+  // get functions for video
   public function getVideoTitle()
   {
     return $this->videoTitle;
@@ -190,7 +188,7 @@ class Video
   {
     return $this->videoGenre;
   }
-
+  // set functions for video
   public function setVideoGenre($value)
   {
     $this->videoGenre = $value;
@@ -209,6 +207,7 @@ class Video
   }
 }
 
+// Object refers to post item
 class Item
 {
   private $postID;
@@ -222,9 +221,10 @@ class Item
   private $postIssaBook;
   private $subClass;
 
+  // Book info
   public function createBookSubClass($bookTitle, $bookAuthor, $bookPages)
   {
-    $x = new Book();
+    $x = new Book();     // book object used to set book info
 
     $x->setBookTitle($bookTitle);
     $x->setBookAuthor($bookAuthor);
@@ -235,9 +235,10 @@ class Item
     $this->subClass = $y;
   }
 
+  // Video info
   public function createVideoSubClass($videoTitle, $videoDuration, $videoGenre)
   {
-    $x = new Video();
+    $x = new Video();     // video object used to set video info
 
     $x->setVideoTitle($videoTitle);
     $x->setVideoGenre($videoGenre);
@@ -248,6 +249,7 @@ class Item
     $this->subClass = $y;
   }
 
+  // get/set functions for item
   public function getSubClass()
   {
     return $this->subClass;
@@ -343,7 +345,7 @@ class Item
     $this->postIssaBook = $value;
   }
 
-  public function displayAll()
+  public function displayAll()          // print function
   {
     echo "Item Class";
     newLine();
@@ -368,23 +370,5 @@ class Item
 }
 
 
-/*$item = new Item();
-
-$item->setPostID('3');
-$item->setPostTitle('dfsdf');
-$item->setPostDescription('dfsdf');
-$item->setPostImage('dfsdf');
-$item->setPostDateCreated('dfsdf');
-$item->setPostPrice('dfsdf');
-$item->setPostDateModified('dfsdf');
-$item->createBookSubClass('sdfdf', 'dsfdsfdsf', 'dsfdsf');
-/*
-($item->getSubClass())->setBookTitle('dfsdf');
-($item->getSubClass())->setBookAuthor('dfsdf');
-($item->getSubClass())->setBookPages('dfsdf');
-
-
-echo $item->toJSON();
-*/
 
 ?>

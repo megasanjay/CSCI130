@@ -1,23 +1,23 @@
 function showImage()
 {
-  let modal = document.getElementById('myModal');
+  let modal = document.getElementById('myModal');       // Used to expand image to a larger view
   let image = document.getElementById('postImage');
   let modalImg = document.getElementById("img01");
 
   modal.style.display = "block";
-  modalImg.src = image.src;
+  modalImg.src = image.src;        // Sets image to the
 }
 
-function closeSpan()
+function closeSpan()               // Resets image to default post view
 {
   let modal = document.getElementById('myModal');
   modal.style.display = "none";
 }
 
-function logout()
+function logout()                  // Logs the user out
 {
   sessionStorage.clear();
-  window.open("Login.html", "_self", false);
+  window.open("Login.html", "_self", false);    // Goes back to login page
 }
 
 function checkPrivilege()
@@ -25,25 +25,27 @@ function checkPrivilege()
   user = sessionStorage.getItem("currentUser");
   admin = sessionStorage.getItem("admin");
 
-  if (user == undefined)
+  // Checks if user is logged in
+  if (user == undefined)           // If user is not logged in
   {
     alert("Please log into your account.");
-    window.open("Login.html", "_self", false);
+    window.open("Login.html", "_self", false);   // Goes back to the login page
   }
 
-  if(admin == true){
-    showAdminSettings();
+  if(admin == true){               // If current user is the admin,
+    showAdminSettings();           // then display admin settings
   }
 
   let lastViewed = sessionStorage.getItem("lastPostViewed");
   let sortBy = sessionStorage.getItem("sortBy");
 
-  if(lastViewed == undefined)
+  if(lastViewed == undefined)       // If last viewed has not been defined
   {
+    // Set it to -1, which means the first post should be displayed
     sessionStorage.setItem("lastPostViewed", -1);
   }
-  if(sortBy == undefined){
-    sessionStorage.setItem("sortBy", "date");
+  if(sortBy == undefined){          // If sort by has not been defined
+    sessionStorage.setItem("sortBy", "date");       // Default: posts ordered date
     document.getElementById('sortDate').classList.remove("menuHide");
     document.getElementById('sortDate').classList.add("menuShow");
   }
@@ -72,7 +74,7 @@ function populateMainPage()
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
 }
-
+// Sets the session sortBy to appropriate value(date, price)
 function sortBy(option){
   sessionStorage.setItem("sortBy", option);
   sessionStorage.setItem("lastPostViewed", -1);
@@ -98,12 +100,13 @@ function alertContents_loadComments(){
       {
         var response = httpRequest.responseText;
 
+        // Checks if comment has been deleted and reloads the page
         if(response == "Comment deleted"){
           alert("GOOD NEWS! Comment Deleted :D");
           location.reload();
           return;
         }
-
+        // Parses the comment and calls display
         comments = JSON.parse(response);
         showComments(comments);
       }
@@ -123,12 +126,15 @@ function alertContents_loadComments(){
 function searchPost(){
   let input = document.getElementById('searchTextBox');
 
+  // Checks if no input
   if(input.value == ""){
     alert("You haven't entered anything silly!");
     return;
   }
 
+  // Sets issaSearch to 1, meaning it is currently displaying search results
   sessionStorage.setItem("issaSearch", 1);
+
 
   var requestURL = "http://localhost:8888/getPost.php";
   httpRequest = new XMLHttpRequest();
@@ -136,47 +142,57 @@ function searchPost(){
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
+  // Sends the action, current post ID, and search query
   httpRequest.send('action=' + encodeURIComponent('search') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&query=' + encodeURIComponent(input.value));
 }
 
+// Displays comments on Main Page for each post
 function showComments(comments){
   let table = document.getElementById("commentTable");
 
+  // Clear comments table so that other post comments do not show up on current
   table.innerHTML = "";
-  document.getElementById("newComment").value = "";
+  document.getElementById("newComment").value = "";    // clear the comment box
 
+  // Creates the comments table
   for(let i = 0; i < comments.length; i++)
   {
-    let row = table.insertRow(i);
+    let row = table.insertRow(i);     // Inserts new row for every comment from current post
     let cell = row.insertCell(0);
 
-    let commentInfo = document.createElement("div");
+    let commentInfo = document.createElement("div");         // Comment container created
     let commentTextField = document.createElement("div");
-    let deleteBtn = document.createElement("button");
+    let deleteBtn = document.createElement("button");        // Delete button for comment
 
-
+    // Displays comment info: Posted by, posted date
     commentInfo.classList.add("commentHeader");
     commentInfo.innerHTML = "Posted by <span class='comment_header'>" + comments[i].postUsername + "</span> on <span class='comment_header'>" + comments[i].commentDate + "</span>";
 
+
     commentTextResponse = comments[i].commentText;
+
+    // Catch for escape characters
     commentTextResponse = commentTextResponse.split("\\'").join("'");
     commentTextResponse = commentTextResponse.split("\\n").join("<br>");
-    //commentTextResponse = commentTextResponse.split("<").join("&lt");
     commentTextField.classList.add("commentText");
     commentTextField.innerHTML = commentTextResponse;
 
     deleteBtn.innerHTML = "Delete Comment";
     deleteBtn.classList.add("menuHide");
     deleteBtn.classList.add("deleteButton");
+
+    // Deletes comment on click
     deleteBtn.addEventListener('click', function()
       {
         deleteComment(comments[i].commentID);
       });
 
+    // Adds comment, button into the cell
     cell.appendChild(commentInfo);
     cell.appendChild(commentTextField)
     cell.appendChild(deleteBtn);
 
+    // Displays delete button only if the current user matches comment user
     if(comments[i].postUsername == sessionStorage.getItem("currentUser")){
       deleteBtn.classList.remove("menuHide");
       deleteBtn.classList.add("menuShow");
@@ -190,16 +206,17 @@ function showComments(comments){
   return;
 }
 
+// Sends action to delete comment in the database
 function deleteComment(commentID){
   var requestURL = "http://localhost:8888/getPost.php";
   httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = alertContents_loadComments;
   httpRequest.open('POST', requestURL);
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
   httpRequest.send('action=' + encodeURIComponent('deleteComment') + '&postID=' + encodeURIComponent(commentID));
 }
 
+// Fills all post information
 function fillInputFields(item, subClass)
 {
   let title = document.getElementById("postTitleBox");
@@ -213,16 +230,17 @@ function fillInputFields(item, subClass)
   let username = document.getElementById("postUsername");
   let postDate = document.getElementById("postDate");
 
+  // Set that last viewed to current post, to return when navigating through posts
   sessionStorage.setItem('lastPostViewed', item['postID']);
-  //alert(item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
   priceAmount.innerHTML = "Price: " + item['postPrice'];
-  title.innerHTML = item['postTitle'].split("\\'").join("'");
+  title.innerHTML = item['postTitle'].split("\\'").join("'");   // Check for apostrophe
   let temp = item['postDescription'].split("\\'").join("'" );
-  postContent.innerHTML =  temp.split("\\n").join("<br/>" );
+  postContent.innerHTML =  temp.split("\\n").join("<br/>" );    // Check for new line
 
-  if(item['postIssaBook']==1)
+  // Set post info according to type of post
+  if(item['postIssaBook']==1)        //  Check what type of post. Book: 1, Video: 0
   {
     img.removeAttribute("hidden");
     img.src = item['postImage'];
@@ -239,6 +257,7 @@ function fillInputFields(item, subClass)
     itemInfo1.innerHTML = "Video Title: " + subClass['videoTitle'].split("\\'").join("'");;
     itemInfo3.innerHTML = "Genre: " + subClass['videoGenre'];
 
+    // Sets video duration in correct format
     let duration = subClass['videoDuration'];
     if (duration <= 59)
     {
@@ -260,16 +279,17 @@ function fillInputFields(item, subClass)
     }
   }
 
+  // Allows user to edit/ delete thier own posts
   if (item['postUsername'] == sessionStorage.getItem("currentUser"))
   {
     showUserButtons();
   }
   else
   {
-    hideUserButtons();
+    hideUserButtons();        // If user did not create post, hide edit/delete buttons
   }
 
-  loadComments();
+  loadComments();             // Display current posts comments
 }
 
 function alertContents_loadMain()
@@ -282,46 +302,49 @@ function alertContents_loadMain()
       {
         var response = httpRequest.responseText;
 
-        if(sessionStorage.getItem("issaSearch") == 1)
+        // Search only displays one result
+        if(sessionStorage.getItem("issaSearch") == 1)     // Currently displaying search results
         {
-          sessionStorage.setItem("issaSearch", 0);
-          document.getElementById("nextPost").style.display = "none";
+          sessionStorage.setItem("issaSearch", 0);        // Reset in the case that the user clicks to go home
+          document.getElementById("nextPost").style.display = "none";    // cannot navigate when search results are displayed
           document.getElementById("prevPost").style.display = "none";
         }
         else {
-          document.getElementById("nextPost").style.display = "block";
-          document.getElementById("prevPost").style.display = "block";
+          document.getElementById("nextPost").style.display = "block";   // If not currently in search results,
+          document.getElementById("prevPost").style.display = "block";   // Display and allow navigation
         }
 
-        if(response == "End of list")
+
+        if(response == "End of list")      // Users have viewed all posts
         {
           alert("There are no more posts to view at this time.");
           return;
         }
 
-        if (response == "no records"){
+        if (response == "no records"){     // If no posts exists, display no posts message gif
           let itemBox = document.getElementById('no');
           itemBox.innerHTML = "<img id='travolta' src='https://thumbs.gfycat.com/UntidyPlumpDore-small.gif'/>";
-          //sessionStorage.setItem('lastPostViewed', -1);
           return;
         }
 
-        if(response == "Record deletedn"){
+        // Navigate will depend on whether a newer post exists, otherwise navigating to the next post is necessary
+        if(response == "Record deletedn"){ // Navigate to right if recorded is deleted
           navigateTo('next');
           return;
         }
 
-        if(response == "Record deletedp"){
+        if(response == "Record deletedp"){ // Navigate to left if recorded is deleted
           navigateTo('prev');
           return;
         }
 
-        if(response == "Good News! Comment Posted")
+        if(response == "Good News! Comment Posted")   // Comment has been posted
         {
-          location.reload();
+          location.reload();               // Page is reloaded to display newest update from comments
           return;
         }
 
+        // Calls to fill subclass of main page (post details)
         let item = JSON.parse(response);
         let subClass = JSON.parse(item['subClass']);
 
@@ -340,6 +363,7 @@ function alertContents_loadMain()
   }
 }
 
+// Displays delete buttons for admin user
 function showAdminSettings()
 {
   let deleteBtn = document.getElementById('deletePost');
@@ -347,6 +371,7 @@ function showAdminSettings()
   deleteBtn.classList.add('menuShow');
 }
 
+// Displays delete and edit buttons for users
 function showUserButtons()
 {
   let deleteBtn = document.getElementById('deletePost');
@@ -357,6 +382,7 @@ function showUserButtons()
   editBtn.classList.add('menuShow');
 }
 
+// Hides delete and edit buttons for user
 function hideUserButtons()
 {
   let deleteBtn = document.getElementById('deletePost');
@@ -374,18 +400,20 @@ function hideUserButtons()
 
 function newPost()
 {
-  sessionStorage.setItem("action", "NP");
-  window.open("NewPost.html", "_self", false);
+  sessionStorage.setItem("action", "NP");        // sets action to NP code
+  window.open("NewPost.html", "_self", false);   // opens new post new page
 }
 
 function editPost()
 {
-  sessionStorage.setItem("action", "EP");
+  sessionStorage.setItem("action", "EP");        // sets action to EP
+  // sets last post viewed to current post to be edited, in order to return to the post after edit
   sessionStorage.setItem("postID", sessionStorage.getItem("lastPostViewed"));
 
-  window.open("NewPost.html", "_self", false);
+  window.open("NewPost.html", "_self", false);   // opens the new post page with different options
 }
 
+// Sends which direction to navigate to
 function navigateTo(action)
 {
   var requestURL = "http://localhost:8888/getPost.php";
@@ -397,13 +425,14 @@ function navigateTo(action)
   httpRequest.send('action=' + encodeURIComponent(action) + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
 }
 
+// Sends to add a comment to current post, and store into comments table
 function addComment(){
   let text = document.getElementById("newComment");
-  if(text.value == ''){
+  if(text.value == ''){                 // If comment is empty alert user
     alert("Please enter a comment");
     return;
   }
-  let temp = text.value.split("<").join("&lt");
+  let temp = text.value.split("<").join("&lt");                  // User cannot enter html
   var requestURL = "http://localhost:8888/postComment.php";
   httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = alertContents_loadMain;
@@ -411,6 +440,7 @@ function addComment(){
   httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
   httpRequest.send('postID='+ encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + "&postUsername=" + encodeURIComponent(sessionStorage.getItem('currentUser'))+ "&text=" + encodeURIComponent(temp));
 }
+// Sends which post to be deleted from posts table
 function deletePost(){
   var requestURL = "http://localhost:8888/getPost.php";
   httpRequest = new XMLHttpRequest();

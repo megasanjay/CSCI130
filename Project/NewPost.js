@@ -3,12 +3,13 @@ function checkPrivilege()
   showform('radio1');
   user = sessionStorage.getItem("currentUser");
 
-  if (user == undefined)
+  if (user == undefined)      // Checks if user is logged in
   {
     alert("Please log into your account.");
-    window.open("Login.html", "_self", false);
+    window.open("Login.html", "_self", false);        // goes to login page if not logged in
   }
 
+// If post is being edited, send changes to update posts table
   if(sessionStorage.getItem('action') == "EP")
   {
     var requestURL = "http://localhost:8888/getPost.php";
@@ -19,6 +20,8 @@ function checkPrivilege()
     httpRequest.send('action=' + encodeURIComponent('view') + '&postID=' + encodeURIComponent(sessionStorage.getItem('lastPostViewed')) + '&sort=' + encodeURIComponent(sessionStorage.getItem('sortBy')));
   }
 }
+
+// Fills all elements on current page
 function fillInputFields(item, subClass)
 {
   let title = document.getElementById("titleTextBox");
@@ -36,29 +39,29 @@ function fillInputFields(item, subClass)
   let videoSeconds = document.getElementById('videoSecondsDropdown');
   let videoGenre = document.getElementById('videoGenreDropdown');
 
-  title.value = item['postTitle'].split("\'").join("'");
+  title.value = item['postTitle'].split("\'").join("'");      // Handles apostrophes
   temp = item['postDescription'].split("\'").join("'");
-  postContent.value = temp.split("\n").join("<br/>");
+  postContent.value = temp.split("\n").join("<br/>");         // Handles new lines
   imageLink.value = item['postImage'];
   priceAmount.value = item['postPrice'];
 
-  if(item['postIssaBook'] == 1 )
+  if(item['postIssaBook'] == 1 )      //  Sets all book values into page
   {
     bookRadio.checked = true;
     videoRadio.disabled = true;
-    bookTitle.value = subClass['bookTitle'].split("\'").join("'");
+    bookTitle.value = subClass['bookTitle'].split("\'").join("'");     // Handles apostrophes
     bookAuthor.value = subClass['bookAuthor'].split("\'").join("'");
     bookPages.value = subClass['bookPages'];
   }
-  else
+  else                                // Sets all video values into page
   {
     bookRadio.disabled = true;
     videoRadio.checked = true;
     showform('radio2');
-    videoTitle.value = subClass['videoTitle'].split("\'").join("'");
+    videoTitle.value = subClass['videoTitle'].split("\'").join("'");  // Handles apostrophes
     videoGenre.value = subClass['videoGenre'];
 
-    let duration = subClass['videoDuration'];
+    let duration = subClass['videoDuration'];    // Sets duration for video
     if (duration<=59)
     {
       videoHours.selectedIndex = 0;
@@ -86,6 +89,7 @@ function fillInputFields(item, subClass)
   }
 }
 
+// Calls to fill all info with parsed response from server
 function alert_fillInputFields()
 {
   try
@@ -113,6 +117,7 @@ function alert_fillInputFields()
   }
 }
 
+// Displays the correct value for radio button depending on type of post
 function showform(val)
 {
   var bookform =  document.getElementById("bookform");
@@ -131,6 +136,7 @@ function showform(val)
   }
 }
 
+// Validates all input from input fields
 function validateInputInfo(){
   let title = document.getElementById("titleTextBox");
   let postContent = document.getElementById("descriptionTextBox");
@@ -140,14 +146,14 @@ function validateInputInfo(){
   let videoRadio = document.getElementById('r22');
 
   let errorFlag = false;
-  // info validation
+  // Alerts if title or price has no input
   if (title.value == '' | priceAmount.value == '')
   {
       alert("Please fill all the required fields before submitting the post")
       errorFlag = true;
   }
 
-  if (errorFlag == true)
+  if (errorFlag == true)    // sets CSS for error
   {
     if (title.value == '')
     {
@@ -168,24 +174,25 @@ function validateInputInfo(){
 
   price = priceAmount.value
 
-  if(isNaN(price) == false)
+  if(isNaN(price) == false)      // Validates that the price is a number
   {
     price = parseInt(price);
   }
   else
   {
-    alert("The price contains invalid characters");
+    alert("The price contains invalid characters");      // if price is not a number alert
     priceAmount.classList.remove("regularTextarea");
     priceAmount.classList.add("errorTextarea");
     return false;
   }
 
-  if(bookRadio.checked)
+
+  if(bookRadio.checked)      // Post is a book
   {
-    let string = imageLink.value;
+    let string = imageLink.value;   // Sets image link
     let image = "";
 
-    if (validateImageLink(string) == false)
+    if (validateImageLink(string) == false)     // Alert if image link if invalid
     {
       alert("Invalid image link.")
       imageLink.classList.remove("regularTextarea");
@@ -193,7 +200,7 @@ function validateInputInfo(){
       return false;
     }
 
-    if (string.indexOf(".jpg") == -1)
+    if (string.indexOf(".jpg") == -1)           // add .jpg if missing
     {
       if (string != "")
       {
@@ -202,24 +209,26 @@ function validateInputInfo(){
     }
     else
     {
-      image = string;
+      image = string;                           // Finally set image
     }
 
-    return validateBookInfo(image, price);
+    return validateBookInfo(image, price);      // Validate that book info is correct
   }
-  else
+  else                                          // Post is a book
   {
     let string = imageLink.value;
     let link = "";
 
-    if (validateVideoLink(string))
+    if (validateVideoLink(string))              // Validate image link is valid
     {
-      alert("You are only allowed to link to Youtube videos at this time.")
+      alert("You are only allowed to link to Youtube videos at this time.")    // only allowing youtube videos
       imageLink.classList.remove("regularTextarea");
       imageLink.classList.add("errorTextarea");
       return false;
     }
 
+    // Checks to create a correct youtube link
+    // and validates all video input is correct
     let x = string.indexOf(".be/");
     let y = string.indexOf("watch?v=");
     let z = string.indexOf("https://www.youtube.com/embed/");
@@ -258,6 +267,7 @@ function validateBookInfo(image, price)
 
   errorFlag = false;
 
+  // Handles if any fields are empty
   if (bookTitle.value == '' || bookAuthor.value == '' || bookPages.value == '')
   {
     errorFlag = true;
@@ -265,7 +275,8 @@ function validateBookInfo(image, price)
 
   if (errorFlag == true)
   {
-    alert("Please fill all the required fields before submitting the post");
+    alert("Please fill all the required fields before submitting the post");   // alerts error
+    // Sets CSS for error
     if (bookTitle.value == '')
     {
       bookTitle.classList.remove("regularTextarea");
@@ -284,7 +295,7 @@ function validateBookInfo(image, price)
     return false;
   }
 
-  if (bookTitle.value.indexOf("<") != -1)
+  if (bookTitle.value.indexOf("<") != -1)           // Handles when user tries to input html
   {
     alert("Oh no! Invalid characters!");
     bookTitle.classList.remove("regularTextarea");
@@ -294,7 +305,7 @@ function validateBookInfo(image, price)
 
   if (bookAuthor.value.indexOf("<") != -1)
   {
-    alert("Oh no! Invalid characters!");
+    alert("Oh no! Invalid characters!");            // Handles when user tries to input html
     bookAuthor.classList.remove("regularTextarea");
     bookAuthor.classList.remove("errorTextarea");
     return false;
@@ -302,11 +313,11 @@ function validateBookInfo(image, price)
 
   let pages = bookPages.value;
 
-  if(isNaN(pages) == false)
+  if(isNaN(pages) == false)      // Checks if pages is a number
   {
     pages = parseInt(pages);
   }
-  else
+  else                           // Otherwise alerts of invalid characters
   {
     alert("The number of pages contains invalid characters");
     bookPages.classList.remove("regularTextarea");
@@ -314,7 +325,7 @@ function validateBookInfo(image, price)
     return false;
   }
 
-
+  // After info validated all info is set to book object
   var bookObject = new Object();
   bookObject.username = sessionStorage.getItem("currentUser");
   let temp = title.value.split("<").join("&lt");
@@ -328,7 +339,7 @@ function validateBookInfo(image, price)
   bookObject.bookPages = pages;
   bookObject.isbook = 1;
 
-  submitPost(bookObject);
+  submitPost(bookObject);       // Passes book object to be set in posts table
   return true;
 
 }
@@ -343,12 +354,12 @@ function validateVideoInfo(image, price){
 
   let errorFlag;
 
-  if (videoTitle.value == '')
+  if (videoTitle.value == '')       // Video title cannot be empty
   {
     errorFlag = true;
   }
 
-  if (errorFlag == true)
+  if (errorFlag == true)            // Video title is empty, alerts user
   {
     alert("Please fill all the required fields before submitting the post");
 
@@ -361,7 +372,7 @@ function validateVideoInfo(image, price){
     return false;
   }
 
-  if (videoTitle.value.indexOf("<") != -1)
+  if (videoTitle.value.indexOf("<") != -1)      // User cannot enter html into title field
   {
     alert("Oh no! Invalid characters!");
     videoTitle.classList.remove("regularTextarea");
@@ -369,6 +380,7 @@ function validateVideoInfo(image, price){
     return false;
   }
 
+  // User must enter video duration
   if (videoHours.value == 0 && videoMinutes.value == 0 && videoSeconds.value == 0)
   {
     alert("A valid video duration must be selected.");
@@ -377,6 +389,7 @@ function validateVideoInfo(image, price){
 
   let duration = (parseInt(videoHours.value) * 60 * 60) + (parseInt(videoMinutes.value) * 60) + (parseInt(videoSeconds.value));
 
+  // After info validated all info is set to video object
   var videoObject = new Object();
   videoObject.username = sessionStorage.getItem("currentUser");
   let temp = title.value.split("<").join("&lt");
@@ -395,7 +408,7 @@ function validateVideoInfo(image, price){
   return true;
 }
 
-function submit()
+function submit()               // Passes book object to be set in posts table
 {
   validateInputInfo();
 }
@@ -403,7 +416,7 @@ function submit()
 function validateImageLink(string)
 {
 
-  if(string.indexOf("'") != -1){
+  if(string.indexOf("'") != -1){        // Link cannot be empty
     return false;
   }
   substring = ".com/a/";
@@ -421,7 +434,7 @@ function validateImageLink(string)
 
 function validateVideoLink(string)
 {
-  if(string.indexOf("'") != -1){
+  if(string.indexOf("'") != -1){        // Link cannot be empty
     return false;
   }
   substring = "youtube";
@@ -437,6 +450,7 @@ function validateVideoLink(string)
   return true;
 }
 
+// Sends object to be inserted/updated in posts table
 function submitPost(newObject)
 {
   var requestURL = "http://localhost:8888/makePost.php";
@@ -463,14 +477,14 @@ function alertContents_submitPost()
       {
         var response = httpRequest.responseText;
 
-        if (response == "New record created successfully")
+        if (response == "New record created successfully")    // Alerts when post had been created
         {
           sessionStorage.setItem('lastPostViewed', -1);
           alert("Your post has been submited. ^-^ Click 'Okay' to go back to browsing.");
           window.open("MainPage.html", "_self", false);
           return;
         }
-        else if (response == "record updated")
+        else if (response == "record updated")                // Alerts when post has beed edited correctly
         {
           alert("Your edits have been submited. Click 'Okay' to go back to browsing where you left off.");
           window.open("MainPage.html", "_self", false);

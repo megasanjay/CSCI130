@@ -12,7 +12,7 @@
 <body onload = "sessionStorage.clear();">
   <div class="mainContainer">
     <form>
-      <fieldset>
+      <fieldset> <!-- Username Input -->
         <input id = "usernameTextBox" class = "regularTextbox" type = "text" autofocus="autofocus"
                placeholder = "Username " maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -21,7 +21,7 @@
                             document.getElementById('usernameTextBox').classList.remove('errorTextbox');
                             document.getElementById('usernameTextBox').classList.add('regularTextbox');
                             }">
-        <br> <br>
+        <br> <br><!-- Password Input-->
         <input id = "passwordTextBox" class = "regularTextbox" type = "password"
                placeholder = "Password" maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -32,7 +32,7 @@
                             }">
       </fieldset>
     </form>
-    <br>
+    <br><!-- Submit button calls the submit() function that will validate the user-->
     <button id = "submitButt" class = "submitButton"
                 onclick = "submit()">
             <span >Log In  </span>

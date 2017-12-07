@@ -18,8 +18,6 @@ if (!empty($_POST))
       die("Connection failed: " . $conn->connect_error ."<br>");
   }
 
-  //$userName = $conn->real_escape_string($userName);
-
   $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ?");
   if ($stmt==FALSE)
   {
@@ -28,10 +26,10 @@ if (!empty($_POST))
   }
   $stmt->bind_param("s", $userName);
 
-  $stmt->execute();
-  $result = $stmt->get_result();
+  $stmt->execute();               // Run query
+  $result = $stmt->get_result();  // query result
 
-  if ($result->num_rows != 0)
+  if ($result->num_rows != 0)     // Results returned
   {
     $row = $result->fetch_assoc(); // Fetch a result row as an associative array
     echo json_encode($row, JSON_PRETTY_PRINT);

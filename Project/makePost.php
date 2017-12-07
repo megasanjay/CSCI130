@@ -6,9 +6,10 @@ $serverpassword = '0cKfzCiL7yVa2iol'; // password that you created
 $dbname = 'project';
 
 if(!empty($_POST)){
-  $action = $_POST["action"];
+  $action = $_POST["action"];                       // set action
   $object = json_decode($_POST["object"], true);
 
+  // Call function according to action
   if($action == "new"){
     newPost($object);
   }
@@ -22,6 +23,7 @@ if(!empty($_POST)){
   }
 }
 
+// Updates object in db
 function update($object)
 {
   // Create connection
@@ -44,7 +46,7 @@ function update($object)
   $stmt->execute();
   $result = $stmt->get_result();
 
-  if ($result->num_rows != 0)
+  if ($result->num_rows != 0)          // Results returned, email already exits
   {
     echo "email already exists";
     return;

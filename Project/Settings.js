@@ -8,7 +8,7 @@ function saveSettings()
   let address = document.getElementById("addressTextBox");
   let errorFlag = false;
 
-  if (email.value == '')
+  if (email.value == '')     // Email cannot be empty
   {
     email.classList.remove("regularTextbox");
     email.classList.add("errorTextbox");
@@ -16,7 +16,7 @@ function saveSettings()
     return;
   }
 
-  if (password.value != confirmPassword.value)
+  if (password.value != confirmPassword.value)         // Password do not match alert
   {
     alert("The passwords do not match. Please retype both passwords.");
     document.getElementById("passwordTextBox").value = "";
@@ -28,9 +28,9 @@ function saveSettings()
     return;
   }
 
-  emailvalidation = validateEmail(email.value);
+  emailvalidation = validateEmail(email.value);        // validate email before changing
 
-  if (emailvalidation == false)
+  if (emailvalidation == false)                        // Email not validated, alert
   {
     alert("Invalid email. Please re-enter a valid email.");
     email.classList.remove("regularTextbox");
@@ -38,6 +38,7 @@ function saveSettings()
     return;
   }
 
+  // Alerts when first name, last name, or user tries to enter html
   if(!validateString(firstName)){
     alert("Please enter a valid first name");
     firstName.classList.remove("regularTextbox");
@@ -60,19 +61,19 @@ function saveSettings()
     return false;
   }
 
-  submitEdit(password, email, firstName, lastName, address);
+  submitEdit(password, email, firstName, lastName, address);       // Info validated, ready to submit
 }
 
 function validateString(str){
-    if(str.value == '')
+    if(str.value == '')                   // Cannot be empty
     {
       return true;
     }
-    if (str.value.indexOf("'") != -1)
+    if (str.value.indexOf("'") != -1)     // Cannot be apostrophe
     {
       return false;
     }
-    if (str.value.indexOf("<") != -1)
+    if (str.value.indexOf("<") != -1)      // Cannot be html
     {
       return false;
     }
@@ -84,7 +85,7 @@ function validateString(str){
 }
 
 function validateEmail(email) {
-  if (email.indexOf("'") != -1)
+  if (email.indexOf("'") != -1)          // Cannot be apostrophe
   {
     return false;
   }
@@ -92,7 +93,7 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function checkPrivilege()
+function checkPrivilege()               // Checks if user is logged in
 {
   user = sessionStorage.getItem("currentUser");
 
@@ -102,16 +103,16 @@ function checkPrivilege()
     window.open("Login.html", "_self", false);
   }
 
-  loadDetails();
+  loadDetails();                       // Loads all setting details
 }
 
 function loadDetails()
 {
-  let userName = document.getElementById('usernameTextBox');
+  let userName = document.getElementById('usernameTextBox');     // Fills username (cannot edit)
 
   userName.value = sessionStorage.getItem("currentUser");
 
-  loadUserInfo();
+  loadUserInfo();                     // Displays current user info
 }
 
 function loadUserInfo(){
@@ -153,7 +154,7 @@ function alertContents_submitEdit()
       {
     		var response = httpRequest.responseText;
 
-        if (response == "email already exists")
+        if (response == "email already exists")         // Checks if email is in use by another user
         {
           alert("This email is already in use by another account. Please use a different email to sign up for an account.");
           document.getElementById("emailTextBox").classList.remove("regularTextbox");
@@ -163,10 +164,10 @@ function alertContents_submitEdit()
           return;
         }
 
-        if (response == "settings updated")
+        if (response == "settings updated")             // Settings correctly updated
         {
           alert("Settings successfully updated xD");
-          window.open("MainPage.html", "_self", false);
+          window.open("MainPage.html", "_self", false); // Go back to Main Page
           return;
         }
       }
@@ -195,7 +196,7 @@ function alertContents_loadEdit()
 
         let userInfo = JSON.parse(response);
 
-        fillInputFields(userInfo);
+        fillInputFields(userInfo);          // Fills all inputs
       }
       else
       {
@@ -210,6 +211,7 @@ function alertContents_loadEdit()
   }
 }
 
+// Fills all settings page inputs according to current user
 function fillInputFields(userInfo)
 {
   let firstName = document.getElementById("firstNameTextBox");
@@ -218,21 +220,21 @@ function fillInputFields(userInfo)
   let address = document.getElementById("addressTextBox");
 
   firstName.value = userInfo.firstName;
-  if (userInfo.firstName == "NULL")
+  if (userInfo.firstName == "NULL")     // If user has not entered name display empty string
   {
     firstName.value = "";
   }
-  lastName.value = userInfo.lastName;
+  lastName.value = userInfo.lastName;   // If user has not entered last name display empty string
   if (userInfo.lastName == "NULL")
   {
     lastName.value = "";
   }
-  email.value = userInfo.emailAddress;
+  email.value = userInfo.emailAddress;  // If user has not entered email display empty string
   if (userInfo.emailAddress == "NULL")
   {
     email.value = "";
   }
-  let temp = userInfo.address.split("\\'").join("'");
+  let temp = userInfo.address.split("\\'").join("'");    // handles apostrophes, new lines
   temp = temp.split("\\n").join("\\\n");
   address.value = temp.split("\\").join("");
   if (userInfo.address == "NULL")

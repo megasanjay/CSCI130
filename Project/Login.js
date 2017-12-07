@@ -1,32 +1,27 @@
+
 function submit()
 {
   let username = document.getElementById("usernameTextBox");
   let password = document.getElementById("passwordTextBox");
-  let errorFlag = false;
 
-  if (username.value == '' || password.value == '')
+  // Calls the get password function if input fields are not empty
+  if (username.value != '' && password.value != '')
   {
-      errorFlag = true;
-      alert("Please fill all the fields in the page before clicking the 'Login' button.")
+      GetPassword(username.value);
+      return;
   }
-
-  if (errorFlag == true)
+  // If input fields are empty, error message will appear
+  alert("Please fill all the fields in the page before clicking the 'Login' button.")
+  if (username.value == '')
   {
-    if (username.value == '')
-    {
-      username.classList.remove("regularTextbox");
-      username.classList.add("errorTextbox");
-    }
-    if (password.value == '')
-    {
-      password.classList.remove("regularTextbox");
-      password.classList.add("errorTextbox");
-    }
-
-    return;
+    username.classList.remove("regularTextbox");
+    username.classList.add("errorTextbox");
   }
-
-  GetPassword(username.value);
+  if (password.value == '')
+  {
+    password.classList.remove("regularTextbox");
+    password.classList.add("errorTextbox");
+  }
 }
 
 function GetPassword(username)
@@ -62,7 +57,8 @@ function alertContents_getPassword()
         response = JSON.parse(response);
         responsePassword = response["password"];
         responsePassword = responsePassword.split("\'").join("'");
-        alert(responsePassword);
+
+        // Checks if password is incorrect
         if (document.getElementById("passwordTextBox").value != responsePassword)
         {
           document.getElementById("passwordTextBox").classList.remove("regularTextbox");
@@ -71,6 +67,7 @@ function alertContents_getPassword()
           return;
         }
 
+        // Validates the password is correct
         if (document.getElementById("passwordTextBox").value == responsePassword)
         {
           sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);

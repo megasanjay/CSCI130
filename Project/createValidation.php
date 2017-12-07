@@ -20,6 +20,7 @@ if (!empty($_POST))
       die("Connection failed: " . $conn->connect_error ."<br>");
   }
 
+
   $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ?");
   if ($stmt==FALSE)
   {
@@ -31,7 +32,7 @@ if (!empty($_POST))
   $stmt->execute();
   $result = $stmt->get_result();
 
-  if ($result->num_rows != 0)
+  if ($result->num_rows != 0)      // No results are returned, username exists
   {
     echo "username already exists";
     return;
@@ -48,7 +49,7 @@ if (!empty($_POST))
   $stmt->execute();
   $result = $stmt->get_result();
 
-  if ($result->num_rows != 0)
+  if ($result->num_rows != 0)     // No results are returned, email exists
   {
     echo "email already exists";
     return;
@@ -56,6 +57,7 @@ if (!empty($_POST))
 
   $passWord = $conn->real_escape_string($passWord);
 
+  // Initial values for all columns
   $stmt = $conn->prepare("INSERT INTO Users (username, password, email, fname, lname, address, admin) VALUES (?,?,?,?,?,?,?)");
   if ($stmt==FALSE)
   {
@@ -67,7 +69,7 @@ if (!empty($_POST))
   $stmt->execute();
   $result = $stmt->get_result();
 
-  if ($conn->query($sql) === TRUE)
+  if ($conn->query($sql) === TRUE)      // result is returned
   {
     echo "New record created successfully";
   }
