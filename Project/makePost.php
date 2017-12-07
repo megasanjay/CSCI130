@@ -34,7 +34,7 @@ function update($object)
   {
       die("Connection failed: " . $conn->connect_error ."<br>");
   }
-
+  // Prepare aql statement
   $stmt = $conn->prepare("SELECT * FROM Users WHERE email = ?");
   if ($stmt==FALSE)
   {
@@ -52,9 +52,10 @@ function update($object)
     return;
   }
 
+  // Parse invalid character
   $object["address"] = $conn->real_escape_string($object["address"]);
 
-  if ($object["password"] != "")
+  if ($object["password"] != "")     // Update everything including password
   {
     $stmt = $conn->prepare("UPDATE Users SET password = ?, email = ?, fname = ?, lname = ?, address = ? WHERE username = ?");
     if ($stmt==FALSE)
@@ -64,7 +65,7 @@ function update($object)
     }
     $stmt->bind_param("ssssss", $object["password"], $object["email"], $object["firstName"], $object["lastName"], $object["address"], $object["username"]);
   }
-  else
+  else            // Update everything except the password
   {
     $stmt = $conn->prepare("UPDATE Users SET email = ?, fname = ?, lname = ?, address = ? WHERE username = ?");
     if ($stmt==FALSE)
@@ -110,6 +111,7 @@ function editPost($object, $postID)
 
     $date = date("Y-m-d");
 
+    // Parse invalid character
     $postTitle = $conn->real_escape_string($postTitle);
     $content = $conn->real_escape_string($content);
     $bookTitle = $conn->real_escape_string($bookTitle);
@@ -123,8 +125,9 @@ function editPost($object, $postID)
     }
     $stmt->bind_param("sssisi", $postTitle, $content, $image, $price, $date, $postID);
 
-    if ($stmt->execute() === TRUE)
+    if ($stmt->execute() === TRUE)      // Query successful, book info edited
     {
+      // prepare query
       $stmt = $conn->prepare("UPDATE Books SET bookTitle = ?, bookAuthor = ?, bookPages =? WHERE postID = ? ");
       if ($stmt==FALSE)
       {
@@ -133,7 +136,7 @@ function editPost($object, $postID)
       }
       $stmt->bind_param("ssii", $bookTitle, $bookAuthor, $bookPages, $postID);
 
-      if ($stmt->execute() === TRUE) {
+      if ($stmt->execute() === TRUE) {         // Query
         echo "record updated";
       }
       else {
@@ -179,7 +182,7 @@ function editPost($object, $postID)
     }
     $stmt->bind_param("sssisi", $postTitle, $content, $image, $price, $date, $postID);
 
-    if ($stmt->execute() === TRUE)
+    if ($stmt->execute() === TRUE)        // Query successful, video info edited
     {
       $stmt = $conn->prepare("UPDATE Videos SET videoTitle = ?, videoDuration = ?, videoGenre =? WHERE postID = ? ");
       if ($stmt==FALSE)
@@ -225,10 +228,11 @@ function newPost($object){
         die("Connection failed: " . $conn->connect_error ."<br>");
     }
 
+    // Get most recent post
     $sql = "SELECT MAX(postID) AS pID FROM Posts";
     $result = $conn->query($sql);
 
-    if ($result->num_rows != 0)
+    if ($result->num_rows != 0)    // If post exists, get post ID
     {
       $row = $result->fetch_assoc();
       $postID = $row["pID"];
@@ -236,7 +240,7 @@ function newPost($object){
     }
     else
     {
-      $postID = 0;
+      $postID = 0;                  // new post will be the first one
     }
 
     $date = date("Y-m-d");
@@ -246,6 +250,7 @@ function newPost($object){
     $bookTitle = $conn->real_escape_string($bookTitle);
     $bookAuthor = $conn->real_escape_string($bookAuthor);
 
+    // Prepare query for new post
     $stmt = $conn->prepare("INSERT INTO Posts (postID, postUsername, postTitle, postDescription, postImage, postDateCreated, postPrice, postDateModified, postIssaBook) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt==FALSE)
     {
@@ -254,8 +259,9 @@ function newPost($object){
     }
     $stmt->bind_param("isssssisi", $postID, $username, $postTitle, $content, $image, $date, $price, $date, $isbook);
 
-    if ($stmt->execute() === TRUE)
+    if ($stmt->execute() === TRUE)       // Query successful
     {
+      // Prepare query for book
       $stmt = $conn->prepare("INSERT INTO Books (postID, bookTitle, bookAuthor, bookPages) VALUES (?, ?, ?, ?)");
       if ($stmt==FALSE)
       {
@@ -264,7 +270,7 @@ function newPost($object){
       }
       $stmt->bind_param("issi", $postID, $bookTitle, $bookAuthor, $bookPages);
 
-      if ($stmt->execute() === TRUE)
+      if ($stmt->execute() === TRUE)          // Query successful, new record created
       {
         echo "New record created successfully";
       }
@@ -303,13 +309,14 @@ function newPost($object){
         die("Connection failed: " . $conn->connect_error ."<br>");
     }
 
+    // Get most recent post
     $sql = "SELECT MAX(postID) AS pID FROM Posts";
     $result = $conn->query($sql);
 
-    if ($result->num_rows != 0)
+    if ($result->num_rows != 0)        // There are results
     {
       $row = $result->fetch_assoc();
-      $postID = $row["pID"];
+      $postID = $row["pID"];           // Assign new posts postID as incremented from more recent posts ID
       $postID = $postID + 1;
     }
     else
@@ -319,6 +326,7 @@ function newPost($object){
 
     $date = date("Y-m-d");
 
+    // Parses invalid characters
     $postTitle = $conn->real_escape_string($postTitle);
     $content = $conn->real_escape_string($content);
     $videoTitle = $conn->real_escape_string($videoTitle);
@@ -331,12 +339,12 @@ function newPost($object){
     }
     $stmt->bind_param("isssssisi", $postID, $username, $postTitle, $content, $image, $date, $price, $date, $isbook);
 
-    if ($stmt->execute() === TRUE)
+    if ($stmt->execute() === TRUE)   // Query successful
     {
       $stmt = $conn->prepare("INSERT INTO Videos (postID, videoTitle, videoDuration, videoGenre) VALUES (?, ?, ?, ?)");
       $stmt->bind_param("issi", $postID, $videoTitle, $videoDuration, $videoGenre);
 
-      if ($stmt->execute() === TRUE)
+      if ($stmt->execute() === TRUE) // Query for new video successful
       {
         echo "New record created successfully";
       }

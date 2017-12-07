@@ -18,6 +18,7 @@ if (!empty($_POST))
       die("Connection failed: " . $conn->connect_error ."<br>");
   }
 
+  // Prepare the sql statement
   $stmt = $conn->prepare("SELECT * FROM Users WHERE username = ?");
   if ($stmt==FALSE)
   {
@@ -32,7 +33,7 @@ if (!empty($_POST))
   if ($result->num_rows != 0)     // Results returned
   {
     $row = $result->fetch_assoc(); // Fetch a result row as an associative array
-    echo json_encode($row, JSON_PRETTY_PRINT);
+    echo json_encode($row, JSON_PRETTY_PRINT);    // Return data encoded in JSON
     return;
   }
   else

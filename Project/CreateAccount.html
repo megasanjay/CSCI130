@@ -10,9 +10,11 @@
 </head>
 
 <body>
+	<!-- container for all user account info -->
   <div class="mainContainer">
     <form>
       <fieldset>
+				<!-- username input -->
         <input id = "usernameTextBox" class = "regularTextbox" type = "text"
                placeholder = "Username " maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -22,6 +24,7 @@
                             document.getElementById('usernameTextBox').classList.add('regularTextbox');
                             }">
         <br> <br>
+				<!-- password input -->
         <input id = "passwordTextBox" class = "regularTextbox" type = "password"
                placeholder = "Password" maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -31,6 +34,7 @@
                             document.getElementById('passwordTextBox').classList.add('regularTextbox');
                             }">
 				<br> <br>
+				<!-- confirm password input -->
 				<input id = "confirmPasswordTextBox" class = "regularTextbox" type = "password"
                placeholder = "Confirm Password" maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -40,6 +44,7 @@
                             document.getElementById('confirmPasswordTextBox').classList.add('regularTextbox');
                             }">
 				<br> <br>
+				<!-- email input -->
 				<input id = "emailTextBox" class = "regularTextbox" type = "text"
                placeholder = "Email" maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -51,6 +56,7 @@
       </fieldset>
     </form>
     <br>
+		<!-- button for creating account, which calls createAccount function -->
 		<button id = "createAccount"  class = "createButton"
                 onclick = "createAccount()">
             <span >Create New Account  </span>
@@ -58,6 +64,7 @@
     <br> <br>
     <div class = "divider"><span class="word">or</span></div>
     <br>
+		<!-- button to to login -->
 		<button id = "submitButt" class = "submitButton"
                 onclick = "location.href = 'Login.html'">
             <span >Log In  </span>

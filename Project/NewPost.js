@@ -231,8 +231,8 @@ function validateInputInfo(){
     // and validates all video input is correct
     let x = string.indexOf(".be/");
     let y = string.indexOf("watch?v=");
-    let z = string.indexOf("https://www.youtube.com/embed/");
 
+    // Handling different types of youtube links
     if (x != -1)
     {
       link = string.substring(x + 4, x + 4 + 11);
@@ -245,7 +245,7 @@ function validateInputInfo(){
       link = "https://www.youtube.com/embed/" + link;
       return validateVideoInfo(link, price);
     }
-    else if (z != -1)
+    else if (string.indexOf("https://www.youtube.com/embed/") != -1)
     {
       return validateVideoInfo(string, price);
     }
@@ -325,7 +325,7 @@ function validateBookInfo(image, price)
     return false;
   }
 
-  // After info validated all info is set to book object
+  // After info is validated all info is set to book object
   var bookObject = new Object();
   bookObject.username = sessionStorage.getItem("currentUser");
   let temp = title.value.split("<").join("&lt");

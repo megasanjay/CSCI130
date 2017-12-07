@@ -70,7 +70,7 @@ function createAccount()
     return;
   }
 
-  checkUserName(username.value, password.value, email.value);     // Check if username exists
+  checkUserName(username.value.toLowerCase(), password.value, email.value);     // Check if username exists
 }
 
 // Regular expression for email
@@ -125,7 +125,7 @@ function alertContents_checkUserName()
           return;
         }
 
-        if (response == "New record created successfully") 
+        if (response == "New record created successfully")
         {
           alert("User account created. You can log into your account now.");
           return;

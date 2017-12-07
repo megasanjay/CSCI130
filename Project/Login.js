@@ -7,7 +7,7 @@ function submit()
   // Calls the get password function if input fields are not empty
   if (username.value != '' && password.value != '')
   {
-      GetPassword(username.value);
+      GetPassword(username.value.toLowerCase());
       return;
   }
   // If input fields are empty, error message will appear
@@ -70,7 +70,7 @@ function alertContents_getPassword()
         // Validates the password is correct
         if (document.getElementById("passwordTextBox").value == responsePassword)
         {
-          sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value);
+          sessionStorage.setItem("currentUser", document.getElementById('usernameTextBox').value.toLowerCase());
 
           if (response["admin"] == 1)
           {

@@ -46,8 +46,8 @@ function checkPrivilege()
   }
   if(sortBy == undefined){          // If sort by has not been defined
     sessionStorage.setItem("sortBy", "date");       // Default: posts ordered date
-    document.getElementById('sortDate').classList.remove("menuHide");
-    document.getElementById('sortDate').classList.add("menuShow");
+    document.getElementById('sortPrice').classList.remove("menuHide");
+    document.getElementById('sortPrice').classList.add("menuShow");
   }
   else
   {

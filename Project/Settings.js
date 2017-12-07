@@ -77,7 +77,7 @@ function validateString(str){
     {
       return false;
     }
-    var re = /^[A-Za-z]+$/;
+    var re = /^[A-Za-z]+$/;                // Regex for only a-z
     if(re.test(str.value))
        return true;
     else
