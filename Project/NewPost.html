@@ -9,11 +9,12 @@
     <script type = "text/javascript" src = "NewPost.js"></script>
     <link type='text/css' href='http://fonts.googleapis.com/css?family=Lato:400,700' />
 </head>
-
 <body onload="checkPrivilege()">
+	<!-- New post input fields -->
   <div class="mainContainer">
     <form>
       <fieldset>
+				<!-- All input fields -->
         <input id = "titleTextBox" class = "regularTextbox" type = "text"
                placeholder = "Title (Required)" maxlength="50"
                onkeydown = "if (event.keyCode == 13){
@@ -45,6 +46,7 @@
                             document.getElementById('priceTextBox').classList.add('regularTextarea');
                             }">
         <br> <br>
+				<!-- Post type radio buttons -->
         <input type="radio" checked = "checked" value="radio1" id="r12" name="item2" hidden onchange="showform('radio1')">
         <label class="radio circle" for="r12">
           <span class="big">
@@ -60,6 +62,7 @@
       </fieldset>
     </form>
     <br>
+		<!-- Book details input fields -->
     <form id = "bookform">
       <textarea id = "bookTitleTextBox" class = "regularTextarea"
 									name="Text1" cols="30" rows="2"
@@ -91,6 +94,7 @@
                             }">
       <br> <br>
     </form>
+		<!-- Video details input fields -->
     <form id = "videoform">
 			<textarea id = "VideoTitleTextBox" class = "regularTextarea"
 									name="Text1" cols="30" rows="2" maxlength="30"
@@ -238,10 +242,12 @@
 			</select>
 
       <br> <br>
+			<!-- Genre drop down menu -->
 			<label class = "genredropdown" >Genre:</label>
 			<select name="genres" id = "videoGenreDropdown">
-			  <option value="Absurdist">Absurdist</option>
+			  <option value="Absurdist" selected>Absurdist</option>
 			  <option value="Action">Action</option>
+			  <option value="Adult">Adult</option>
 			  <option value="Adventure">Adventure</option>
 			  <option value="Comedy">Comedy</option>
 				<option value="Crime">Crime</option>
@@ -268,6 +274,7 @@
 			</select>
     </form>
     <br>
+		<!-- Submit Post button -->
     <button id = "submitButt" class = "submitButton"
                 onclick = "submit()">
             <span >Submit Post</span>
@@ -275,6 +282,7 @@
     <br> <br>
     <div class = "divider"><span class="word">or</span></div>
     <br>
+		<!-- Cancel Post Button -->
     <button id = "cancelButt"  class = "createButton"
                 onclick = "location.href = 'MainPage.html'">
             <span > &nbsp;&nbsp;Cancel&nbsp;&nbsp;</span>

@@ -11,7 +11,7 @@
 
 <body onload="checkPrivilege()">
 
-
+	<!-- User details input conatiner -->
   <div class="mainContainer">
     <form>
       <fieldset>
@@ -22,6 +22,7 @@
                             document.getElementById('saveSettings').click();}
                             ">
         <br> <br>
+				<!-- All inputs -->
 				<input id = "firstNameTextBox" class = "regularTextbox" type = "text"
                placeholder = "First Name" maxlength="30"
                onkeydown = "if (event.keyCode == 13){
@@ -73,6 +74,7 @@
       </fieldset>
     </form>
     <br>
+		<!-- Save settings button -->
 		<button id = "saveSettings"  class = "createButton"
                 onclick = "saveSettings()">
             <span >Save </span>
@@ -80,6 +82,7 @@
     <br> <br>
     <div class = "divider"><span class="word">or</span></div>
     <br>
+		<!-- Cancel settings button -->
 		<button id = "cancelButt" class = "submitButton"
                 onclick = "location.href = 'MainPage.html'">
             <span >Cancel  </span>
