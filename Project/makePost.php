@@ -342,7 +342,7 @@ function newPost($object){
     if ($stmt->execute() === TRUE)   // Query successful
     {
       $stmt = $conn->prepare("INSERT INTO Videos (postID, videoTitle, videoDuration, videoGenre) VALUES (?, ?, ?, ?)");
-      $stmt->bind_param("issi", $postID, $videoTitle, $videoDuration, $videoGenre);
+      $stmt->bind_param("isss", $postID, $videoTitle, $videoDuration, $videoGenre);
 
       if ($stmt->execute() === TRUE) // Query for new video successful
       {

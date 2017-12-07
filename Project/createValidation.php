@@ -56,20 +56,18 @@ if (!empty($_POST))
   }
 
   $passWord = $conn->real_escape_string($passWord);
+  $x = 0;
 
   // Initial values for all columns
-  $stmt = $conn->prepare("INSERT INTO Users (username, password, email, fname, lname, address, admin) VALUES (?,?,?,?,?,?,?)");
+  $stmt = $conn->prepare("INSERT INTO Users (username, password, email, fname, lname, address, admin) VALUES (?,?,?,'NULL','NULL','NULL',0)");
   if ($stmt==FALSE)
   {
   	echo "There is a problem with prepare <br>";
   	echo $conn->error; // Need to connect/reconnect before the prepare call otherwise it doesnt work
   }
-  $stmt->bind_param("ssssssi", $username, $passWord, $email, 'NULL', 'NULL', 'NULL', 0);
+  $stmt->bind_param("sss", $username, $passWord, $email);
 
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  if ($conn->query($sql) === TRUE)      // result is returned
+  if ($stmt->execute() === TRUE)      // result is returned
   {
     echo "New record created successfully";
   }

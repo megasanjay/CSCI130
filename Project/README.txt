@@ -16,15 +16,24 @@ httpRequest.open('POST', http://localhost:8888/getPost.php);
 Therefore, we recommend that the port number for the Apache server be changed to 8888 before running the website.
 ---------------------------------------------------------
 ---------------------------------------------------------
-The sql file provided should fill the tables with all the data needed to run the program. You are free to provide your own to test the usability of the website. A few user accounts have already been predefined in this file as well. There are two different types of accounts: a regular user and admin. The admin and user accounts and passwords for these accounts are listed below. However though, you are free to create your own user accounts through the website itself to test the functionality.
+The sql file provided should fill the tables with all the data needed to run the program. You are free to provide your own to test the usability of the website. A few user accounts have already been predefined in this file as well. There are two different types of accounts: a regular user and admin. The admin and user accounts and passwords for these accounts are listed below. However though, you are free to create your own user accounts through the website itself to test the functionality. The user account is written below as 'username:password;
 ---------------------------
 Admin Accounts
 ---------------------------
-
+hubert:france
+michelle:cool
+sanjay:srilanka
 ---------------------------
 User Accounts
 ---------------------------
-
+bookworm19990:ilovebooks
+coffeegirl:grande
+fiddyman:fahad
+filmjunkie:movies
+moviepirate1997:free
+nigerianprince:scam
+simpsonhomer:donut
+Monica:notanasian
 ---------------------------------------------------------
 ---------------------------------------------------------
 There are a few rules that the website uses to guarantee that the data is displayed on the website correctly. 

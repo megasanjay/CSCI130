@@ -234,7 +234,7 @@ function fillInputFields(item, subClass)
   sessionStorage.setItem('lastPostViewed', item['postID']);
   username.innerHTML = item['postUsername'];
   postDate.innerHTML = item['postDateCreated'];
-  priceAmount.innerHTML = "Price: " + item['postPrice'];
+  priceAmount.innerHTML = "Price: $" + item['postPrice'];
   title.innerHTML = item['postTitle'].split("\\'").join("'");   // Check for apostrophe
   let temp = item['postDescription'].split("\\'").join("'" );
   postContent.innerHTML =  temp.split("\\n").join("<br/>" );    // Check for new line
